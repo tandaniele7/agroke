@@ -8,7 +8,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "AgroFuturo - Irrorazione di Precisione per Frutteti",
+  title: "floxot - Soluzioni innovative per l'agricoltura",
   description:
     "Soluzioni innovative per ottimizzare l'applicazione di prodotti fitosanitari nei frutteti e oliveti. Risparmia fino al 90% sui costi di trattamento.",
   keywords: [
