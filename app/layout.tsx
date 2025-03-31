@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import Footer from "@/components/ui/footer";
+
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
