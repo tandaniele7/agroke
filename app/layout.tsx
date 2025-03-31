@@ -1,13 +1,4 @@
-import DeployButton from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import Link from "next/link";
 import { Inter } from "next/font/google";
-import { Metadata } from "next";
 import Footer from "@/components/ui/footer";
 import "./globals.css";
 
@@ -30,11 +21,6 @@ export const metadata = {
     "sostenibilità",
   ],
 };
-
-const geistSans = Geist({
-  display: "swap",
-  subsets: ["latin"],
-});
 
 const inter = Inter({ subsets: ["latin"] });
 

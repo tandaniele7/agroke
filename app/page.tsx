@@ -68,7 +68,7 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-6">
-            Il Futuro dell'Agricoltura è Precisione
+            Il Futuro dell&apos;Agricoltura è Precisione
           </h2>
           <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-10">
             Soluzioni innovative per un uso efficiente e sostenibile delle risorse in frutteti e vigneti.
@@ -83,7 +83,7 @@ export default function Home() {
       {/* Problema e Vantaggi */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-800 mb-12">Perché l'Irrorazione di Precisione?</h2>
+          <h2 className="text-3xl font-bold text-center text-green-800 mb-12">Perché l&apos;Irrorazione di Precisione?</h2>
           
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div className="bg-green-50 p-8 rounded-lg shadow-md">
@@ -94,7 +94,7 @@ export default function Home() {
               <ul className="list-disc pl-5 text-gray-700 space-y-2">
                 <li>Eccessivo utilizzo di prodotti fitosanitari</li>
                 <li>Distribuzione non uniforme sulle piante</li>
-                <li>Dispersione nell'ambiente circostante</li>
+                <li>Dispersione nell&apos;ambiente circostante</li>
                 <li>Costi elevati per gli agricoltori</li>
                 <li>Impatto ambientale significativo</li>
               </ul>
@@ -106,7 +106,7 @@ export default function Home() {
                 Gli studi dimostrano che le tecnologie di precisione permettono:
               </p>
               <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                <li>Riduzione fino al 90% dell'uso di prodotti fitosanitari</li>
+                <li>Riduzione fino al 90% dell&apos;uso di prodotti fitosanitari</li>
                 <li>Risparmio significativo sui costi di produzione</li>
                 <li>Minore impatto ambientale</li>
                 <li>Maggiore efficacia dei trattamenti</li>
@@ -117,7 +117,7 @@ export default function Home() {
           
           <div className="text-center">
             <p className="text-xl text-gray-700 italic max-w-3xl mx-auto">
-              "Secondo recenti ricerche, l'adozione di tecnologie di irrorazione di precisione può portare a una riduzione fino al 90% del consumo di prodotti fitosanitari, mantenendo o migliorando l'efficacia dei trattamenti."
+            &quot;Secondo recenti ricerche, l&apos;adozione di tecnologie di irrorazione di precisione può portare a una riduzione fino al 90% del consumo di prodotti fitosanitari, mantenendo o migliorando l&apos;efficacia dei trattamenti.&quot;
             </p>
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function Home() {
               <p className="text-gray-500">Grafico comparativo tra metodi tradizionali e di precisione</p>
             </div>
             <p className="mt-4 text-gray-700">
-              Confronto tra i costi e l'efficacia dei metodi tradizionali rispetto alle nuove tecnologie di precisione.
+              Confronto tra i costi e l&apos;efficacia dei metodi tradizionali rispetto alle nuove tecnologie di precisione.
             </p>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function Home() {
             Sei interessato a ottimizzare i trattamenti nel tuo frutteto?
           </h2>
           <p className="text-center text-xl text-gray-700 mb-12">
-            Stiamo sviluppando soluzioni innovative per l'agricoltura di precisione. Lasciaci i tuoi contatti per ricevere aggiornamenti e partecipare alla fase di testing.
+            Stiamo sviluppando soluzioni innovative per l&apos;agricoltura di precisione. Lasciaci i tuoi contatti per ricevere aggiornamenti e partecipare alla fase di testing.
           </p>
           
           <form onSubmit={handleSubmit} className="bg-green-50 p-8 rounded-lg shadow-md">
