@@ -60,7 +60,7 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-green-800">AgroFuturo</h1>
+          <h1 className="text-3xl font-bold text-green-800">fluxot</h1>
         </div>
       </header>
 
@@ -71,7 +71,7 @@ export default function Home() {
             Il Futuro dell'Agricoltura è Precisione
           </h2>
           <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-10">
-            Soluzioni innovative per ottimizzare l'applicazione di prodotti fitosanitari nei frutteti e oliveti.
+            Soluzioni innovative per un uso efficiente e sostenibile delle risorse in frutteti e vigneti.
           </p>
           <button onClick={() => document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' })} 
                   className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 text-lg">
@@ -89,7 +89,7 @@ export default function Home() {
             <div className="bg-green-50 p-8 rounded-lg shadow-md">
               <h3 className="text-2xl font-semibold text-green-700 mb-4">Il Problema</h3>
               <p className="text-gray-700 mb-4">
-                I metodi tradizionali di irrorazione nei frutteti comportano:
+                I metodi tradizionali di irrorazione comportano:
               </p>
               <ul className="list-disc pl-5 text-gray-700 space-y-2">
                 <li>Eccessivo utilizzo di prodotti fitosanitari</li>
@@ -213,16 +213,6 @@ export default function Home() {
           </form>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-green-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="mb-4">© 2025 AgroFuturo - Soluzioni innovative per l'agricoltura</p>
-          <p className="text-green-200">
-            Per informazioni: info@agrofuturo.it
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
