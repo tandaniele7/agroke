@@ -1,7 +1,9 @@
 import { Inter } from "next/font/google";
 import Footer from "@/components/ui/footer";
-
+import ReactGA from "react-ga4";
 import "./globals.css";
+
+ReactGA.initialize(`${process.env.GOOGLE_MEASUREMENT_ID}`);
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
