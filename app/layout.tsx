@@ -3,7 +3,13 @@ import Footer from "@/components/ui/footer";
 import ReactGA from "react-ga4";
 import "./globals.css";
 
-ReactGA.initialize(`${process.env.GOOGLE_MEASUREMENT_ID}`);
+import { useEffect } from "react";
+
+useEffect(() => {
+  if (typeof window !== "undefined" && process.env.GOOGLE_MEASUREMENT_ID) {
+    ReactGA.initialize(process.env.GOOGLE_MEASUREMENT_ID);
+  }
+}, []);
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
