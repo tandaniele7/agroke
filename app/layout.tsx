@@ -28,6 +28,7 @@ const defaultUrl = process.env.VERCEL_URL
   };
   
   const inter = Inter({ subsets: ["latin"] });
+  ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   
   // Caricamento del font Inter
   
@@ -36,7 +37,6 @@ const defaultUrl = process.env.VERCEL_URL
   }: Readonly<{
     children: React.ReactNode;
   }>) {
-  ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   return (
     <html lang="it">
       <head>
