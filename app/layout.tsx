@@ -3,43 +3,40 @@ import Footer from "@/components/ui/footer";
 import ReactGA from "react-ga4";
 import "./globals.css";
 
-import { useEffect } from "react";
-
-useEffect(() => {
-  if (typeof window !== "undefined" && process.env.GOOGLE_MEASUREMENT_ID) {
-    ReactGA.initialize(process.env.GOOGLE_MEASUREMENT_ID);
-  }
-}, []);
+ReactGA.initialize(`${process.env.GOOGLE_MEASUREMENT_ID}`);
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "floxot - Soluzioni innovative per l'agricoltura",
-  description:
+
+  
+  export const metadata = {
+    metadataBase: new URL(defaultUrl),
+    title: "floxot - Soluzioni innovative per l'agricoltura",
+    description:
     "Soluzioni innovative per ottimizzare l'applicazione di prodotti fitosanitari nei frutteti e oliveti. Risparmia fino al 90% sui costi di trattamento.",
-  keywords: [
-    "agricoltura di precisione",
-    "irrorazione di precisione",
-    "frutteti",
-    "risparmio fitofarmaci",
-    "agritech",
-    "tecnologia agricola",
-    "sostenibilità",
-  ],
-};
-
-const inter = Inter({ subsets: ["latin"] });
-
-// Caricamento del font Inter
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+    keywords: [
+      "agricoltura di precisione",
+      "irrorazione di precisione",
+      "frutteti",
+      "risparmio fitofarmaci",
+      "agritech",
+      "tecnologia agricola",
+      "sostenibilità",
+    ],
+  };
+  
+  const inter = Inter({ subsets: ["latin"] });
+  
+  // Caricamento del font Inter
+  
+  export default function RootLayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+  ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   return (
     <html lang="it">
       <head>
