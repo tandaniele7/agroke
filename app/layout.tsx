@@ -44,7 +44,7 @@ export default function RootLayout({
         <div>{children}</div>
         <Footer />
       </body>
-      <GoogleAnalytics gaId={`${process.env.GOOGLE_MEASUREMENT_ID}`} />
+      <GoogleAnalytics gaId="G-529Z4P1BGD" />
     </html>
   );
 }
