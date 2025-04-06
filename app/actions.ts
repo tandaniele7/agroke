@@ -15,7 +15,7 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect(
       "error",
       "/sign-up",
-      "Email and password are required",
+      "Email and password are required"
     );
   }
 
@@ -34,7 +34,7 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect(
       "success",
       "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link.",
+      "Thanks for signing up! Please check your email for a verification link."
     );
   }
 };
@@ -75,7 +75,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
     return encodedRedirect(
       "error",
       "/forgot-password",
-      "Could not reset password",
+      "Could not reset password"
     );
   }
 
@@ -86,7 +86,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
   return encodedRedirect(
     "success",
     "/forgot-password",
-    "Check your email for a link to reset your password.",
+    "Check your email for a link to reset your password."
   );
 };
 
@@ -100,7 +100,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       "error",
       "/protected/reset-password",
-      "Password and confirm password are required",
+      "Password and confirm password are required"
     );
   }
 
@@ -108,7 +108,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       "error",
       "/protected/reset-password",
-      "Passwords do not match",
+      "Passwords do not match"
     );
   }
 
@@ -120,7 +120,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect(
       "error",
       "/protected/reset-password",
-      "Password update failed",
+      "Password update failed"
     );
   }
 
@@ -132,3 +132,101 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export interface State {
+  isLoading: boolean;
+  error: string | null;
+}
+
+export async function addFieldData(prevState: State, formData: FormData) {
+  const nome = formData.get("fieldName")?.toString();
+  const lat = formData.getAll("lat").map((val) => parseFloat(val.toString()));
+  const lng = formData.getAll("lng").map((val) => parseFloat(val.toString()));
+
+  if (lat.length < 3 || lng.length < 3) {
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "At least three points are required to calculate the area"
+    );
+  }
+
+  const calculatePolygonArea = (lat: number[], lng: number[]): number => {
+    let area = 0;
+    const numPoints = lat.length;
+
+    for (let i = 0; i < numPoints; i++) {
+      const j = (i + 1) % numPoints;
+      area += lat[i] * lng[j] - lng[i] * lat[j];
+    }
+
+    return Math.abs(area / 2);
+  };
+
+  const area = calculatePolygonArea(lat, lng).toString();
+
+  if (
+    !nome ||
+    !area ||
+    !lat ||
+    !lng ||
+    !Array.isArray(lat) ||
+    !Array.isArray(lng)
+  ) {
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "All fields are required and lat/lng must be arrays"
+    );
+  }
+
+  if (lat.length !== lng.length) {
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "Lat and Lng arrays must have the same length"
+    );
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "Could not retrieve user information"
+    );
+  }
+
+  const { error } = await supabase.from("campi").insert([
+    {
+      nome,
+      area,
+      coordinate: {
+        lat: lat,
+        lng: lng,
+      },
+      user_id: user.id,
+    },
+  ]);
+
+  if (error) {
+    console.error(error.message);
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "Could not add field data"
+    );
+  }
+
+  return encodedRedirect(
+    "success",
+    "/protected/fields",
+    "Field data added successfully"
+  );
+}

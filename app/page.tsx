@@ -67,13 +67,13 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-6">
-          {/* <h1 className="text-3xl font-bold text-green-800">fluxot</h1> */}
+          {/* <h1 className="text-3xl font-bold text-green-800">agroke</h1> */}
           <Image
-            src={"/logo-enhanced.png"}
-            alt="floxot logo"
+            src={"/agroke_logo_with_text.png"}
+            alt="agroke logo"
             width={1400}
             height={1200}
-            className="h-14 w-auto mx-auto"
+            className="h-16 w-auto mx-auto"
           ></Image>
         </div>
       </header>

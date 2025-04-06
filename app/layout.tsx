@@ -2,6 +2,9 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/ui/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import HeaderAuth from "@/components/header-auth";
+import { EnvVarWarning } from "@/components/env-var-warning";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -9,7 +12,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "floxot - Soluzioni innovative per l'agricoltura",
+  title: "agroke - Soluzioni innovative per l'agricoltura",
   description:
     "Soluzioni innovative per ottimizzare l'applicazione di prodotti fitosanitari nei frutteti e oliveti. Risparmia fino al 90% sui costi di trattamento.",
   keywords: [
@@ -40,10 +43,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#166534" />
         <link rel="icon" href="/favicon.ico" />
       </head>
+
       <body className={inter.className}>
-        <div>{children}</div>
+        {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+        <div className="w-full min-h-screen">{children}</div>
         <Footer />
       </body>
+
       <GoogleAnalytics gaId="G-529Z4P1BGD" />
     </html>
   );
