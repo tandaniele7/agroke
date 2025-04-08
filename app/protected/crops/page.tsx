@@ -1,8 +1,113 @@
 "use client";
 import { useState } from 'react';
-import { Trash2, Plus, MapPin, Droplet, Leaf, Bug, ChevronDown, ChevronUp, Layers } from 'lucide-react';
+import { 
+  Trash2, Plus, MapPin, Droplet, Leaf, Bug, ChevronDown, ChevronUp, 
+  Layers, AlertCircle, BarChart3, PiggyBank, Sprout
+} from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+
+// Dati predefiniti delle colture per ogni terreno
+const colturePredefinite: Record<number, {
+  id: number;
+  nome: string;
+  varieta: string;
+  data_semina: string;
+  data_raccolto_prevista: string;
+  area_coltivata: number;
+  rendimento_previsto: number;
+  prezzo_stimato: number;
+  ricavo_stimato: number;
+  stato_salute: string;
+  avvisi: {
+    tipo: string;
+    descrizione: string;
+    impatto: string;
+    livello: string;
+  }[];
+  consigli: string;
+}[]> = {
+  1: [  // Campo di Grano - Toscana
+    {
+      id: 1,
+      nome: "Grano duro",
+      varieta: "Senatore Cappelli",
+      data_semina: "2024-11-15",
+      data_raccolto_prevista: "2025-06-20",
+      area_coltivata: 12.75,
+      rendimento_previsto: 3.8,
+      prezzo_stimato: 380,  // €/ton
+      ricavo_stimato: 18392,  // €
+      stato_salute: "Ottimo",
+      avvisi: [
+        {
+          tipo: "Meteo",
+          descrizione: "Precipitazioni sotto la media previste nelle prossime 3 settimane.",
+          impatto: "Possibile riduzione del rendimento del 2% se non viene applicata irrigazione supplementare.",
+          livello: "medio"
+        }
+      ],
+      consigli: "Considerare un'irrigazione supplementare entro 7 giorni per mantenere la resa prevista."
+    }
+  ],
+  2: [  // Vigneto - Piemonte
+    {
+      id: 2,
+      nome: "Vite",
+      varieta: "Nebbiolo",
+      data_semina: "Piante di 8 anni",
+      data_raccolto_prevista: "2025-09-15",
+      area_coltivata: 8.32,
+      rendimento_previsto: 7.5,
+      prezzo_stimato: 2200,  // €/ton
+      ricavo_stimato: 137280,  // €
+      stato_salute: "Buono",
+      avvisi: [
+        {
+          tipo: "Malattia",
+          descrizione: "Rischio di peronospora in aumento a causa dell'umidità prevista.",
+          impatto: "Possibile riduzione della qualità dell'uva e calo della produzione fino al 5% senza trattamento preventivo.",
+          livello: "alto"
+        },
+        {
+          tipo: "Nutrienti",
+          descrizione: "Carenza di potassio rilevata in alcune zone del vigneto.",
+          impatto: "Potrebbe influire sulla maturazione dell'uva e ridurre il contenuto zuccherino.",
+          livello: "basso"
+        }
+      ],
+      consigli: "Applicare fungicida preventivo e considerare un'integrazione di potassio localizzata nelle aree carenti."
+    }
+  ],
+  3: [  // Uliveto - Puglia
+    {
+      id: 3,
+      nome: "Ulivo",
+      varieta: "Coratina",
+      data_semina: "Piante di 15+ anni",
+      data_raccolto_prevista: "2025-11-05",
+      area_coltivata: 15.45,
+      rendimento_previsto: 0.9,
+      prezzo_stimato: 7500,  // €/ton (olio)
+      ricavo_stimato: 104288,  // €
+      stato_salute: "Critico",
+      avvisi: [
+        {
+          tipo: "Parassita",
+          descrizione: "Infestazione di mosca dell'olivo (Bactrocera oleae) rilevata.",
+          impatto: "Rischio di riduzione della produzione fino al 20% e degradazione della qualità dell'olio.",
+          livello: "critico"
+        },
+        {
+          tipo: "Idrico",
+          descrizione: "Stress idrico severo rilevato nella maggior parte dell'uliveto.",
+          impatto: "Riduzione prevista della produzione dell'8% e potenziale caduta precoce delle olive.",
+          livello: "critico"
+        }
+      ],
+      consigli: "Intervenire urgentemente con trattamento specifico per la mosca dell'olivo e programmare irrigazione di soccorso entro 48 ore."
+    }
+  ]
+};
 
 // Dati predefiniti dei terreni
 const campiPredefiniti = [
@@ -65,9 +170,10 @@ const campiPredefiniti = [
   }
 ];
 
-export default function TerreniFarmer() {
+export default function ColturePage() {
   const [campiEspansi, setCampiEspansi] = useState<{ [key: number]: boolean }>({});
   const [layerAttivi, setLayerAttivi] = useState<{ [key: number]: string }>({});
+  const [coltureEspanse, setColtureEspanse] = useState<{ [key: number]: boolean }>({});
 
   const toggleEspansione = (id: number) => {
     setCampiEspansi(prev => ({
@@ -81,6 +187,13 @@ export default function TerreniFarmer() {
         [id]: 'base'
       }));
     }
+  };
+
+  const toggleColturaEspansione = (id: number) => {
+    setColtureEspanse(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
   };
 
   const setLayer = (id: number, layer: string) => {
@@ -102,6 +215,21 @@ export default function TerreniFarmer() {
         return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
+    }
+  }
+
+  function getLivelloAvvisoClasse(livello: string) {
+    switch (livello.toLowerCase()) {
+      case 'basso':
+        return 'bg-blue-50 border-blue-200 text-blue-700';
+      case 'medio':
+        return 'bg-yellow-50 border-yellow-200 text-yellow-700';
+      case 'alto':
+        return 'bg-orange-50 border-orange-200 text-orange-700';
+      case 'critico':
+        return 'bg-red-50 border-red-200 text-red-700';
+      default:
+        return 'bg-gray-50 border-gray-200 text-gray-700';
     }
   }
 
@@ -154,13 +282,20 @@ export default function TerreniFarmer() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">I Tuoi Terreni</h1>
-          <Link href="/protected/fields/add-field">
-            <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-              <Plus size={20} />
-              <span>Aggiungi Nuovo Terreno</span>
-            </button>
-          </Link>
+          <h1 className="text-3xl font-bold text-gray-800">Le Tue Colture</h1>
+          <div className="flex gap-3">
+            <Link href="/protected/fields">
+              <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                <span>Visualizza Terreni</span>
+              </button>
+            </Link>
+            <Link href="/protected/crops/add-crop">
+              <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                <Plus size={20} />
+                <span>Aggiungi Nuova Coltura</span>
+              </button>
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6">
@@ -177,12 +312,6 @@ export default function TerreniFarmer() {
                     >
                       {campiEspansi[campo.id] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                     </button>
-                    <button
-                      className="text-red-500 hover:text-red-700 transition-colors p-1"
-                      aria-label="Elimina terreno"
-                    >
-                      <Trash2 size={20} />
-                    </button>
                   </div>
                 </div>
                 
@@ -194,7 +323,7 @@ export default function TerreniFarmer() {
                 <div className="flex items-center text-gray-600 mb-2">
                   <span className="text-sm">Area: {campo.area.toFixed(2)} ettari</span>
                   <span className="mx-2">•</span>
-                  <span className="text-sm">Coltura: {campo.coltura_attuale}</span>
+                  <span className="text-sm">Coltura principale: {campo.coltura_attuale}</span>
                 </div>
                 
                 <div className="border-t border-gray-100 my-4"></div>
@@ -232,7 +361,107 @@ export default function TerreniFarmer() {
                 </div>
               </div>
               
-              {/* Contenuto espandibile */}
+              {/* Informazioni sulle colture presenti in questo terreno */}
+              <div className="border-t border-gray-100 bg-gray-50 p-4">
+                <div className="flex items-center mb-3">
+                  <Sprout size={18} className="text-green-600 mr-2" />
+                  <h3 className="font-medium text-gray-700">Colture presenti:</h3>
+                </div>
+                
+                {colturePredefinite[campo.id]?.map(coltura => (
+                  <div key={coltura.id} className="mb-4 bg-white rounded-lg shadow-sm p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold text-lg">{coltura.nome} - {coltura.varieta}</h4>
+                        <div className="text-sm text-gray-600 mb-2">
+                          <span>Area coltivata: {coltura.area_coltivata} ettari</span>
+                          <span className="mx-2">•</span>
+                          <span>Stato: <span className={`inline-block px-2 py-0.5 rounded-full text-xs ${getStatoClasse(coltura.stato_salute)}`}>{coltura.stato_salute}</span></span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => toggleColturaEspansione(coltura.id)}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        {coltureEspanse[coltura.id] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-3 mt-3">
+                      <div className="bg-green-50 p-3 rounded-md">
+                        <div className="flex items-center text-green-700 mb-1">
+                          <BarChart3 size={16} className="mr-1" />
+                          <span className="font-medium text-sm">Rendimento previsto</span>
+                        </div>
+                        <p className="text-lg font-semibold">{coltura.rendimento_previsto} ton/ha</p>
+                      </div>
+                      
+                      <div className="bg-blue-50 p-3 rounded-md">
+                        <div className="flex items-center text-blue-700 mb-1">
+                          <PiggyBank size={16} className="mr-1" />
+                          <span className="font-medium text-sm">Ricavo stimato</span>
+                        </div>
+                        <p className="text-lg font-semibold">{coltura.ricavo_stimato.toLocaleString()} €</p>
+                      </div>
+                      
+                      <div className="bg-amber-50 p-3 rounded-md">
+                        <div className="flex items-center text-amber-700 mb-1">
+                          <AlertCircle size={16} className="mr-1" />
+                          <span className="font-medium text-sm">Avvisi</span>
+                        </div>
+                        <p className="text-lg font-semibold">{coltura.avvisi.length}</p>
+                      </div>
+                    </div>
+                    
+                    {coltureEspanse[coltura.id] && (
+                      <div className="mt-4">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Data semina/impianto:</p>
+                            <p className="font-medium">{coltura.data_semina}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Data raccolto prevista:</p>
+                            <p className="font-medium">{coltura.data_raccolto_prevista}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Prezzo stimato:</p>
+                            <p className="font-medium">{coltura.prezzo_stimato} €/ton</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Produzione totale stimata:</p>
+                            <p className="font-medium">{(coltura.rendimento_previsto * coltura.area_coltivata).toFixed(1)} ton</p>
+                          </div>
+                        </div>
+                        
+                        {coltura.avvisi.length > 0 && (
+                          <div className="mb-4">
+                            <h5 className="font-medium mb-2 flex items-center">
+                              <AlertCircle size={16} className="text-amber-500 mr-1" />
+                              <span>Avvisi e minacce potenziali</span>
+                            </h5>
+                            <div className="space-y-3">
+                              {coltura.avvisi.map((avviso, idx) => (
+                                <div key={idx} className={`border-l-4 p-3 rounded-r-md ${getLivelloAvvisoClasse(avviso.livello)}`}>
+                                  <div className="font-medium">{avviso.tipo}: {avviso.descrizione}</div>
+                                  <div className="text-sm mt-1">Impatto: {avviso.impatto}</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div className="bg-green-50 p-3 rounded-md">
+                          <h5 className="font-medium mb-2">Consigli per migliorare la resa:</h5>
+                          <p>{coltura.consigli}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Contenuto espandibile del campo */}
               {campiEspansi[campo.id] && (
                 <div className="border-t border-gray-100">
                   {/* Selettore Layer */}
@@ -315,9 +544,9 @@ export default function TerreniFarmer() {
                   className="w-full bg-gray-50 hover:bg-gray-100 py-3 text-gray-700 font-medium text-center transition-colors flex items-center justify-center gap-2"
                 >
                   {campiEspansi[campo.id] ? (
-                    <>Nascondi Dettagli <ChevronUp size={16} /></>
+                    <>Nascondi Dettagli Terreno <ChevronUp size={16} /></>
                   ) : (
-                    <>Visualizza Dettagli <ChevronDown size={16} /></>
+                    <>Visualizza Dettagli Terreno <ChevronDown size={16} /></>
                   )}
                 </button>
               </div>

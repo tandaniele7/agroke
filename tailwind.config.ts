@@ -1,3 +1,4 @@
+import { lightningCssTransform } from "next/dist/build/swc/generated-native";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -53,22 +54,37 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         agroke: {
-					green: {
-						light: '#8DD19B',
-						DEFAULT: '#3E885B',
-						dark: '#2A5C3D',
-					},
-					brown: {
-						light: '#D7BC8F',
-						DEFAULT: '#A37D4C',
-						dark: '#5D4527',
-					},
-					blue: {
-						light: '#A1CFE8',
-						DEFAULT: '#4A90B8',
-						dark: '#2A5676',
-					},
-				},
+          black: {
+            light: "#375734",
+            DEFAULT: "#2b4529",
+            dark: "#233821",
+          },
+          green: {
+            light: "#e1fae8", // Softer green for a fresh look
+            DEFAULT: "#4CAF50", // Vibrant green for growth
+            dark: "#2E7D32", // Deep green for stability
+          },
+          brown: {
+            light: "#E0C3A1", // Light soil tone
+            DEFAULT: "#8B5E3C", // Rich soil color
+            dark: "#5A3A1E", // Dark earthy tone
+          },
+          blue: {
+            light: "#B3E5FC", // Light sky blue
+            DEFAULT: "#0288D1", // Vibrant blue for water and tech
+            dark: "#01579B", // Deep blue for trust and reliability
+          },
+          yellow: {
+            light: "#FFF9C4", // Soft sunlight
+            DEFAULT: "#FFEB3B", // Bright yellow for energy
+            dark: "#FBC02D", // Golden yellow for warmth
+          },
+          gray: {
+            light: "#E0E0E0", // Neutral light gray
+            DEFAULT: "#9E9E9E", // Medium gray for balance
+            dark: "#616161", // Dark gray for precision
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

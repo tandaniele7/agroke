@@ -36,7 +36,7 @@ const navigation_ = [
   { name: "Calendar", href: "#", current: false },
 ];
 const navigation = [
-  { icon: Home, name: "Dashboard", href: "/protected/", current: false },
+  { icon: Home, name: "Dashboard", href: "/protected", current: false },
   { icon: Map, name: "Fields", href: "/protected/fields", current: false },
   {
     icon: Droplets,
@@ -71,19 +71,12 @@ function classNames(...classes: (string | boolean | undefined)[]) {
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname === "/protected") {
-    navigation[0].current = false;
-    navigation[1].current = false;
-  } else if (pathname === "/dashboard") {
-    navigation[0].current = true;
-    navigation[1].current = false;
-  } else {
-    navigation[0].current = false;
-    navigation[1].current = false;
+  for (const item of navigation) {
+    item.current = pathname === item.href;
   }
 
   return (
-    <Disclosure as="nav" className="bg-teal-500/80 backdrop-blur-md">
+    <Disclosure as="nav" className="bg-agroke-green/65 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -124,8 +117,8 @@ export default function Navbar() {
                       aria-current={item.current ? "page" : undefined}
                       className={classNames(
                       item.current
-                        ? "bg-teal-900 text-white"
-                        : "text-teal-100 hover:bg-teal-500 hover:text-white",
+                        ? "bg-agroke-black-light text-agroke-gray-light"
+                        : "text-agroke-green-light hover:bg-agroke-green-dark hover:text-white",
                       "rounded-md px-3 py-2 text-sm font-medium flex items-center space-x-1"
                       )}
                     >
