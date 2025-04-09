@@ -106,46 +106,65 @@ export default function TerreniFarmer() {
   }
 
   function getLayerImage(campoId: number, layer: string) {
-    // In un'app reale, qui si userebbero immagini diverse per ogni layer
-    // ma per ora simuliamo l'effetto con dei filtri CSS
-    const campo = campiPredefiniti.find(c => c.id === campoId);
+    const campo = campiPredefiniti.find((c) => c.id === campoId);
     if (!campo) return null;
 
-    const baseImageUrl = campo.mappa_url;
-    
+    let imageUrl = campo.mappa_url;
+
+    // Modifica l'URL dell'immagine per il layer "malattie"
+    if (layer === "malattie") {
+      const imageExtensionIndex = imageUrl.lastIndexOf(".");
+      imageUrl = `${imageUrl.slice(0, imageExtensionIndex)}-risk${imageUrl.slice(imageExtensionIndex)}`;
+    }
+
     // Stile CSS per simulare diverse visualizzazioni
     let filterStyle = {};
-    switch(layer) {
-      case 'satellite':
-        filterStyle = { filter: 'contrast(1.2) saturate(1.1)' };
-        break;
-      case 'idrico':
-        filterStyle = { filter: 'hue-rotate(240deg) saturate(0.8)' };
-        break;
-      case 'malattie':
-        filterStyle = { filter: 'hue-rotate(320deg) saturate(1.2)' };
-        break;
-      default:
-        filterStyle = {};
+    if (layer === "satellite") {
+      filterStyle = { filter: "contrast(1.2) saturate(1.1)" };
+    } else if (layer === "idrico") {
+      filterStyle = { filter: "hue-rotate(240deg) saturate(0.8)" };
     }
 
     return (
       <div className="relative w-full h-[450px]">
         <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-          <div 
+          <div
             className="w-full h-full bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${baseImageUrl})`,
-              ...filterStyle
+            style={{
+              backgroundImage: `url(${imageUrl})`,
+              ...filterStyle,
             }}
           />
           <div className="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-full text-sm font-medium shadow">
-            {layer === 'base' && 'Vista Base'}
-            {layer === 'satellite' && 'Vista Satellite'}
-            {layer === 'idrico' && 'Stato Idrico'}
-            {layer === 'malattie' && 'Rischio Malattie'}
+            {layer === "base" && "Vista Base"}
+            {layer === "satellite" && "Vista Satellite"}
+            {layer === "idrico" && "Stato Idrico"}
+            {layer === "malattie" && "Rischio Malattie"}
           </div>
         </div>
+        {layer === "malattie" && (
+          <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
+            <h4 className="text-sm font-medium text-gray-700 mb-2">
+              Legenda
+            </h4>
+            <div className="flex flex-col items-start">
+              <div className="flex justify-between w-full text-xs text-gray-600">
+
+              <span>100% Rischio</span>
+              </div>
+
+              <div
+                className="h-20 w-4 mr-2 rounded-full mb-2"
+                style={{
+                  background: "linear-gradient(to top, blue, red)",
+                }}
+              ></div>
+              <div className="flex justify-between w-full text-xs text-gray-600">
+                <span>0% Rischio</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -156,7 +175,7 @@ export default function TerreniFarmer() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">I Tuoi Terreni</h1>
           <Link href="/protected/fields/add-field">
-            <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+            <button className="bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
               <Plus size={20} />
               <span>Aggiungi Nuovo Terreno</span>
             </button>
@@ -244,25 +263,25 @@ export default function TerreniFarmer() {
                     <div className="flex gap-2 flex-wrap">
                       <button 
                         onClick={() => setLayer(campo.id, 'base')}
-                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'base' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'base' ? 'bg-agroke-green/65 text-agroke-black-light font-bold' : 'bg-gray-200 text-gray-700'}`}
                       >
                         Base
                       </button>
                       <button 
                         onClick={() => setLayer(campo.id, 'satellite')}
-                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'satellite' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'satellite' ? 'bg-agroke-green/65 text-agroke-black-light font-bold' : 'bg-gray-200 text-gray-700'}`}
                       >
                         Satellite
                       </button>
                       <button 
                         onClick={() => setLayer(campo.id, 'idrico')}
-                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'idrico' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'idrico' ? 'bg-agroke-green/65 text-agroke-black-light font-bold' : 'bg-gray-200 text-gray-700'}`}
                       >
                         Stato Idrico
                       </button>
                       <button 
                         onClick={() => setLayer(campo.id, 'malattie')}
-                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'malattie' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === 'malattie' ? 'bg-agroke-green/65 text-agroke-black-light font-bold' : 'bg-gray-200 text-gray-700'}`}
                       >
                         Rischio Malattie
                       </button>

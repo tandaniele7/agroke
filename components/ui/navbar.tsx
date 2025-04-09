@@ -81,7 +81,7 @@ export default function Navbar() {
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-teal-100 hover:bg-teal-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-agroke-black-light hover:bg-agroke-green-dark hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon
@@ -118,7 +118,7 @@ export default function Navbar() {
                       className={classNames(
                       item.current
                         ? "bg-agroke-black-light text-agroke-gray-light"
-                        : "text-agroke-green-light hover:bg-agroke-green-dark hover:text-white",
+                        : "text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light",
                       "rounded-md px-3 py-2 text-sm font-medium flex items-center space-x-1"
                       )}
                     >
@@ -133,7 +133,7 @@ export default function Navbar() {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               type="button"
-              className="relative rounded-full teal-500 p-1 text-teal-100 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+              className="relative rounded-full teal-500 p-1 text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light focus:ring-2 focus:ring-agroke-black-light focus:outline-hidden"
             >
               <span className="absolute -inset-1.5" />
               <span className="sr-only">View notifications</span>
@@ -143,7 +143,7 @@ export default function Navbar() {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
-                <MenuButton className="relative flex rounded-full bg-teal-500/0 text-sm text-teal-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                <MenuButton className="relative flex rounded-full text-sm text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light focus:ring-2 focus:ring-agroke-black-light focus:outline-hidden">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   {/* <Image
@@ -153,7 +153,7 @@ export default function Navbar() {
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     className="size-8 rounded-full"
                   /> */}
-                  <UserCircleIcon aria-hidden="true" className="size-8" />
+                  <UserCircleIcon aria-hidden="true" className="size-10" />
                 </MenuButton>
               </div>
               <MenuItems
@@ -200,8 +200,8 @@ export default function Navbar() {
               aria-current={item.current ? "page" : undefined}
               className={classNames(
                 item.current
-                  ? "bg-teal-900 text-white"
-                  : "text-gray-300 hover:bg-teal-700 hover:text-white",
+                  ? "bg-agroke-black-light text-agroke-gray-light"
+                  : "text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light",
                 "block rounded-md px-3 py-2 text-base font-medium"
               )}
             >
