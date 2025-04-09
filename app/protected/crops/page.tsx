@@ -44,34 +44,34 @@ const colturePredefinite: Record<
     // Campo di Grano - Toscana
     {
       id: 1,
-      nome: "Grano duro",
-      varieta: "Senatore Cappelli",
-      data_semina: "2024-11-15",
+      nome: "Vineyard - Piedmont",
+      varieta: "Barolo",
+      data_semina: "12 year old plants",
       data_raccolto_prevista: "2025-06-20",
       area_coltivata: 12.75,
       rendimento_previsto: 3.8,
       prezzo_stimato: 380, // €/ton
       ricavo_stimato: 18392, // €
-      stato_salute: "Ottimo",
+      stato_salute: "Optimal",
       avvisi: [
         {
-          tipo: "Meteo",
+          tipo: "Weather",
           descrizione:
-            "Precipitazioni sotto la media previste nelle prossime 3 settimane.",
+            "Below average precipitation expected over the next 3 weeks.",
           impatto:
-            "Possibile riduzione del rendimento del 2% se non viene applicata irrigazione supplementare.",
+            "Possible yield reduction of 2% if supplemental irrigation is not applied.",
           livello: "medio",
         },
       ],
       consigli:
-        "Considerare un'irrigazione supplementare entro 7 giorni per mantenere la resa prevista.",
+        "Consider supplemental irrigation within 7 days to maintain expected yield.",
     },
   ],
   2: [
     // Vigneto - Piemonte
     {
       id: 2,
-      nome: "Vite",
+      nome: "Vineyard - Piedmont",
       varieta: "Nebbiolo",
       data_semina: "Piante di 8 anni",
       data_raccolto_prevista: "2025-09-15",
@@ -79,62 +79,70 @@ const colturePredefinite: Record<
       rendimento_previsto: 7.5,
       prezzo_stimato: 2200, // €/ton
       ricavo_stimato: 137280, // €
-      stato_salute: "Buono",
+      stato_salute: "Good",
       avvisi: [
         {
-          tipo: "Malattia",
+          tipo: "Disease",
           descrizione:
-            "Rischio di peronospora in aumento a causa dell'umidità prevista.",
+            "Downy mildew risk increases due to forecasted humidity.",
           impatto:
-            "Possibile riduzione della qualità dell'uva e calo della produzione fino al 5% senza trattamento preventivo.",
+            "Possible reduction in grape quality and drop in production of up to 5% without preventive treatment.",
           livello: "alto",
         },
         {
-          tipo: "Nutrienti",
+          tipo: "Nutrients",
           descrizione:
-            "Carenza di potassio rilevata in alcune zone del vigneto.",
+            "Potassium deficiency detected in some areas of the vineyard.",
           impatto:
-            "Potrebbe influire sulla maturazione dell'uva e ridurre il contenuto zuccherino.",
+            "It may affect the ripening of the grapes and reduce the sugar content.",
           livello: "basso",
         },
       ],
       consigli:
-        "Applicare fungicida preventivo e considerare un'integrazione di potassio localizzata nelle aree carenti.",
+        "Apply preventative fungicide and consider localized potassium supplementation in deficient areas.",
     },
   ],
   3: [
     // Uliveto - Puglia
     {
       id: 3,
-      nome: "Ulivo",
-      varieta: "Coratina",
+      nome: "Apple Orchard",
+      varieta: "Red Delicious",
       data_semina: "Piante di 15+ anni",
       data_raccolto_prevista: "2025-11-05",
       area_coltivata: 15.45,
       rendimento_previsto: 0.9,
       prezzo_stimato: 7500, // €/ton (olio)
       ricavo_stimato: 104288, // €
-      stato_salute: "Critico",
+      stato_salute: "Critical",
       avvisi: [
         {
-          tipo: "Parassita",
+          tipo: "Parasite",
           descrizione:
-            "Infestazione di mosca dell'olivo (Bactrocera oleae) rilevata.",
+            "Codling moth infestation detected in several areas of the orchard.",
           impatto:
-            "Rischio di riduzione della produzione fino al 20% e degradazione della qualità dell'olio.",
+            "Risk of up to 15% yield loss and potential damage to fruit quality.",
           livello: "critico",
         },
         {
-          tipo: "Idrico",
+          tipo: "Disease",
           descrizione:
-            "Stress idrico severo rilevato nella maggior parte dell'uliveto.",
+            "Fire blight symptoms observed on some trees in the orchard.",
           impatto:
-            "Riduzione prevista della produzione dell'8% e potenziale caduta precoce delle olive.",
-          livello: "critico",
+            "Potential spread to healthy trees, leading to significant yield loss.",
+          livello: "alto",
+        },
+        {
+          tipo: "Weather",
+          descrizione:
+            "Frost risk detected for the upcoming week during flowering.",
+          impatto:
+            "Possible reduction in fruit set and overall yield if frost protection is not implemented.",
+          livello: "medio",
         },
       ],
       consigli:
-        "Intervenire urgentemente con trattamento specifico per la mosca dell'olivo e programmare irrigazione di soccorso entro 48 ore.",
+        "Address codling moth infestation immediately, prune infected branches to control fire blight, and prepare frost protection measures to safeguard the orchard.",
     },
   ],
 };
@@ -143,58 +151,58 @@ const colturePredefinite: Record<
 const campiPredefiniti = [
   {
     id: 1,
-    nome: "Campo di Grano - Toscana",
+    nome: "Vineyard - Piedmont",
     area: 12.75,
     coordinate: { lat: 43.76956, lng: 11.25584 },
-    coltura_attuale: "Grano duro",
-    stato_idrico: "Ottimo",
-    stato_fertilizzante: "Buono",
-    stato_pesticidi: "Sufficiente",
+    coltura_attuale: "Grape (Barolo)",
+    stato_idrico: "Optimal",
+    stato_fertilizzante: "Good",
+    stato_pesticidi: "Sufficient",
     data_creazione: "2024-12-10",
     mappa_url: "/toscana-field.png",
     metriche: {
       umidita_suolo: "28%",
       ph_suolo: "6.8",
       temperatura_media: "22°C",
-      previsione_raccolto: "3.8 ton/ha",
+      previsione_raccolto: "9.0 ton/ha",
       rischio_malattie: "Basso",
     },
   },
   {
     id: 2,
-    nome: "Vigneto - Piemonte",
+    nome: "Vineyard - Piedmont",
     area: 8.32,
     coordinate: { lat: 44.69825, lng: 8.21376 },
-    coltura_attuale: "Vite (Nebbiolo)",
-    stato_idrico: "Sufficiente",
-    stato_fertilizzante: "Ottimo",
-    stato_pesticidi: "Buono",
+    coltura_attuale: "Grape (Nebbiolo)",
+    stato_idrico: "Sufficient",
+    stato_fertilizzante: "Optimal",
+    stato_pesticidi: "Good",
     data_creazione: "2024-09-22",
     mappa_url: "/piemonte-field.png",
     metriche: {
       umidita_suolo: "22%",
       ph_suolo: "7.2",
       temperatura_media: "19°C",
-      previsione_raccolto: "7.5 ton/ha",
+      previsione_raccolto: "9.0 ton/ha",
       rischio_malattie: "Medio",
     },
   },
   {
     id: 3,
-    nome: "Uliveto - Puglia",
+    nome: "Apple Orchard - Piedmont",
     area: 15.45,
     coordinate: { lat: 40.79144, lng: 17.24312 },
-    coltura_attuale: "Ulivo (Coratina)",
-    stato_idrico: "Critico",
-    stato_fertilizzante: "Sufficiente",
-    stato_pesticidi: "Critico",
+    coltura_attuale: "Apple (Red Delicious)",
+    stato_idrico: "Critical",
+    stato_fertilizzante: "Sufficient",
+    stato_pesticidi: "Critical",
     data_creazione: "2025-01-05",
     mappa_url: "/puglia-field.png",
     metriche: {
       umidita_suolo: "15%",
       ph_suolo: "7.8",
       temperatura_media: "24°C",
-      previsione_raccolto: "0.9 ton/ha",
+      previsione_raccolto: "10.9 ton/ha",
       rischio_malattie: "Alto",
     },
   },
@@ -239,13 +247,13 @@ export default function ColturePage() {
 
   function getStatoClasse(stato: string) {
     switch (stato.toLowerCase()) {
-      case "ottimo":
+      case "optimal":
         return "bg-green-100 text-green-800";
-      case "buono":
+      case "good":
         return "bg-blue-100 text-blue-800";
-      case "sufficiente":
+      case "sufficient":
         return "bg-yellow-100 text-yellow-800";
-      case "critico":
+      case "critical":
         return "bg-red-100 text-red-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -254,13 +262,13 @@ export default function ColturePage() {
 
   function getLivelloAvvisoClasse(livello: string) {
     switch (livello.toLowerCase()) {
-      case "basso":
+      case "low":
         return "bg-blue-50 border-blue-200 text-blue-700";
-      case "medio":
+      case "medium":
         return "bg-yellow-50 border-yellow-200 text-yellow-700";
-      case "alto":
+      case "high":
         return "bg-orange-50 border-orange-200 text-orange-700";
-      case "critico":
+      case "critical":
         return "bg-red-50 border-red-200 text-red-700";
       default:
         return "bg-gray-50 border-gray-200 text-gray-700";
@@ -298,21 +306,18 @@ export default function ColturePage() {
             }}
           />
           <div className="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-full text-sm font-medium shadow">
-            {layer === "base" && "Vista Base"}
-            {layer === "satellite" && "Vista Satellite"}
-            {layer === "idrico" && "Stato Idrico"}
-            {layer === "malattie" && "Rischio Malattie"}
+            {layer === "base" && "Basic View"}
+            {layer === "satellite" && "Satellite View"}
+            {layer === "idrico" && "Water State"}
+            {layer === "malattie" && "Disease Risk"}
           </div>
         </div>
         {layer === "malattie" && (
           <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">
-              Legenda
-            </h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-2">Legend</h4>
             <div className="flex flex-col items-start">
               <div className="flex justify-between w-full text-xs text-gray-600">
-
-              <span>100% Rischio</span>
+                <span>100% Risk</span>
               </div>
 
               <div
@@ -322,7 +327,7 @@ export default function ColturePage() {
                 }}
               ></div>
               <div className="flex justify-between w-full text-xs text-gray-600">
-                <span>0% Rischio</span>
+                <span>0% Risk</span>
               </div>
             </div>
           </div>
@@ -335,17 +340,17 @@ export default function ColturePage() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Le Tue Colture</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Your Crops</h1>
           <div className="flex gap-3">
             <Link href="/protected/fields">
               <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                <span>Visualizza Terreni</span>
+                <span>View Fields</span>
               </button>
             </Link>
             <Link href="/protected/crops/add-crop">
               <button className="bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                 <Plus size={20} />
-                <span>Aggiungi Nuova Coltura</span>
+                <span>Add a New Crop</span>
               </button>
             </Link>
           </div>
@@ -389,11 +394,11 @@ export default function ColturePage() {
 
                 <div className="flex items-center text-gray-600 mb-2">
                   <span className="text-sm">
-                    Area: {campo.area.toFixed(2)} ettari
+                    Surface: {campo.area.toFixed(2)} hectares
                   </span>
                   <span className="mx-2">•</span>
                   <span className="text-sm">
-                    Coltura principale: {campo.coltura_attuale}
+                    Main Crop: {campo.coltura_attuale}
                   </span>
                 </div>
 
@@ -403,7 +408,7 @@ export default function ColturePage() {
                   <div className="flex flex-col items-center">
                     <div className="flex items-center mb-1">
                       <Droplet size={16} className="text-blue-500 mr-1" />
-                      <span className="text-sm font-medium">Acqua</span>
+                      <span className="text-sm font-medium">Water</span>
                     </div>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${getStatoClasse(campo.stato_idrico)}`}
@@ -415,7 +420,7 @@ export default function ColturePage() {
                   <div className="flex flex-col items-center">
                     <div className="flex items-center mb-1">
                       <Leaf size={16} className="text-green-500 mr-1" />
-                      <span className="text-sm font-medium">Fertilizzante</span>
+                      <span className="text-sm font-medium">Fertilizer</span>
                     </div>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${getStatoClasse(campo.stato_fertilizzante)}`}
@@ -427,7 +432,7 @@ export default function ColturePage() {
                   <div className="flex flex-col items-center">
                     <div className="flex items-center mb-1">
                       <Bug size={16} className="text-amber-500 mr-1" />
-                      <span className="text-sm font-medium">Pesticidi</span>
+                      <span className="text-sm font-medium">Pesticides</span>
                     </div>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${getStatoClasse(campo.stato_pesticidi)}`}
@@ -443,7 +448,7 @@ export default function ColturePage() {
                 <div className="flex items-center mb-3">
                   <Sprout size={18} className="text-green-600 mr-2" />
                   <h3 className="font-medium text-gray-700">
-                    Colture presenti:
+                    Crops:
                   </h3>
                 </div>
 
@@ -459,11 +464,11 @@ export default function ColturePage() {
                         </h4>
                         <div className="text-sm text-gray-600 mb-2">
                           <span>
-                            Area coltivata: {coltura.area_coltivata} ettari
+                          Cultivated surface: {coltura.area_coltivata} hectares
                           </span>
                           <span className="mx-2">•</span>
                           <span>
-                            Stato:{" "}
+                            State:{" "}
                             <span
                               className={`inline-block px-2 py-0.5 rounded-full text-xs ${getStatoClasse(coltura.stato_salute)}`}
                             >
@@ -489,7 +494,7 @@ export default function ColturePage() {
                         <div className="flex items-center text-green-700 mb-1">
                           <BarChart3 size={16} className="mr-1" />
                           <span className="font-medium text-sm">
-                            Rendimento previsto
+                          Expected yield
                           </span>
                         </div>
                         <p className="text-lg font-semibold">
@@ -501,7 +506,7 @@ export default function ColturePage() {
                         <div className="flex items-center text-blue-700 mb-1">
                           <PiggyBank size={16} className="mr-1" />
                           <span className="font-medium text-sm">
-                            Ricavo stimato
+                          Estimated revenue
                           </span>
                         </div>
                         <p className="text-lg font-semibold">
@@ -512,7 +517,7 @@ export default function ColturePage() {
                       <div className="bg-amber-50 p-3 rounded-md">
                         <div className="flex items-center text-amber-700 mb-1">
                           <AlertCircle size={16} className="mr-1" />
-                          <span className="font-medium text-sm">Avvisi</span>
+                          <span className="font-medium text-sm">Warnings</span>
                         </div>
                         <p className="text-lg font-semibold">
                           {coltura.avvisi.length}
@@ -525,13 +530,13 @@ export default function ColturePage() {
                         <div className="grid grid-cols-2 gap-4 mb-4">
                           <div>
                             <p className="text-sm text-gray-500 mb-1">
-                              Data semina/impianto:
+                            Sowing/planting date:
                             </p>
                             <p className="font-medium">{coltura.data_semina}</p>
                           </div>
                           <div>
                             <p className="text-sm text-gray-500 mb-1">
-                              Data raccolto prevista:
+                            Expected harvest date:
                             </p>
                             <p className="font-medium">
                               {coltura.data_raccolto_prevista}
@@ -539,7 +544,7 @@ export default function ColturePage() {
                           </div>
                           <div>
                             <p className="text-sm text-gray-500 mb-1">
-                              Prezzo stimato:
+                              Estimated price:
                             </p>
                             <p className="font-medium">
                               {coltura.prezzo_stimato} €/ton
@@ -547,7 +552,7 @@ export default function ColturePage() {
                           </div>
                           <div>
                             <p className="text-sm text-gray-500 mb-1">
-                              Produzione totale stimata:
+                              Total estimated yield:
                             </p>
                             <p className="font-medium">
                               {(
@@ -566,7 +571,7 @@ export default function ColturePage() {
                                 size={16}
                                 className="text-amber-500 mr-1"
                               />
-                              <span>Avvisi e minacce potenziali</span>
+                              <span>Warnings and potential threats</span>
                             </h5>
                             <div className="space-y-3">
                               {coltura.avvisi.map((avviso, idx) => (
@@ -578,7 +583,7 @@ export default function ColturePage() {
                                     {avviso.tipo}: {avviso.descrizione}
                                   </div>
                                   <div className="text-sm mt-1">
-                                    Impatto: {avviso.impatto}
+                                  Impact: {avviso.impatto}
                                   </div>
                                 </div>
                               ))}
@@ -588,7 +593,7 @@ export default function ColturePage() {
 
                         <div className="bg-green-50 p-3 rounded-md">
                           <h5 className="font-medium mb-2">
-                            Consigli per migliorare la resa:
+                          Tips to improve performance:
                           </h5>
                           <p>{coltura.consigli}</p>
                         </div>
@@ -606,7 +611,7 @@ export default function ColturePage() {
                     <div className="flex items-center mb-3">
                       <Layers size={18} className="text-gray-600 mr-2" />
                       <span className="font-medium text-gray-700">
-                        Visualizza Layer:
+                        View Layer:
                       </span>
                     </div>
                     <div className="flex gap-2 flex-wrap">
@@ -626,13 +631,13 @@ export default function ColturePage() {
                         onClick={() => setLayer(campo.id, "idrico")}
                         className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === "idrico" ? "bg-agroke-green/65 text-agroke-black-light font-bold" : "bg-gray-200 text-gray-700"}`}
                       >
-                        Stato Idrico
+                        Water State
                       </button>
                       <button
                         onClick={() => setLayer(campo.id, "malattie")}
                         className={`px-3 py-1 rounded-full text-sm ${layerAttivi[campo.id] === "malattie" ? "bg-agroke-green/65 text-agroke-black-light font-bold" : "bg-gray-200 text-gray-700"}`}
                       >
-                        Rischio Malattie
+                        Disease Risk
                       </button>
                     </div>
                   </div>

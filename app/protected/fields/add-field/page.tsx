@@ -118,7 +118,7 @@ export default function Home() {
   // Save the field data
   const saveField = () => {
     if (!fieldName || polygonCoordinates.length === 0) {
-      alert("Inserisci il nome del campo e disegna un'area sulla mappa.");
+      alert("Enter the field name and draw an area on the map.");
       return;
     }
 
@@ -133,7 +133,7 @@ export default function Home() {
     setFieldDescription("");
     setPolygonCoordinates([]);
     vectorSourceRef.current?.clear();
-    alert("Campo salvato con successo!");
+    alert("Field saved successfully!");
   };
 
   return (
@@ -142,12 +142,10 @@ export default function Home() {
         {/* Map Section */}
         <div className="md:w-2/3 mb-6 md:mb-0">
           <div className="bg-white rounded-lg shadow-lg p-4 h-full">
-            <h2 className="text-2xl font-semibold mb-4">
-              Mappa del tuo terreno
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">Field Map</h2>
             <p className="mb-4">
-              Disegna il perimetro del tuo terreno sulla mappa e inserisci le
-              informazioni.
+              Draw the perimeter of your land on the map and enter the
+              information.
             </p>
             <div
               ref={mapRef}
@@ -159,13 +157,13 @@ export default function Home() {
               <button
                 onClick={startDrawing}
                 disabled={isDrawing}
-                className={`px-4 py-2 rounded font-semibold ${
+                className={`px-4 py-2 rounded font-semibold w-full ${
                   isDrawing
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-green-600 hover:bg-green-700 text-white"
+                    : "bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold"
                 }`}
               >
-                {isDrawing ? "Disegno in corso..." : "Disegna area"}
+                {isDrawing ? "Drawing in progress..." : "Draw area"}
               </button>
             </div>
           </div>
@@ -175,7 +173,7 @@ export default function Home() {
         <div className="md:w-1/3">
           <div className="bg-white rounded-lg shadow-lg p-4">
             <h2 className="text-2xl font-semibold mb-4">
-              Informazioni sul campo
+              Field Information
             </h2>
             <form action={formAction}>
               <div className="mb-4">
@@ -183,7 +181,7 @@ export default function Home() {
                   className="block text-sm font-medium mb-2"
                   htmlFor="fieldName"
                 >
-                  Nome del campo
+                  Field Name
                 </label>
                 <input
                   id="fieldName"
@@ -192,7 +190,7 @@ export default function Home() {
                   value={fieldName}
                   onChange={(e) => setFieldName(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2"
-                  placeholder="Inserisci il nome del campo"
+                  placeholder="Enter the field name"
                 />
               </div>
 
@@ -201,7 +199,7 @@ export default function Home() {
                   className="block text-sm font-medium mb-2"
                   htmlFor="fieldDescription"
                 >
-                  Descrizione
+                  Description
                 </label>
                 <textarea
                   id="fieldDescription"
@@ -209,7 +207,7 @@ export default function Home() {
                   value={fieldDescription}
                   onChange={(e) => setFieldDescription(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2"
-                  placeholder="Inserisci una descrizione del campo"
+                  placeholder="Enter a description of the field"
                 ></textarea>
               </div>
               <div className="mb-4 hidden">
@@ -217,7 +215,7 @@ export default function Home() {
                   className="block text-sm font-medium mb-2"
                   htmlFor="polygonCoordinates"
                 >
-                  Punti del poligono
+                  Points of the polygon
                 </label>
                 <textarea
                   id="polygonCoordinates"
@@ -235,9 +233,9 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded"
+                className="w-full px-4 py-2 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded"
               >
-                Salva campo
+                Save field
               </button>
             </form>
           </div>
@@ -245,7 +243,7 @@ export default function Home() {
           {/* Display Saved Fields */}
           {fields.length > 0 && (
             <div className="bg-white rounded-lg shadow-lg p-4 mt-6">
-              <h2 className="text-2xl font-semibold mb-4">Campi salvati</h2>
+              <h2 className="text-2xl font-semibold mb-4">Field saved</h2>
               <ul className="space-y-4">
                 {fields.map((field, index) => (
                   <li key={index} className="p-3 border rounded">
@@ -254,7 +252,7 @@ export default function Home() {
                       {field.description}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Coordinate: {field.coordinates.length} punti
+                      Coordinate: {field.coordinates.length} points
                     </p>
                   </li>
                 ))}

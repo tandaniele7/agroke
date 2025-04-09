@@ -36,13 +36,13 @@ import {
 const campiPredefiniti = [
   {
     id: 1,
-    nome: "Campo di Grano - Toscana",
+    nome: "Vineyard - Piedmont",
     area: 12.75,
     coordinate: { lat: 43.76956, lng: 11.25584 },
-    coltura_attuale: "Grano duro",
-    stato_idrico: "Ottimo",
-    stato_fertilizzante: "Buono",
-    stato_pesticidi: "Sufficiente",
+    coltura_attuale: "Grape (Barolo)",
+    stato_idrico: "Optimal",
+    stato_fertilizzante: "Good",
+    stato_pesticidi: "Sufficient",
     data_creazione: "2024-12-10",
     mappa_url: "/toscana-field.png",
     metriche: {
@@ -50,7 +50,7 @@ const campiPredefiniti = [
       ph_suolo: "6.8",
       temperatura_media: "22°C",
       previsione_raccolto: "3.8 ton/ha",
-      rischio_malattie: "Basso",
+      rischio_malattie: "Low",
       azoto_disponibile: "42 kg/ha",
       carbonio_organico: "1.8%",
       previsione_pioggia_7gg: "24mm",
@@ -58,25 +58,25 @@ const campiPredefiniti = [
       risparmio_idrico_potenziale: "12%",
     },
     storico_metriche: [
-      { data: "Gen", umidita: 32, temperatura: 8, resa: 0 },
+      { data: "Jan", umidita: 32, temperatura: 8, resa: 0 },
       { data: "Feb", umidita: 35, temperatura: 10, resa: 0 },
       { data: "Mar", umidita: 30, temperatura: 14, resa: 10 },
       { data: "Apr", umidita: 28, temperatura: 18, resa: 20 },
-      { data: "Mag", umidita: 25, temperatura: 22, resa: 40 },
-      { data: "Giu", umidita: 22, temperatura: 26, resa: 70 },
-      { data: "Lug", umidita: 20, temperatura: 28, resa: 90 },
-      { data: "Ago", umidita: 18, temperatura: 27, resa: 100 },
+      { data: "May", umidita: 25, temperatura: 22, resa: 40 },
+      { data: "Jun", umidita: 22, temperatura: 26, resa: 70 },
+      { data: "Jul", umidita: 20, temperatura: 28, resa: 90 },
+      { data: "Aug", umidita: 18, temperatura: 27, resa: 100 },
     ],
   },
   {
     id: 2,
-    nome: "Vigneto - Piemonte",
+    nome: "Vineyard - Piedmont",
     area: 8.32,
     coordinate: { lat: 44.69825, lng: 8.21376 },
-    coltura_attuale: "Vite (Nebbiolo)",
-    stato_idrico: "Sufficiente",
-    stato_fertilizzante: "Ottimo",
-    stato_pesticidi: "Buono",
+    coltura_attuale: "Grape (Nebbiolo)",
+    stato_idrico: "Sufficient",
+    stato_fertilizzante: "Optimal",
+    stato_pesticidi: "Good",
     data_creazione: "2024-09-22",
     mappa_url: "/piemonte-field.png",
     metriche: {
@@ -84,7 +84,7 @@ const campiPredefiniti = [
       ph_suolo: "7.2",
       temperatura_media: "19°C",
       previsione_raccolto: "7.5 ton/ha",
-      rischio_malattie: "Medio",
+      rischio_malattie: "Medium",
       azoto_disponibile: "38 kg/ha",
       carbonio_organico: "2.1%",
       previsione_pioggia_7gg: "18mm",
@@ -92,25 +92,25 @@ const campiPredefiniti = [
       risparmio_idrico_potenziale: "15%",
     },
     storico_metriche: [
-      { data: "Gen", umidita: 28, temperatura: 5, resa: 0 },
+      { data: "Jan", umidita: 28, temperatura: 5, resa: 0 },
       { data: "Feb", umidita: 30, temperatura: 7, resa: 0 },
       { data: "Mar", umidita: 27, temperatura: 12, resa: 5 },
       { data: "Apr", umidita: 25, temperatura: 16, resa: 15 },
-      { data: "Mag", umidita: 24, temperatura: 18, resa: 30 },
-      { data: "Giu", umidita: 22, temperatura: 22, resa: 60 },
-      { data: "Lug", umidita: 20, temperatura: 25, resa: 85 },
-      { data: "Ago", umidita: 18, temperatura: 24, resa: 95 },
+      { data: "May", umidita: 24, temperatura: 18, resa: 30 },
+      { data: "Jun", umidita: 22, temperatura: 22, resa: 60 },
+      { data: "Jul", umidita: 20, temperatura: 25, resa: 85 },
+      { data: "Aug", umidita: 18, temperatura: 24, resa: 95 },
     ],
   },
   {
     id: 3,
-    nome: "Uliveto - Puglia",
+    nome: "Apple Orchard - Piedmont",
     area: 15.45,
     coordinate: { lat: 40.79144, lng: 17.24312 },
-    coltura_attuale: "Ulivo (Coratina)",
-    stato_idrico: "Critico",
-    stato_fertilizzante: "Sufficiente",
-    stato_pesticidi: "Critico",
+    coltura_attuale: "Apple",
+    stato_idrico: "Critical",
+    stato_fertilizzante: "Sufficient",
+    stato_pesticidi: "Critical",
     data_creazione: "2025-01-05",
     mappa_url: "/puglia-field.png",
     metriche: {
@@ -118,7 +118,7 @@ const campiPredefiniti = [
       ph_suolo: "7.8",
       temperatura_media: "24°C",
       previsione_raccolto: "0.9 ton/ha",
-      rischio_malattie: "Alto",
+      rischio_malattie: "High",
       azoto_disponibile: "25 kg/ha",
       carbonio_organico: "1.5%",
       previsione_pioggia_7gg: "5mm",
@@ -126,14 +126,14 @@ const campiPredefiniti = [
       risparmio_idrico_potenziale: "25%",
     },
     storico_metriche: [
-      { data: "Gen", umidita: 25, temperatura: 12, resa: 0 },
+      { data: "Jan", umidita: 25, temperatura: 12, resa: 0 },
       { data: "Feb", umidita: 24, temperatura: 14, resa: 0 },
       { data: "Mar", umidita: 22, temperatura: 17, resa: 5 },
       { data: "Apr", umidita: 20, temperatura: 20, resa: 15 },
-      { data: "Mag", umidita: 18, temperatura: 23, resa: 25 },
-      { data: "Giu", umidita: 16, temperatura: 26, resa: 40 },
-      { data: "Lug", umidita: 15, temperatura: 29, resa: 55 },
-      { data: "Ago", umidita: 13, temperatura: 30, resa: 65 },
+      { data: "May", umidita: 18, temperatura: 23, resa: 25 },
+      { data: "Jun", umidita: 16, temperatura: 26, resa: 40 },
+      { data: "Jul", umidita: 15, temperatura: 29, resa: 55 },
+      { data: "Aug", umidita: 13, temperatura: 30, resa: 65 },
     ],
   },
 ];
@@ -141,39 +141,37 @@ const campiPredefiniti = [
 // Dati predefiniti delle colture per ogni terreno
 const colturePredefinite = {
   1: [
-    // Campo di Grano - Toscana
     {
       id: 1,
-      nome: "Grano duro",
-      varieta: "Senatore Cappelli",
-      data_semina: "2024-11-15",
+      nome: "Grape",
+      varieta: "Barolo",
+      data_semina: "12 year old plants",
       data_raccolto_prevista: "2025-06-20",
       area_coltivata: 12.75,
       rendimento_previsto: 3.8,
       prezzo_stimato: 380, // €/ton
       ricavo_stimato: 18392, // €
-      stato_salute: "Ottimo",
+      stato_salute: "Optimal",
       avvisi: [
         {
-          tipo: "Meteo",
+          tipo: "Weather",
           descrizione:
-            "Precipitazioni sotto la media previste nelle prossime 3 settimane.",
+            "Below average precipitation expected over the next 3 weeks.",
           impatto:
-            "Possibile riduzione del rendimento del 2% se non viene applicata irrigazione supplementare.",
+            "Possible yield reduction of 2% if supplemental irrigation is not applied.",
           livello: "medio",
           data: "2025-04-08",
-          azione_consigliata: "Irrigazione supplementare entro 7 giorni",
+          azione_consigliata: "Supplemental irrigation within 7 days",
         },
       ],
       consigli:
-        "Considerare un'irrigazione supplementare entro 7 giorni per mantenere la resa prevista.",
+        "Consider supplemental irrigation within 7 days to maintain expected yield.",
     },
   ],
   2: [
-    // Vigneto - Piemonte
     {
       id: 2,
-      nome: "Vite",
+      nome: "Grape",
       varieta: "Nebbiolo",
       data_semina: "Piante di 8 anni",
       data_raccolto_prevista: "2025-09-15",
@@ -181,78 +179,97 @@ const colturePredefinite = {
       rendimento_previsto: 7.5,
       prezzo_stimato: 2200, // €/ton
       ricavo_stimato: 137280, // €
-      stato_salute: "Buono",
+      stato_salute: "Good",
       avvisi: [
         {
-          tipo: "Malattia",
+          tipo: "Disease",
           descrizione:
-            "Rischio di peronospora in aumento a causa dell'umidità prevista.",
+            "Downy mildew risk increases due to forecasted humidity.",
           impatto:
-            "Possibile riduzione della qualità dell'uva e calo della produzione fino al 5% senza trattamento preventivo.",
+            "Possible reduction in grape quality and drop in production of up to 5% without preventive treatment.",
           livello: "alto",
           data: "2025-04-07",
-          azione_consigliata: "Applicare fungicida preventivo entro 3 giorni",
+          azione_consigliata: "Apply preventative fungicide within 3 days",
         },
         {
-          tipo: "Nutrienti",
+          tipo: "Nutrients",
           descrizione:
-            "Carenza di potassio rilevata in alcune zone del vigneto.",
+            "Potassium deficiency detected in some areas of the vineyard.",
           impatto:
-            "Potrebbe influire sulla maturazione dell'uva e ridurre il contenuto zuccherino.",
+            "It may affect the ripening of the grapes and reduce the sugar content.",
           livello: "basso",
           data: "2025-04-05",
           azione_consigliata:
-            "Integrazione di potassio localizzata nelle aree carenti",
+            "Localized potassium supplementation in deficient areas",
         },
       ],
       consigli:
-        "Applicare fungicida preventivo e considerare un'integrazione di potassio localizzata nelle aree carenti.",
+        "Apply preventative fungicide and consider localized potassium supplementation in deficient areas.",
     },
   ],
   3: [
-    // Uliveto - Puglia
     {
       id: 3,
-      nome: "Ulivo",
-      varieta: "Coratina",
+      nome: "Apple Orchard",
+      varieta: "Red Delicious",
       data_semina: "Piante di 15+ anni",
       data_raccolto_prevista: "2025-11-05",
       area_coltivata: 15.45,
       rendimento_previsto: 0.9,
-      prezzo_stimato: 7500, // €/ton (olio)
+      prezzo_stimato: 7500, // €/ton
       ricavo_stimato: 104288, // €
-      stato_salute: "Critico",
+      stato_salute: "Critical",
       avvisi: [
         {
-          tipo: "Parassita",
+          tipo: "Parasite",
           descrizione:
-            "Infestazione di mosca dell'olivo (Bactrocera oleae) rilevata.",
+            "Codling moth infestation detected in several areas of the orchard.",
           impatto:
-            "Rischio di riduzione della produzione fino al 20% e degradazione della qualità dell'olio.",
+            "Risk of up to 15% yield loss and potential damage to fruit quality.",
           livello: "critico",
           data: "2025-04-09",
           azione_consigliata:
-            "Trattamento specifico immediato per la mosca dell'olivo",
+            "Apply targeted treatment for codling moth immediately.",
         },
         {
-          tipo: "Idrico",
+          tipo: "Disease",
           descrizione:
-            "Stress idrico severo rilevato nella maggior parte dell'uliveto.",
+            "Fire blight symptoms observed on some trees in the orchard.",
           impatto:
-            "Riduzione prevista della produzione dell'8% e potenziale caduta precoce delle olive.",
-          livello: "critico",
+            "Potential spread to healthy trees, leading to significant yield loss.",
+          livello: "alto",
           data: "2025-04-08",
-          azione_consigliata: "Irrigazione di soccorso entro 48 ore",
+          azione_consigliata:
+            "Prune infected branches and apply bactericide treatment.",
+        },
+        {
+          tipo: "Weather",
+          descrizione:
+            "Frost risk detected for the upcoming week during flowering.",
+          impatto:
+            "Possible reduction in fruit set and overall yield if frost protection is not implemented.",
+          livello: "medio",
+          data: "2025-04-07",
+          azione_consigliata:
+            "Implement frost protection measures such as sprinklers or heaters.",
         },
       ],
       consigli:
-        "Intervenire urgentemente con trattamento specifico per la mosca dell'olivo e programmare irrigazione di soccorso entro 48 ore.",
+        "Address codling moth infestation immediately, prune infected branches to control fire blight, and prepare frost protection measures to safeguard the orchard.",
     },
   ],
 };
 
 // Custom Tooltip per Recharts
-const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: any[];
+  label?: string;
+}) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white p-3 border border-gray-200 shadow-md rounded">
@@ -260,7 +277,7 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
         {payload.map((entry, index) => (
           <p key={`item-${index}`} style={{ color: entry.color }}>
             {`${entry.name}: ${entry.value}`}
-            {entry.name === "temperatura"
+            {entry.name === "Temperature"
               ? "°C"
               : entry.name === "umidita"
                 ? "%"
@@ -326,7 +343,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
       <div className="min-h-screen bg-gray-50 flex justify-center items-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-green-500 mx-auto"></div>
-          <p className="mt-3 text-gray-600">Caricamento dati del campo...</p>
+          <p className="mt-3 text-gray-600">Loading Data Field...</p>
         </div>
       </div>
     );
@@ -334,11 +351,11 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
 
   function getStatoClasse(stato: string) {
     switch (stato.toLowerCase()) {
-      case "ottimo":
+      case "Optimal":
         return "bg-green-100 text-green-800";
-      case "buono":
+      case "Good":
         return "bg-blue-100 text-blue-800";
-      case "sufficiente":
+      case "Sufficient":
         return "bg-yellow-100 text-yellow-800";
       case "critico":
         return "bg-red-100 text-red-800";
@@ -388,20 +405,18 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
             }}
           />
           <div className="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-full text-sm font-medium shadow">
-            {layer === "base" && "Vista Base"}
-            {layer === "satellite" && "Vista Satellite"}
-            {layer === "idrico" && "Stato Idrico"}
-            {layer === "malattie" && "Rischio Malattie"}
+            {layer === "base" && "Basic View"}
+            {layer === "satellite" && "Satellite View"}
+            {layer === "idrico" && "Water State"}
+            {layer === "malattie" && "Disease Risk"}
           </div>
         </div>
         {layer === "malattie" && (
           <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">
-              Legenda
-            </h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-2">Legend</h4>
             <div className="flex flex-col items-start">
               <div className="flex justify-between w-full text-xs text-gray-600">
-                <span>100% Rischio</span>
+                <span>100% Risk</span>
               </div>
               <div
                 className="h-20 w-4 mr-2 rounded-full mb-2"
@@ -410,7 +425,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                 }}
               ></div>
               <div className="flex justify-between w-full text-xs text-gray-600">
-                <span>0% Rischio</span>
+                <span>0% Risk</span>
               </div>
             </div>
           </div>
@@ -480,7 +495,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                     {campo.coordinate.lng.toFixed(5)}
                   </span>
                   <span className="mx-2">•</span>
-                  <span>{campo.area.toFixed(2)} ettari</span>
+                  <span>{campo.area.toFixed(2)} hectares</span>
                 </div>
               </div>
             </div>
@@ -488,13 +503,13 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               <Link href={`/protected/fields/${campoId}/irrigazione`}>
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                   <Droplet size={18} />
-                  <span>Gestione Irrigazione</span>
+                  <span>Irrigation Management</span>
                 </button>
               </Link>
               <Link href={`/protected/fields/${campoId}/trattamenti`}>
                 <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                   <Leaf size={18} />
-                  <span>Pianifica Trattamenti</span>
+                  <span>Plan Treatments</span>
                 </button>
               </Link>
             </div>
@@ -513,12 +528,11 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               </div>
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-red-800">
-                  Attenzione! Ci sono problemi critici che richiedono azione
-                  immediata
+                  Warning! There are critical issues that require immediate
+                  action.
                 </h3>
                 <div className="mt-2 text-sm text-red-700">
-                  Consultare gli avvisi nella sezione dedicata per maggiori
-                  dettagli.
+                  See the notices in the dedicated section for more details.
                 </div>
               </div>
             </div>
@@ -533,10 +547,10 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
             <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
               <div className="p-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-agroke-black-light">
-                  Vista del Campo
+                  Field View
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
-                  Coltura attuale: {campo.coltura_attuale}
+                  Current culture: {campo.coltura_attuale}
                 </p>
               </div>
 
@@ -544,9 +558,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               <div className="p-4 bg-gray-50 border-b border-gray-100">
                 <div className="flex items-center mb-3">
                   <Layers size={18} className="text-gray-600 mr-2" />
-                  <span className="font-medium text-gray-700">
-                    Visualizza Layer:
-                  </span>
+                  <span className="font-medium text-gray-700">View Layer:</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -577,7 +589,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                         : "bg-gray-200 text-gray-700"
                     }`}
                   >
-                    Stato Idrico
+                    Water State
                   </button>
                   <button
                     onClick={() => setLayerAttivo("malattie")}
@@ -587,7 +599,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                         : "bg-gray-200 text-gray-700"
                     }`}
                   >
-                    Rischio Malattie
+                    Disease Risk
                   </button>
                 </div>
               </div>
@@ -600,7 +612,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
             <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
               <div className="p-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-agroke-black-light">
-                  Andamento Stagionale
+                  Seasonal Trend
                 </h2>
               </div>
               <div className="p-4">
@@ -620,7 +632,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                         yAxisId="left"
                         type="monotone"
                         dataKey="umidita"
-                        name="Umidità"
+                        name="Humidity"
                         stroke="#3b82f6"
                         strokeWidth={2}
                         dot={{ r: 4 }}
@@ -630,7 +642,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                         yAxisId="left"
                         type="monotone"
                         dataKey="temperatura"
-                        name="Temperatura"
+                        name="Temperature"
                         stroke="#ef4444"
                         strokeWidth={2}
                         dot={{ r: 4 }}
@@ -640,7 +652,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                         yAxisId="right"
                         type="monotone"
                         dataKey="resa"
-                        name="Sviluppo coltura"
+                        name="Crop development"
                         stroke="#22c55e"
                         strokeWidth={2}
                         dot={{ r: 4 }}
@@ -661,7 +673,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                 <div className="flex items-center">
                   <AlertCircle className="h-5 w-5 text-red-600 mr-2" />
                   <h3 className="text-lg font-medium text-red-800">
-                    Avvisi per {campo.coltura_attuale}
+                    Alerts for {campo.coltura_attuale}
                   </h3>
                 </div>
               </div>
@@ -703,7 +715,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                                 {avviso.descrizione}
                               </p>
                               <p className="text-sm text-gray-600 mt-1">
-                                <span className="font-semibold">Impatto:</span>{" "}
+                                <span className="font-semibold">Impact:</span>{" "}
                                 {avviso.impatto}
                               </p>
                               <div className="mt-2 flex items-center text-sm">
@@ -714,7 +726,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                               </div>
                               <div className="mt-2 bg-white bg-opacity-50 p-2 rounded">
                                 <p className="text-sm font-medium">
-                                  Azione consigliata:{" "}
+                                  Recommended action:{" "}
                                   {avviso.azione_consigliata}
                                 </p>
                               </div>
@@ -730,7 +742,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                       <Leaf className="h-6 w-6 text-green-600" />
                     </div>
                     <p className="mt-3 text-gray-600">
-                      Nessun avviso attivo per questo campo
+                    No active alerts for this field
                     </p>
                   </div>
                 )}
@@ -738,7 +750,9 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               {colture.length > 0 && (
                 <div className="p-4 bg-gray-50 border-t border-gray-100">
                   <p className="text-sm font-medium text-gray-800">
-                    <span className="font-bold text-agroke-black-light">Consigli:</span>{" "}
+                    <span className="font-bold text-agroke-black-light">
+                    Recommendations:
+                    </span>{" "}
                     {colture[0].consigli}
                   </p>
                 </div>
@@ -749,7 +763,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
             <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
               <div className="p-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-agroke-black-light">
-                  Statistiche del Campo
+                  Field Statistics
                 </h2>
               </div>
               <div className="p-4">
@@ -757,7 +771,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-blue-50 transition-colors">
                     <Droplet size={24} className="text-blue-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                      Umidità del Suolo
+                    Soil Moisture
                     </span>
                     <span className="text-lg font-bold text-gray-800">
                       {campo.metriche.umidita_suolo}
@@ -766,7 +780,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-red-50 transition-colors">
                     <Thermometer size={24} className="text-red-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                      Temperatura Media
+                    Average Temperature
                     </span>
                     <span className="text-lg font-bold text-gray-800">
                       {campo.metriche.temperatura_media}
@@ -775,7 +789,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-green-50 transition-colors">
                     <Leaf size={24} className="text-green-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                      Fertilizzante
+                    Fertilizer
                     </span>
                     <span
                       className={`text-lg font-bold ${getStatoClasse(campo.stato_fertilizzante)}`}
@@ -786,7 +800,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-amber-50 transition-colors">
                     <Bug size={24} className="text-amber-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                      Pesticidi
+                    Pesticides
                     </span>
                     <span
                       className={`text-lg font-bold ${getStatoClasse(campo.stato_pesticidi)}`}
@@ -802,7 +816,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
             <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
               <div className="p-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-agroke-black-light">
-                  Metriche Terreno
+                  Field Characteristics
                 </h2>
               </div>
               <div className="p-4">
@@ -810,7 +824,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">
-                        pH Suolo
+                        Soil pH
                       </span>
                       <span className="text-sm font-bold text-gray-800">
                         {campo.metriche.ph_suolo}
@@ -828,7 +842,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">
-                        Azoto Disponibile
+                      Nitrogen Available
                       </span>
                       <span className="text-sm font-bold text-gray-800">
                         {campo.metriche.azoto_disponibile}
@@ -846,7 +860,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">
-                        Carbonio Organico
+                      Organic Carbon
                       </span>
                       <span className="text-sm font-bold text-gray-800">
                         {campo.metriche.carbonio_organico}
@@ -870,7 +884,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               <div className="p-4 border-b border-gray-100">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold text-agroke-black-light">
-                    Previsione Raccolto
+                  Crop Forecast
                   </h2>
                   <div className="flex items-center">
                     <PiggyBank className="text-green-600 mr-2" size={20} />
@@ -894,7 +908,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                       <Area
                         type="monotone"
                         dataKey="resa"
-                        name="Sviluppo (%)"
+                        name="Development (%)"
                         stroke="#10b981"
                         fill="#10b981"
                         fillOpacity={0.3}
@@ -907,14 +921,14 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                     <CalendarIcon className="mr-1 h-4 w-4" />
                     {colture.length > 0 && (
                       <span>
-                        Raccolto previsto: {colture[0].data_raccolto_prevista}
+                        Expected yield: {colture[0].data_raccolto_prevista}
                       </span>
                     )}
                   </div>
                   <div className="flex items-center">
                     <CloudRain className="mr-1 h-4 w-4" />
                     <span>
-                      Previsione pioggia:{" "}
+                    Rain forecast:{" "}
                       {campo.metriche.previsione_pioggia_7gg}
                     </span>
                   </div>

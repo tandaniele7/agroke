@@ -12,9 +12,9 @@ const campiPredefiniti = [
     area: 12.75,
     coordinate: { lat: 43.76956, lng: 11.25584 },
     coltura_attuale: "Grano duro",
-    stato_idrico: "Ottimo",
-    stato_fertilizzante: "Buono",
-    stato_pesticidi: "Sufficiente",
+    stato_idrico: "Optimal",
+    stato_fertilizzante: "Good",
+    stato_pesticidi: "Sufficient",
     data_creazione: "2024-12-10",
     mappa_url: "/toscana-field.png",
     metriche: {
@@ -31,9 +31,9 @@ const campiPredefiniti = [
     area: 8.32,
     coordinate: { lat: 44.69825, lng: 8.21376 },
     coltura_attuale: "Vite (Nebbiolo)",
-    stato_idrico: "Sufficiente",
-    stato_fertilizzante: "Ottimo",
-    stato_pesticidi: "Buono",
+    stato_idrico: "Sufficient",
+    stato_fertilizzante: "Optimal",
+    stato_pesticidi: "Good",
     data_creazione: "2024-09-22",
     mappa_url: "/piemonte-field.png",
     metriche: {
@@ -50,9 +50,9 @@ const campiPredefiniti = [
     area: 15.45,
     coordinate: { lat: 40.79144, lng: 17.24312 },
     coltura_attuale: "Ulivo (Coratina)",
-    stato_idrico: "Critico",
-    stato_fertilizzante: "Sufficiente",
-    stato_pesticidi: "Critico",
+    stato_idrico: "Critical",
+    stato_fertilizzante: "Sufficient",
+    stato_pesticidi: "Critical",
     data_creazione: "2025-01-05",
     mappa_url: "/puglia-field.png",
     metriche: {
@@ -92,11 +92,11 @@ export default function TerreniFarmer() {
 
   function getStatoClasse(stato: string) {
     switch (stato.toLowerCase()) {
-      case 'ottimo':
+      case 'Optimal':
         return 'bg-green-100 text-green-800';
-      case 'buono':
+      case 'Good':
         return 'bg-blue-100 text-blue-800';
-      case 'sufficiente':
+      case 'Sufficient':
         return 'bg-yellow-100 text-yellow-800';
       case 'critico':
         return 'bg-red-100 text-red-800';
@@ -136,21 +136,21 @@ export default function TerreniFarmer() {
             }}
           />
           <div className="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-full text-sm font-medium shadow">
-            {layer === "base" && "Vista Base"}
-            {layer === "satellite" && "Vista Satellite"}
-            {layer === "idrico" && "Stato Idrico"}
-            {layer === "malattie" && "Rischio Malattie"}
+            {layer === "base" && "Basic View"}
+            {layer === "satellite" && "Satellite View"}
+            {layer === "idrico" && "Water State"}
+            {layer === "malattie" && "Disease Risk"}
           </div>
         </div>
         {layer === "malattie" && (
           <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
             <h4 className="text-sm font-medium text-gray-700 mb-2">
-              Legenda
+              Legend
             </h4>
             <div className="flex flex-col items-start">
               <div className="flex justify-between w-full text-xs text-gray-600">
 
-              <span>100% Rischio</span>
+              <span>100% Risk</span>
               </div>
 
               <div
@@ -160,7 +160,7 @@ export default function TerreniFarmer() {
                 }}
               ></div>
               <div className="flex justify-between w-full text-xs text-gray-600">
-                <span>0% Rischio</span>
+                <span>0% Risk</span>
               </div>
             </div>
           </div>

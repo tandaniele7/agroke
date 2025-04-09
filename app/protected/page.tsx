@@ -14,51 +14,51 @@ export default function Dashboard() {
     area: number;
     coordinate: { lat: number; lng: number };
     coltura_attuale: string;
-    stato_idrico: "Ottimo" | "Buono" | "Sufficiente" | "Critico";
-    stato_fertilizzante: "Ottimo" | "Buono" | "Sufficiente" | "Critico";
-    stato_pesticidi: "Ottimo" | "Buono" | "Sufficiente" | "Critico";
+    stato_idrico: "Optimal" | "Good" | "Sufficient" | "Critical";
+    stato_fertilizzante: "Optimal" | "Good" | "Sufficient" | "Critical";
+    stato_pesticidi: "Optimal" | "Good" | "Sufficient" | "Critical";
     health: number;
     lastUpdated: string;
-    rischio_malattie: "Basso" | "Medio" | "Alto";
+    rischio_malattie: "Low" | "Medium" | "High";
   }> = [
     {
       id: 1,
-      nome: "Campo di Grano - Toscana",
+      nome: "Vineyard - Piedmont",
       area: 12.75,
       coordinate: { lat: 43.76956, lng: 11.25584 },
-      coltura_attuale: "Grano duro",
-      stato_idrico: "Ottimo",
-      stato_fertilizzante: "Buono",
-      stato_pesticidi: "Sufficiente",
+      coltura_attuale: "Grape (Barolo)",
+      stato_idrico: "Optimal",
+      stato_fertilizzante: "Good",
+      stato_pesticidi: "Sufficient",
       health: 85,
-      lastUpdated: "2 ore fa",
-      rischio_malattie: "Basso"
+      lastUpdated: "2 hours ago",
+      rischio_malattie: "Low"
     },
     {
       id: 2,
-      nome: "Vigneto - Piemonte",
+      nome: "Vineyard - Piedmont",
       area: 8.32,
       coordinate: { lat: 44.69825, lng: 8.21376 },
-      coltura_attuale: "Vite (Nebbiolo)",
-      stato_idrico: "Sufficiente",
-      stato_fertilizzante: "Ottimo",
-      stato_pesticidi: "Buono",
+      coltura_attuale: "Grape (Nebbiolo)",
+      stato_idrico: "Sufficient",
+      stato_fertilizzante: "Optimal",
+      stato_pesticidi: "Good",
       health: 75,
-      lastUpdated: "4 ore fa",
-      rischio_malattie: "Medio"
+      lastUpdated: "4 hours ago",
+      rischio_malattie: "Medium"
     },
     {
       id: 3,
-      nome: "Uliveto - Puglia",
+      nome: "Apple Orchard - Piedmont",
       area: 15.45,
       coordinate: { lat: 40.79144, lng: 17.24312 },
-      coltura_attuale: "Ulivo (Coratina)",
-      stato_idrico: "Critico",
-      stato_fertilizzante: "Sufficiente",
-      stato_pesticidi: "Critico",
+      coltura_attuale: "Apple",
+      stato_idrico: "Critical",
+      stato_fertilizzante: "Sufficient",
+      stato_pesticidi: "Critical",
       health: 60,
-      lastUpdated: "1 giorno fa",
-      rischio_malattie: "Alto"
+      lastUpdated: "1 day ago",
+      rischio_malattie: "High"
     }
   ];
 
@@ -68,37 +68,37 @@ export default function Dashboard() {
   // Calcola i dati aggregati per le statistiche
   const countAttivi = campiPredefiniti.length;
   const efficienzaIdrica = Math.round(
-    (campiPredefiniti.filter(campo => campo.stato_idrico !== "Critico").length / countAttivi) * 100
+    (campiPredefiniti.filter(campo => campo.stato_idrico !== "Critical").length / countAttivi) * 100
   );
-  const condizioniMeteo = "Variabili";
+  const condizioniMeteo = "Variable";
   const countAllarmi = campiPredefiniti.filter(campo => 
-    campo.stato_idrico === "Critico" || 
-    campo.stato_fertilizzante === "Critico" || 
-    campo.stato_pesticidi === "Critico" ||
-    campo.rischio_malattie === "Alto"
+    campo.stato_idrico === "Critical" || 
+    campo.stato_fertilizzante === "Critical" || 
+    campo.stato_pesticidi === "Critical" ||
+    campo.rischio_malattie === "High"
   ).length;
 
   const fieldStats = [
     {
-      title: "Campi Attivi",
+      title: "Active Fields",
       value: countAttivi.toString(),
       icon: Leaf,
       color: "text-agroke-green bg-agroke-green/10",
     },
     {
-      title: "Efficienza Idrica",
+      title: "Water Efficiency",
       value: `${efficienzaIdrica}%`,
       icon: Droplets,
       color: "text-agroke-blue bg-agroke-blue/10",
     },
     {
-      title: "Condizioni Meteo",
+      title: "Weather Conditions",
       value: condizioniMeteo,
       icon: CloudRain,
       color: "text-agroke-blue-light bg-agroke-blue-light/10",
     },
     {
-      title: "Allarmi di Rischio",
+      title: "Risk Alerts",
       value: countAllarmi.toString(),
       icon: AlertTriangle,
       color: "text-agroke-brown bg-agroke-brown/10",
@@ -109,29 +109,29 @@ export default function Dashboard() {
   const events = [
     {
       id: 1,
-      tipo: "allarme",
-      titolo: "Allarme Rischio Malattia",
-      descrizione: "L'Uliveto in Puglia mostra un rischio alto di infezione da Xylella.",
+      tipo: "Warning",
+      titolo: "Disease Risk Alert",
+      descrizione: "The Apple Orchard in Piedmont shows a high risk of infection by apple scab. Immediate action is required.",
       icona: AlertTriangle,
       iconaColore: "text-agroke-brown",
-      data: "Oggi",
-      campo: "Uliveto - Puglia"
+      data: "Today",
+      campo: "Apple Orchard - Piedmont"
     },
     {
       id: 2,
-      tipo: "idrico",
-      titolo: "Carenza Idrica Critica",
-      descrizione: "L'Uliveto in Puglia necessita di irrigazione immediata.",
+      tipo: "Warning",
+      titolo: "Water Efficiency Alert",
+      descrizione: "The Nebbiolo vineyard in Piedmont shows insufficient water levels. Immediate action is required.",
       icona: Droplets,
       iconaColore: "text-agroke-blue",
-      data: "Domani",
-      campo: "Uliveto - Puglia"
+      data: "Today",
+      campo: "Nebbiolo Vineyard - Piedmont"
     },
     {
       id: 3,
-      tipo: "trattamento",
-      titolo: "Trattamento Consigliato",
-      descrizione: "Il Vigneto in Piemonte necessita di trattamento preventivo contro l'oidio.",
+      tipo: "Treatment",
+      titolo: "Recommended Treatment",
+      descrizione: "The Barolo vineyard in Piedmont requires preventive treatment against powdery mildew.",
       icona: Bug,
       iconaColore: "text-agroke-blue-light",
       data: "Tra 2 giorni",
@@ -142,38 +142,38 @@ export default function Dashboard() {
   // Preparazione dati per i grafici
   const prepareResourceData = (campo: { stato_idrico: keyof typeof statusMap; stato_fertilizzante: keyof typeof statusMap; stato_pesticidi: keyof typeof statusMap }) => {
     const statusMap = {
-      "Ottimo": 90,
-      "Buono": 75,
-      "Sufficiente": 50,
-      "Critico": 20,
+      "Optimal": 90,
+      "Good": 75,
+      "Sufficient": 50,
+      "Critical": 20,
     };
 
     return [
-      { name: "Acqua", value: statusMap[campo.stato_idrico] || 0, color: "#2563eb" },
-      { name: "Fertilizzante", value: statusMap[campo.stato_fertilizzante] || 0, color: "#65a30d" },
-      { name: "Pesticidi", value: statusMap[campo.stato_pesticidi] || 0, color: "#ca8a04" },
+      { name: "Water", value: statusMap[campo.stato_idrico] || 0, color: "#2563eb" },
+      { name: "Fertilizer", value: statusMap[campo.stato_fertilizzante] || 0, color: "#65a30d" },
+      { name: "Pesticides", value: statusMap[campo.stato_pesticidi] || 0, color: "#ca8a04" },
     ];
   };
 
   const resourceData = prepareResourceData(campoSelezionato);
 
   // Funzione per mappare lo stato a colori per i grafici
-  const getStatusColor = (status: "Ottimo" | "Buono" | "Sufficiente" | "Critico") => {
+  const getStatusColor = (status: "Optimal" | "Good" | "Sufficient" | "Critical") => {
     switch(status) {
-      case "Ottimo": return "#22c55e";
-      case "Buono": return "#3b82f6";
-      case "Sufficiente": return "#eab308";
-      case "Critico": return "#ef4444";
+      case "Optimal": return "#22c55e";
+      case "Good": return "#3b82f6";
+      case "Sufficient": return "#eab308";
+      case "Critical": return "#ef4444";
       default: return "#6b7280";
     }
   };
 
   // Funzione per determinare il colore del rischio malattie
-  const getRiskColor = (risk: "Alto" | "Medio" |"Basso" ) => {
+  const getRiskColor = (risk: "High" | "Medium" |"Low" ) => {
     switch(risk) {
-      case "Basso": return "#22c55e";
-      case "Medio": return "#eab308";
-      case "Alto": return "#ef4444";
+      case "Low": return "#22c55e";
+      case "Medium": return "#eab308";
+      case "High": return "#ef4444";
       default: return "#6b7280";
     }
   };
@@ -181,8 +181,8 @@ export default function Dashboard() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-agroke-black-dark">Bentornato, Agricoltore</h1>
-        <p className="text-sm text-muted-foreground">Ultima scansione: Oggi, 10:15</p>
+        <h1 className="text-2xl font-bold text-agroke-black-dark">Welcome!</h1>
+        <p className="text-sm text-muted-foreground">Last Scan: Today, 10:15 a.m.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -204,13 +204,13 @@ export default function Dashboard() {
       {/* Nuovo widget statistiche campi */}
       <Card className="w-full">
         <CardHeader>
-          <CardTitle className='text-agroke-black-dark'>Statistiche Dettagliate dei Terreni</CardTitle>
+          <CardTitle className='text-agroke-black-dark'>Detailed Field Stats</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
             <div className="lg:col-span-1">
               <div className="space-y-2">
-                <p className="text-sm font-medium mb-2 text-agroke-black-dark">Seleziona un Terreno:</p>
+                <p className="text-sm font-medium mb-2 text-agroke-black-dark">Select a Field:</p>
                 {campiPredefiniti.map((campo) => (
                   <div 
                     key={campo.id}
@@ -232,7 +232,7 @@ export default function Dashboard() {
                   <h3 className="text-lg font-medium mb-2 text-agroke-black-dark">{campoSelezionato.nome}</h3>
                   <div className="space-y-4">
                     <div>
-                      <p className="text-sm font-medium text-agroke-black-dark">Indice di Salute Generale</p>
+                      <p className="text-sm font-medium text-agroke-black-dark">General Health Index</p>
                         <div className="flex items-center mt-1">
                         <Progress 
                           value={campoSelezionato.health} 
@@ -251,7 +251,7 @@ export default function Dashboard() {
 
                     <div className="grid grid-cols-3 gap-2">
                       <div className="p-2 border rounded">
-                        <p className="text-xs text-muted-foreground">Stato Idrico</p>
+                        <p className="text-xs text-muted-foreground">Water State</p>
                         <div className="flex items-center mt-1">
                           <div 
                             className="w-3 h-3 rounded-full mr-1" 
@@ -261,7 +261,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="p-2 border rounded">
-                        <p className="text-xs text-muted-foreground">Fertilizzante</p>
+                        <p className="text-xs text-muted-foreground">Fertilizer</p>
                         <div className="flex items-center mt-1">
                           <div 
                             className="w-3 h-3 rounded-full mr-1" 
@@ -271,7 +271,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="p-2 border rounded">
-                        <p className="text-xs text-muted-foreground">Pesticidi</p>
+                        <p className="text-xs text-muted-foreground">Pesticides</p>
                         <div className="flex items-center mt-1">
                           <div 
                             className="w-3 h-3 rounded-full mr-1" 
@@ -283,7 +283,7 @@ export default function Dashboard() {
                     </div>
 
                     <div className="p-2 border rounded">
-                      <p className="text-xs text-muted-foreground">Rischio Malattie</p>
+                      <p className="text-xs text-muted-foreground">Disease Risk</p>
                       <div className="flex items-center mt-1">
                         <div 
                           className="w-3 h-3 rounded-full mr-1" 
@@ -295,11 +295,11 @@ export default function Dashboard() {
 
                     <div className="grid grid-cols-2 gap-2">
                       <div className="p-2 border rounded">
-                        <p className="text-xs text-muted-foreground">Area</p>
-                        <p className="text-sm font-medium text-agroke-black-dark">{campoSelezionato.area} ettari</p>
+                        <p className="text-xs text-muted-foreground">Surface</p>
+                        <p className="text-sm font-medium text-agroke-black-dark">{campoSelezionato.area} hectares</p>
                       </div>
                       <div className="p-2 border rounded">
-                        <p className="text-xs text-muted-foreground">Ultimo Aggiornamento</p>
+                        <p className="text-xs text-muted-foreground">Last Update</p>
                         <p className="text-sm font-medium text-agroke-black-dark">{campoSelezionato.lastUpdated}</p>
                       </div>
                     </div>
@@ -307,7 +307,7 @@ export default function Dashboard() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium mb-2 text-agroke-black-dark">Livelli Risorse</p>
+                  <p className="text-sm font-medium mb-2 text-agroke-black-dark">Resource Levels</p>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -333,7 +333,7 @@ export default function Dashboard() {
                   <div className="mt-4">
                     <Link href={`/protected/fields/${campoSelezionato.id}`}>
                       <button className="w-full py-2 px-4 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded transition-colors">
-                        Dettagli Completi
+                      Full Details
                       </button>
                     </Link>
                   </div>
@@ -347,7 +347,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className='text-agroke-black-dark'>I Tuoi Terreni</CardTitle>
+            <CardTitle className='text-agroke-black-dark'>Your Fields</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -366,11 +366,11 @@ export default function Dashboard() {
                         {campo.coordinate.lat.toFixed(2)}, {campo.coordinate.lng.toFixed(2)}
                       </span>
                       <span className="mx-2">•</span>
-                      <span>Coltura: {campo.coltura_attuale}</span>
+                      <span>Crop: {campo.coltura_attuale}</span>
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-agroke-black-dark">Indice di Salute</span>
+                        <span className="text-sm text-agroke-black-dark">Health Index</span>
                         <span className="text-sm font-medium text-agroke-black-dark">{campo.health}%</span>
                       </div>
                       <Progress 
@@ -387,19 +387,19 @@ export default function Dashboard() {
                     </div>
                     <div className="mt-2 flex gap-2">
                       <span className={`text-xs px-2 py-1 rounded-full ${
-                        campo.stato_idrico === "Ottimo" ? "bg-green-100 text-green-800" :
-                        campo.stato_idrico === "Buono" ? "bg-blue-100 text-blue-800" :
-                        campo.stato_idrico === "Sufficiente" ? "bg-yellow-100 text-yellow-800" :
+                        campo.stato_idrico === "Optimal" ? "bg-green-100 text-green-800" :
+                        campo.stato_idrico === "Good" ? "bg-blue-100 text-blue-800" :
+                        campo.stato_idrico === "Sufficient" ? "bg-yellow-100 text-yellow-800" :
                         "bg-red-100 text-red-800"
                       }`}>
-                        Acqua: {campo.stato_idrico}
+                        Water: {campo.stato_idrico}
                       </span>
                       <span className={`text-xs px-2 py-1 rounded-full ${
-                        campo.rischio_malattie === "Basso" ? "bg-green-100 text-green-800" :
-                        campo.rischio_malattie === "Medio" ? "bg-yellow-100 text-yellow-800" :
+                        campo.rischio_malattie === "Low" ? "bg-green-100 text-green-800" :
+                        campo.rischio_malattie === "Medium" ? "bg-yellow-100 text-yellow-800" :
                         "bg-red-100 text-red-800"
                       }`}>
-                        Rischio: {campo.rischio_malattie}
+                        Risk: {campo.rischio_malattie}
                       </span>
                     </div>
                   </div>
@@ -411,7 +411,7 @@ export default function Dashboard() {
         
         <Card>
           <CardHeader>
-            <CardTitle className='text-agroke-black-dark'>Eventi in Arrivo</CardTitle>
+            <CardTitle className='text-agroke-black-dark'>Upcoming Events</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

@@ -45,7 +45,10 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
+        <div className="">
+
         {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+        </div>
         <div className="w-full min-h-screen">{children}</div>
         <Footer />
       </body>
