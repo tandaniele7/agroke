@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useActionState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
@@ -13,7 +13,7 @@ import { fromLonLat, toLonLat } from "ol/proj";
 import Feature from "ol/Feature";
 import { Style, Fill, Stroke } from "ol/style";
 import XYZ from "ol/source/XYZ";
-import { addFieldData } from "@/app/actions";
+
 
 export default function Home() {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -25,12 +25,12 @@ export default function Home() {
   const [polygonCoordinates, setPolygonCoordinates] = useState<number[][]>([]);
   const [fieldName, setFieldName] = useState("");
   const [fieldDescription, setFieldDescription] = useState("");
-  const [fields, setFields] = useState<any[]>([]);
-  const initialState = {
-    isLoading: false,
-    error: null,
-  };
-  const [state, formAction] = useActionState(addFieldData, initialState);
+  // const [fields, setFields] = useState<any[]>([]);
+  // const initialState = {
+  //   isLoading: false,
+  //   error: null,
+  // };
+  // const [state, formAction] = useActionState(addFieldData, initialState);
   // Initialize the map when the component mounts
   useEffect(() => {
     if (mapRef.current && !mapInstanceRef.current) {
@@ -116,25 +116,25 @@ export default function Home() {
   };
 
   // Save the field data
-  const saveField = () => {
-    if (!fieldName || polygonCoordinates.length === 0) {
-      alert("Enter the field name and draw an area on the map.");
-      return;
-    }
+  // const saveField = () => {
+  //   if (!fieldName || polygonCoordinates.length === 0) {
+  //     alert("Enter the field name and draw an area on the map.");
+  //     return;
+  //   }
 
-    const newField = {
-      name: fieldName,
-      description: fieldDescription,
-      coordinates: polygonCoordinates,
-    };
+  //   const newField = {
+  //     name: fieldName,
+  //     description: fieldDescription,
+  //     coordinates: polygonCoordinates,
+  //   };
 
-    setFields((prevFields) => [...prevFields, newField]);
-    setFieldName("");
-    setFieldDescription("");
-    setPolygonCoordinates([]);
-    vectorSourceRef.current?.clear();
-    alert("Field saved successfully!");
-  };
+  //   setFields((prevFields) => [...prevFields, newField]);
+  //   setFieldName("");
+  //   setFieldDescription("");
+  //   setPolygonCoordinates([]);
+  //   vectorSourceRef.current?.clear();
+  //   alert("Field saved successfully!");
+  // };
 
   return (
     <main className="min-h-screen flex flex-col">

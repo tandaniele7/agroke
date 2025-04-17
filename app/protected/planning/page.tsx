@@ -180,10 +180,10 @@ interface Field {
     treatments: Treatment[];
 }
 
-interface GanttChartRow {
-    type: string;
-    label: string;
-}
+// interface GanttChartRow {
+//     type: string;
+//     label: string;
+// }
 
 const prepareGanttData = (fieldId: string): (string | Date | number | null)[][] => {
     const field: Field | undefined = fields.find(f => f.id === fieldId);
@@ -243,7 +243,7 @@ const prepareGanttData = (fieldId: string): (string | Date | number | null)[][] 
   };
 
   // Get the active field
-  const activeField = fields.find(field => field.id === activeTab);
+  // const activeField = fields.find(field => field.id === activeTab);
   const summary = calculateSummary(activeTab);
 
   // Get category color

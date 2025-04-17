@@ -19,12 +19,12 @@ import {
 import {
   Home,
   Map,
-  Droplets,
-  Leaf,
-  BarChart,
+  // Droplets,
+  // Leaf,
+  // BarChart,
   Notebook,
-  Calendar,
-  CloudLightning,
+  // Calendar,
+  // CloudLightning,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
