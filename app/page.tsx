@@ -5,7 +5,6 @@ import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone } from "react-feather";
-import { Instagram, Linkedin } from "react-feather";
 
 // Initialize Supabase (replace with your credentials)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -271,7 +270,7 @@ export default function Home() {
                 className="text-xl text-gray-700 mb-8"
                 variants={fadeInUp}
               >
-                Semplifica la gestione burocratica, ottimizza i trattamenti e rispetta le normative con un'unica soluzione innovativa.
+                Semplifica la gestione burocratica, ottimizza i trattamenti e rispetta le normative con un&apos;unica soluzione innovativa.
               </motion.p>
               
               <motion.div 
@@ -317,7 +316,7 @@ export default function Home() {
                   />
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-green-800 mb-2">Quaderno di Campagna AgroKe</h3>
-                    <p className="text-gray-600 mb-4">Gestisci facilmente trattamenti, semina, raccolta e tutte le operazioni colturali in un'unica interfaccia intuitiva.</p>
+                    <p className="text-gray-600 mb-4">Gestisci facilmente trattamenti, semina, raccolta e tutte le operazioni colturali in un&apos;unica interfaccia intuitiva.</p>
                     <div className="flex items-center">
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -528,7 +527,7 @@ export default function Home() {
                 variants={fadeInUp}
                 whileHover={{ y: -5 }}
               >
-                <div className="text-green-600 text-4xl mb-4">"</div>
+                <div className="text-green-600 text-4xl mb-4">&quot;</div>
                 <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -612,7 +611,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <p>Assistenza personalizzata all'avvio</p>
+                  <p>Assistenza personalizzata all&apos;avvio</p>
                 </div>
                 <div className="flex items-start">
                   <div className="text-green-300 mr-4 mt-1">

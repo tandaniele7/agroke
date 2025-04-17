@@ -508,7 +508,7 @@ export default function FieldDiary() {
           <div className="bg-blue-50 p-6 border-t border-blue-100">
             <h3 className="text-lg font-semibold text-blue-800 mb-2">Regulatory Information</h3>
             <p className="text-sm text-gray-700">
-              According to Presidential Decree No. 290 of 2001, Article 42, paragraph 3, all farmers must maintain a "Record of Treatments"
+              According to Presidential Decree No. 290 of 2001, Article 42, paragraph 3, all farmers must maintain a &quot;Record of Treatments&quot;
               for all phytosanitary products used. This record must be updated within 30 days of application and kept for at least one year.
             </p>
             <p className="text-sm text-gray-700 mt-2">
@@ -781,7 +781,7 @@ export default function FieldDiary() {
                 <h4 className="text-lg font-semibold text-gray-800">Legal Requirements</h4>
                 <p className="text-gray-600">According to Presidential Decree No. 290 of 2001, Article 42, paragraph 3:</p>
                 <ul className="list-disc pl-5 text-gray-600">
-                  <li>All farmers must maintain a detailed "Record of Treatments"</li>
+                  <li>All farmers must maintain a detailed &quot;Record of Treatments&quot;</li>
                   <li>Records must be updated within 30 days of application</li>
                   <li>Records must be kept for a minimum of 3 years</li>
                   <li>All phytosanitary products used must be documented</li>
