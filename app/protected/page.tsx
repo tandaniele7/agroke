@@ -27,7 +27,7 @@ export default function Dashboard() {
       area: 12.75,
       coordinate: { lat: 43.76956, lng: 11.25584 },
       coltura_attuale: "Grape (Barolo)",
-      stato_idrico: "Optimal",
+      stato_idrico: "Critical",
       stato_fertilizzante: "Good",
       stato_pesticidi: "Sufficient",
       health: 85,
@@ -40,7 +40,7 @@ export default function Dashboard() {
       area: 8.32,
       coordinate: { lat: 44.69825, lng: 8.21376 },
       coltura_attuale: "Grape (Nebbiolo)",
-      stato_idrico: "Sufficient",
+      stato_idrico: "Critical",
       stato_fertilizzante: "Optimal",
       stato_pesticidi: "Good",
       health: 75,
@@ -307,7 +307,7 @@ export default function Dashboard() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium mb-2 text-agroke-black-dark">Resource Levels</p>
+                  <p className="text-sm font-bold mb-2 text-agroke-black-dark">Avg Resource Usage/Treatment</p>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>

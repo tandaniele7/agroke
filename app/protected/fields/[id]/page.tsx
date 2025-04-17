@@ -1,5 +1,5 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -10,13 +10,9 @@ import {
   Droplet,
   Leaf,
   Bug,
-  BarChart3,
   PiggyBank,
-  Sprout,
   CalendarIcon,
   Thermometer,
-  Activity,
-  Scale,
   CloudRain,
 } from "lucide-react";
 import {
@@ -33,7 +29,41 @@ import {
 } from "recharts";
 
 // Importiamo i dati di esempio (nella versione finale verrebbero prelevati da Supabase)
-const campiPredefiniti = [
+interface Campo {
+  id: number;
+  nome: string;
+  area: number;
+  coordinate: {
+    lat: number;
+    lng: number;
+  };
+  coltura_attuale: string;
+  stato_idrico: string;
+  stato_fertilizzante: string;
+  stato_pesticidi: string;
+  data_creazione: string;
+  mappa_url: string;
+  metriche: {
+    umidita_suolo: string;
+    ph_suolo: string;
+    temperatura_media: string;
+    previsione_raccolto: string;
+    rischio_malattie: string;
+    azoto_disponibile: string;
+    carbonio_organico: string;
+    previsione_pioggia_7gg: string;
+    efficienza_irrigazione: string;
+    risparmio_idrico_potenziale: string;
+  };
+  storico_metriche: {
+    data: string;
+    umidita: number;
+    temperatura: number;
+    resa: number;
+  }[];
+}
+
+const campiPredefiniti: Campo[] = [
   {
     id: 1,
     nome: "Vineyard - Piedmont",
@@ -75,8 +105,8 @@ const campiPredefiniti = [
     coordinate: { lat: 44.69825, lng: 8.21376 },
     coltura_attuale: "Grape (Nebbiolo)",
     stato_idrico: "Sufficient",
-    stato_fertilizzante: "Optimal",
-    stato_pesticidi: "Good",
+    stato_fertilizzante: "To Add",
+    stato_pesticidi: "Risk Detected",
     data_creazione: "2024-09-22",
     mappa_url: "/piemonte-field.png",
     metriche: {
@@ -296,7 +326,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
   const router = useRouter();
   const campoId = parseInt(params.id as string);
   const [layerAttivo, setLayerAttivo] = useState("base");
-  const [campo, setCampo] = useState<any>(null);
+  const [campo, setCampo] = useState<Campo>(null as unknown as Campo);
 
   interface Avviso {
     tipo: string;
@@ -360,24 +390,24 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
       case "critico":
         return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return " text-gray-800";
     }
   }
 
-  function getLivelloAvvisoClasse(livello: string) {
-    switch (livello.toLowerCase()) {
-      case "basso":
-        return "bg-blue-50 border-blue-200 text-blue-700";
-      case "medio":
-        return "bg-yellow-50 border-yellow-200 text-yellow-700";
-      case "alto":
-        return "bg-orange-50 border-orange-200 text-orange-700";
-      case "critico":
-        return "bg-red-50 border-red-200 text-red-700";
-      default:
-        return "bg-gray-50 border-gray-200 text-gray-700";
-    }
-  }
+  // function getLivelloAvvisoClasse(livello: string) {
+  //   switch (livello.toLowerCase()) {
+  //     case "basso":
+  //       return "bg-blue-50 border-blue-200 text-blue-700";
+  //     case "medio":
+  //       return "bg-yellow-50 border-yellow-200 text-yellow-700";
+  //     case "alto":
+  //       return "bg-orange-50 border-orange-200 text-orange-700";
+  //     case "critico":
+  //       return "bg-red-50 border-red-200 text-red-700";
+  //     default:
+  //       return "bg-gray-50 border-gray-200 text-gray-700";
+  //   }
+  // }
 
   function getLayerImage(layer: string) {
     let imageUrl = campo.mappa_url;
@@ -742,7 +772,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                       <Leaf className="h-6 w-6 text-green-600" />
                     </div>
                     <p className="mt-3 text-gray-600">
-                    No active alerts for this field
+                      No active alerts for this field
                     </p>
                   </div>
                 )}
@@ -751,7 +781,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                 <div className="p-4 bg-gray-50 border-t border-gray-100">
                   <p className="text-sm font-medium text-gray-800">
                     <span className="font-bold text-agroke-black-light">
-                    Recommendations:
+                      Recommendations:
                     </span>{" "}
                     {colture[0].consigli}
                   </p>
@@ -771,7 +801,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-blue-50 transition-colors">
                     <Droplet size={24} className="text-blue-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                    Soil Moisture
+                      Soil Moisture
                     </span>
                     <span className="text-lg font-bold text-gray-800">
                       {campo.metriche.umidita_suolo}
@@ -780,7 +810,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-red-50 transition-colors">
                     <Thermometer size={24} className="text-red-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                    Average Temperature
+                      Average Temperature
                     </span>
                     <span className="text-lg font-bold text-gray-800">
                       {campo.metriche.temperatura_media}
@@ -789,7 +819,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-green-50 transition-colors">
                     <Leaf size={24} className="text-green-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                    Fertilizer
+                      Fertilizer
                     </span>
                     <span
                       className={`text-lg font-bold ${getStatoClasse(campo.stato_fertilizzante)}`}
@@ -800,7 +830,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex flex-col items-center p-3 rounded-lg border border-gray-100 hover:bg-amber-50 transition-colors">
                     <Bug size={24} className="text-amber-500 mb-2" />
                     <span className="text-sm font-medium text-gray-600">
-                    Pesticides
+                      Pesticides
                     </span>
                     <span
                       className={`text-lg font-bold ${getStatoClasse(campo.stato_pesticidi)}`}
@@ -842,7 +872,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">
-                      Nitrogen Available
+                        Nitrogen Available
                       </span>
                       <span className="text-sm font-bold text-gray-800">
                         {campo.metriche.azoto_disponibile}
@@ -860,7 +890,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">
-                      Organic Carbon
+                        Organic Carbon
                       </span>
                       <span className="text-sm font-bold text-gray-800">
                         {campo.metriche.carbonio_organico}
@@ -884,7 +914,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
               <div className="p-4 border-b border-gray-100">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold text-agroke-black-light">
-                  Crop Forecast
+                    Crop Forecast
                   </h2>
                   <div className="flex items-center">
                     <PiggyBank className="text-green-600 mr-2" size={20} />
@@ -928,8 +958,7 @@ export default function CampoDettaglio(props: { params: { id: string } }) {
                   <div className="flex items-center">
                     <CloudRain className="mr-1 h-4 w-4" />
                     <span>
-                    Rain forecast:{" "}
-                      {campo.metriche.previsione_pioggia_7gg}
+                      Rain forecast: {campo.metriche.previsione_pioggia_7gg}
                     </span>
                   </div>
                 </div>

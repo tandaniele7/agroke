@@ -1,5 +1,6 @@
 "use client";
 
+import { signOutAction } from "@/app/actions";
 import {
   Disclosure,
   DisclosureButton,
@@ -21,48 +22,48 @@ import {
   Droplets,
   Leaf,
   BarChart,
+  Notebook,
   Calendar,
-  MessageSquare,
   CloudLightning,
-  Settings,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navigation_ = [
-  { name: "Dashboard", href: "/dashboard", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
 const navigation = [
   { icon: Home, name: "Dashboard", href: "/protected", current: false },
   { icon: Map, name: "Fields", href: "/protected/fields", current: false },
+  // {
+  //   icon: Droplets,
+  //   name: "Water Management",
+  //   href: "/protected/water",
+  //   current: false,
+  // },
+  // { icon: Leaf, name: "Crops", href: "/protected/crops", current: false },
   {
-    icon: Droplets,
-    name: "Water Management",
-    href: "/protected/water",
+    icon: Notebook,
+    name: "Field Diary",
+    href: "/protected/field-diary",
     current: false,
   },
-  { icon: Leaf, name: "Crops", href: "/protected/crops", current: false },
-  {
-    icon: BarChart,
-    name: "Yield Forecast",
-    href: "/protected/yield",
-    current: false,
-  },
-  {
-    icon: Calendar,
-    name: "Planning",
-    href: "/protected/planning",
-    current: false,
-  },
-  {
-    icon: CloudLightning,
-    name: "Weather Alerts",
-    href: "/protected/weather",
-    current: false,
-  },
+  // {
+  //   icon: BarChart,
+  //   name: "Yield Forecast",
+  //   href: "/protected/yield",
+  //   current: false,
+  // },
+  // {
+  //   icon: Calendar,
+  //   name: "Planning",
+  //   href: "/protected/planning",
+  //   current: false,
+  // },
+  // {
+  //   icon: CloudLightning,
+  //   name: "Weather Alerts",
+  //   href: "/protected/weather",
+  //   current: false,
+  // },
 ];
 
 function classNames(...classes: (string | boolean | undefined)[]) {
@@ -116,10 +117,10 @@ export default function Navbar() {
                       href={item.href}
                       aria-current={item.current ? "page" : undefined}
                       className={classNames(
-                      item.current
-                        ? "bg-agroke-black-light text-agroke-gray-light"
-                        : "text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light",
-                      "rounded-md px-3 py-2 text-sm font-medium flex items-center space-x-1"
+                        item.current
+                          ? "bg-agroke-black-light text-agroke-gray-light"
+                          : "text-agroke-black-light hover:bg-agroke-green-dark hover:text-agroke-gray-light",
+                        "rounded-md px-3 py-2 text-sm font-medium flex items-center space-x-1"
                       )}
                     >
                       <LinkIcon className="w-6" />
@@ -177,12 +178,14 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </a>
+                  <form action={signOutAction}>
+                    <button
+                      type="submit"
+                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    >
+                      Sign out
+                    </button>
+                  </form>
                 </MenuItem>
               </MenuItems>
             </Menu>

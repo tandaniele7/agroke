@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Trash2, Plus, MapPin, Droplet, Leaf, Bug, ChevronDown, ChevronUp, Layers } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+
 
 // Dati predefiniti dei terreni
 const campiPredefiniti = [
