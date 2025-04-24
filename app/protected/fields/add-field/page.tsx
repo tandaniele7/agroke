@@ -115,27 +115,6 @@ export default function Home() {
     setIsDrawing(true);
   };
 
-  // Save the field data
-  const saveField = () => {
-    if (!fieldName || polygonCoordinates.length <= 3) {
-      alert("Enter the field name and draw an area on the map.");
-      return;
-    }
-
-    const newField = {
-      name: fieldName,
-      description: fieldDescription,
-      coordinates: polygonCoordinates,
-    };
-
-    setFields((prevFields) => [...prevFields, newField]);
-    setFieldName("");
-    setFieldDescription("");
-    setPolygonCoordinates([]);
-    vectorSourceRef.current?.clear();
-    alert("Field saved successfully!");
-  };
-
   return (
     <main className="min-h-screen flex flex-col">
       <section className="flex-grow container mx-auto p-4 md:flex gap-6">
@@ -185,6 +164,7 @@ export default function Home() {
                   id="fieldName"
                   required
                   type="text"
+                  name="fieldName"
                   value={fieldName}
                   onChange={(e) => setFieldName(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2"
@@ -193,7 +173,7 @@ export default function Home() {
               </div>
               {polygonCoordinates.length > 0 &&
                 polygonCoordinates.map((point, index) => (
-                  <div className="" key={index}>
+                  <div className="hidden" key={index}>
                     <div className="mb-4 ">
                       <label
                         className="block text-sm font-medium mb-2"
@@ -203,6 +183,7 @@ export default function Home() {
                       </label>
                       <textarea
                         id="lng"
+                        name="lng"
                         readOnly
                         value={point[0]}
                         className="w-full border border-gray-300 rounded px-3 py-2"
@@ -218,6 +199,7 @@ export default function Home() {
                       </label>
                       <textarea
                         id="lat"
+                        name="lat"
                         readOnly
                         value={point[1]}
                         className="w-full border border-gray-300 rounded px-3 py-2"
@@ -235,6 +217,7 @@ export default function Home() {
                 </label>
                 <textarea
                   id="fieldDescription"
+                  name="fieldDescription"
                   required
                   value={fieldDescription}
                   onChange={(e) => setFieldDescription(e.target.value)}
@@ -246,16 +229,6 @@ export default function Home() {
               <button
                 type="submit"
                 className="w-full px-4 py-2 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded"
-                onClick={() => {
-                  alert(
-                    polygonCoordinates
-                      .map((point) => {
-                        console.log(point);
-                        return point.join(", ");
-                      })
-                      .join("\n")
-                  );
-                }}
               >
                 Save field
               </button>

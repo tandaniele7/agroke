@@ -143,11 +143,10 @@ export async function addFieldData(prevState: State, formData: FormData) {
   const fieldDescription = formData.get("fieldDescription")?.toString();
   const lat = formData.getAll("lat").map((val) => parseFloat(val.toString()));
   const lng = formData.getAll("lng").map((val) => parseFloat(val.toString()));
-
   if (lat.length < 3 || lng.length < 3) {
     return encodedRedirect(
       "error",
-      "/protected/fields",
+      "/protected/fields/add-field",
       "At least three points are required to define the field geometry"
     );
   }
@@ -155,12 +154,14 @@ export async function addFieldData(prevState: State, formData: FormData) {
   if (lat.length !== lng.length) {
     return encodedRedirect(
       "error",
-      "/protected/fields",
+      "/protected/fields/add-field",
       "Lat and Lng arrays must have the same length"
     );
   }
 
   const fieldGeometry = lat.map((latitude, index) => [latitude, lng[index]]);
+  const fieldGeometryJson = {fieldGeometry};
+  console.log("Field Geometry:", fieldGeometryJson);
 
   if (!fieldName || !fieldDescription || !fieldGeometry || !Array.isArray(fieldGeometry)) {
     return encodedRedirect(
@@ -198,8 +199,9 @@ export async function addFieldData(prevState: State, formData: FormData) {
     console.error(error.message);
     return encodedRedirect(
       "error",
-      "/protected/fields",
-      "Could not add field data"
+      "/protected/fields/add-field",
+      // "Could not add field data"
+      error.message
     );
   }
 
