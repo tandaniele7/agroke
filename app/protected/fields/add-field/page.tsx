@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useActionState } from "react";
 import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
@@ -13,7 +13,7 @@ import { fromLonLat, toLonLat } from "ol/proj";
 import Feature from "ol/Feature";
 import { Style, Fill, Stroke } from "ol/style";
 import XYZ from "ol/source/XYZ";
-
+import { addFieldData } from "@/app/actions";
 
 export default function Home() {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -25,12 +25,12 @@ export default function Home() {
   const [polygonCoordinates, setPolygonCoordinates] = useState<number[][]>([]);
   const [fieldName, setFieldName] = useState("");
   const [fieldDescription, setFieldDescription] = useState("");
-  // const [fields, setFields] = useState<any[]>([]);
-  // const initialState = {
-  //   isLoading: false,
-  //   error: null,
-  // };
-  // const [state, formAction] = useActionState(addFieldData, initialState);
+  const [fields, setFields] = useState<any[]>([]);
+  const initialState = {
+    isLoading: false,
+    error: null,
+  };
+  const [state, formAction] = useActionState(addFieldData, initialState);
   // Initialize the map when the component mounts
   useEffect(() => {
     if (mapRef.current && !mapInstanceRef.current) {
@@ -116,25 +116,25 @@ export default function Home() {
   };
 
   // Save the field data
-  // const saveField = () => {
-  //   if (!fieldName || polygonCoordinates.length === 0) {
-  //     alert("Enter the field name and draw an area on the map.");
-  //     return;
-  //   }
+  const saveField = () => {
+    if (!fieldName || polygonCoordinates.length <= 3) {
+      alert("Enter the field name and draw an area on the map.");
+      return;
+    }
 
-  //   const newField = {
-  //     name: fieldName,
-  //     description: fieldDescription,
-  //     coordinates: polygonCoordinates,
-  //   };
+    const newField = {
+      name: fieldName,
+      description: fieldDescription,
+      coordinates: polygonCoordinates,
+    };
 
-  //   setFields((prevFields) => [...prevFields, newField]);
-  //   setFieldName("");
-  //   setFieldDescription("");
-  //   setPolygonCoordinates([]);
-  //   vectorSourceRef.current?.clear();
-  //   alert("Field saved successfully!");
-  // };
+    setFields((prevFields) => [...prevFields, newField]);
+    setFieldName("");
+    setFieldDescription("");
+    setPolygonCoordinates([]);
+    vectorSourceRef.current?.clear();
+    alert("Field saved successfully!");
+  };
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -172,9 +172,7 @@ export default function Home() {
         {/* Form Section */}
         <div className="md:w-1/3">
           <div className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-2xl font-semibold mb-4">
-              Field Information
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">Field Information</h2>
             <form action={formAction}>
               <div className="mb-4">
                 <label
@@ -193,7 +191,41 @@ export default function Home() {
                   placeholder="Enter the field name"
                 />
               </div>
-
+              {polygonCoordinates.length > 0 &&
+                polygonCoordinates.map((point, index) => (
+                  <div className="" key={index}>
+                    <div className="mb-4 ">
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        htmlFor="lng"
+                      >
+                        Longitude
+                      </label>
+                      <textarea
+                        id="lng"
+                        readOnly
+                        value={point[0]}
+                        className="w-full border border-gray-300 rounded px-3 py-2"
+                        placeholder="I punti della longitudine verranno visualizzati qui"
+                      ></textarea>
+                    </div>
+                    <div className="mb-4 ">
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        htmlFor="lng"
+                      >
+                        Latitude
+                      </label>
+                      <textarea
+                        id="lat"
+                        readOnly
+                        value={point[1]}
+                        className="w-full border border-gray-300 rounded px-3 py-2"
+                        placeholder="I punti della latitudine verranno visualizzati qui"
+                      ></textarea>
+                    </div>
+                  </div>
+                ))}
               <div className="mb-4">
                 <label
                   className="block text-sm font-medium mb-2"
@@ -210,30 +242,20 @@ export default function Home() {
                   placeholder="Enter a description of the field"
                 ></textarea>
               </div>
-              <div className="mb-4 hidden">
-                <label
-                  className="block text-sm font-medium mb-2"
-                  htmlFor="polygonCoordinates"
-                >
-                  Points of the polygon
-                </label>
-                <textarea
-                  id="polygonCoordinates"
-                  readOnly
-                  value={polygonCoordinates
-                    .map((point) => {
-                      console.log(point);
-                      point.join(", ");
-                    })
-                    .join("\n")}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                  placeholder="I punti del poligono verranno visualizzati qui"
-                ></textarea>
-              </div>
 
               <button
                 type="submit"
                 className="w-full px-4 py-2 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded"
+                onClick={() => {
+                  alert(
+                    polygonCoordinates
+                      .map((point) => {
+                        console.log(point);
+                        return point.join(", ");
+                      })
+                      .join("\n")
+                  );
+                }}
               >
                 Save field
               </button>

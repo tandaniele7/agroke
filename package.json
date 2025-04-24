@@ -15,9 +15,12 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-google-maps/api": "^2.20.6",
+    "@stripe/react-stripe-js": "^3.6.0",
+    "@stripe/stripe-js": "^7.1.0",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.20",
+    "axios": "^1.8.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -35,7 +38,8 @@
     "react-feather": "^2.0.10",
     "react-ga4": "^2.1.0",
     "react-google-charts": "^5.2.1",
-    "recharts": "^2.15.2"
+    "recharts": "^2.15.2",
+    "stripe": "^18.0.0"
   },
   "devDependencies": {
     "@types/node": "22.10.2",

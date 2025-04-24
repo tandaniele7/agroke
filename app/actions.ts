@@ -139,7 +139,8 @@ export interface State {
 }
 
 export async function addFieldData(prevState: State, formData: FormData) {
-  const nome = formData.get("fieldName")?.toString();
+  const fieldName = formData.get("fieldName")?.toString();
+  const fieldDescription = formData.get("fieldDescription")?.toString();
   const lat = formData.getAll("lat").map((val) => parseFloat(val.toString()));
   const lng = formData.getAll("lng").map((val) => parseFloat(val.toString()));
 
@@ -147,36 +148,7 @@ export async function addFieldData(prevState: State, formData: FormData) {
     return encodedRedirect(
       "error",
       "/protected/fields",
-      "At least three points are required to calculate the area"
-    );
-  }
-
-  const calculatePolygonArea = (lat: number[], lng: number[]): number => {
-    let area = 0;
-    const numPoints = lat.length;
-
-    for (let i = 0; i < numPoints; i++) {
-      const j = (i + 1) % numPoints;
-      area += lat[i] * lng[j] - lng[i] * lat[j];
-    }
-
-    return Math.abs(area / 2);
-  };
-
-  const area = calculatePolygonArea(lat, lng).toString();
-
-  if (
-    !nome ||
-    !area ||
-    !lat ||
-    !lng ||
-    !Array.isArray(lat) ||
-    !Array.isArray(lng)
-  ) {
-    return encodedRedirect(
-      "error",
-      "/protected/fields",
-      "All fields are required and lat/lng must be arrays"
+      "At least three points are required to define the field geometry"
     );
   }
 
@@ -185,6 +157,16 @@ export async function addFieldData(prevState: State, formData: FormData) {
       "error",
       "/protected/fields",
       "Lat and Lng arrays must have the same length"
+    );
+  }
+
+  const fieldGeometry = lat.map((latitude, index) => [latitude, lng[index]]);
+
+  if (!fieldName || !fieldDescription || !fieldGeometry || !Array.isArray(fieldGeometry)) {
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "All fields are required and field geometry must be valid"
     );
   }
 
@@ -203,15 +185,12 @@ export async function addFieldData(prevState: State, formData: FormData) {
     );
   }
 
-  const { error } = await supabase.from("campi").insert([
+  const { error } = await supabase.from("field_data").insert([
     {
-      nome,
-      area,
-      coordinate: {
-        lat: lat,
-        lng: lng,
-      },
-      user_id: user.id,
+      id: user.id,
+      field_name: fieldName,
+      field_description: fieldDescription,
+      field_geometry: fieldGeometry,
     },
   ]);
 
