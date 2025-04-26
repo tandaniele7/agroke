@@ -4,6 +4,9 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { Field, ActivityDash, Activity, Product } from "@/lib/definitions";
+import { set } from "date-fns";
+import { act } from "react";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -159,11 +162,15 @@ export async function addFieldData(prevState: State, formData: FormData) {
     );
   }
 
-  const fieldGeometry = lat.map((latitude, index) => [latitude, lng[index]]);
-  const fieldGeometryJson = {fieldGeometry};
-  console.log("Field Geometry:", fieldGeometryJson);
+  const fieldGeometry = lat.map((latitude, index) => [lng[index], latitude]);
+  const fieldGeometryJson = { fieldGeometry };
 
-  if (!fieldName || !fieldDescription || !fieldGeometry || !Array.isArray(fieldGeometry)) {
+  if (
+    !fieldName ||
+    !fieldDescription ||
+    !fieldGeometry ||
+    !Array.isArray(fieldGeometry)
+  ) {
     return encodedRedirect(
       "error",
       "/protected/fields",
@@ -210,4 +217,396 @@ export async function addFieldData(prevState: State, formData: FormData) {
     "/protected/fields",
     "Field data added successfully"
   );
+}
+export async function addActivity(prevState: State, formData: FormData) {
+  const activityType = formData.get("activityType")?.toString();
+  const activityDate = formData.get("activityDate")?.toString();
+  const fieldId = formData.get("fieldId")?.toString();
+  const productId = formData.get("productId")?.toString();
+  const productQuantity = formData.get("productQuantity")?.toString();
+  const Unit = formData.get("unit")?.toString();
+  const note_ = formData.get("note")?.toString();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return encodedRedirect(
+      "error",
+      "/protected/activities",
+      "Could not retrieve user information"
+    );
+  }
+
+  if (
+    !activityType ||
+    !activityDate ||
+    !fieldId ||
+    !productId ||
+    !productQuantity
+  ) {
+    return encodedRedirect(
+      "error",
+      "/protected/activities",
+      "All fields are required"
+    );
+  }
+
+  let transformedQuantity = parseFloat(productQuantity);
+  if (Unit === "l/ha") {
+    transformedQuantity = transformedQuantity * 1; // assuming 1L = 1kg for simplicity
+  } else if (Unit === "q/ha") {
+    transformedQuantity = transformedQuantity * 100; // 1q = 100kg
+  }
+  const productQuantityTransformed = transformedQuantity.toString();
+
+  const { error } = await supabase.from("activities").insert([
+    {
+      id: user.id,
+      activity_date: activityDate,
+      activity_type: activityType,
+      field_id: fieldId,
+      product_id: productId,
+      product_quantity: productQuantityTransformed,
+      note: note_ ? note_ : "",
+    },
+  ]);
+
+  if (error) {
+    console.error(error.message);
+    return encodedRedirect(
+      "error",
+      "/protected/activities",
+      // "Could not add field data"
+      error.message
+    );
+  }
+
+  return encodedRedirect(
+    "success",
+    "/protected/activities",
+    "Field data added successfully"
+  );
+}
+
+export async function fetchStats(): Promise<{
+  NumFields: number;
+  NumActivities: number;
+  NumProducts: number;
+  NumAlerts: number;
+}> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return {
+      NumFields: -2,
+      NumActivities: -2,
+      NumProducts: -2,
+      NumAlerts: -2,
+    };
+  }
+
+  const { count: NumFields, error: fieldsError } = await supabase
+    .from("field_data")
+    .select("*", { count: "exact", head: true })
+    .eq("id", user.id);
+
+  const { count: NumActivities, error: activitiesError } = await supabase
+    .from("activities")
+    .select("*", { count: "exact", head: true })
+    .eq("id", user.id);
+
+  const { count: NumProducts, error: productsError } = await supabase
+    .from("products")
+    .select("*", { count: "exact", head: true })
+    .eq("id", user.id);
+
+  const { count: NumAlerts, error: alertsError } = await supabase
+    .from("alerts")
+    .select("*", { count: "exact", head: true })
+    .eq("id", user.id);
+
+  const Stats: {
+    NumFields: number;
+    NumActivities: number;
+    NumProducts: number;
+    NumAlerts: number;
+  } = {
+    NumFields: NumFields || 0,
+    NumActivities: NumActivities || 0,
+    NumProducts: NumProducts || 0,
+    NumAlerts: NumAlerts || 0,
+  };
+
+  if (fieldsError) {
+    console.error("Error fetching fields count:", fieldsError.message);
+    Stats.NumFields = -1;
+  }
+  if (activitiesError) {
+    console.error("Error fetching activities count:", activitiesError.message);
+    Stats.NumActivities = -1;
+  }
+  if (productsError) {
+    console.error("Error fetching products count:", productsError.message);
+    Stats.NumProducts = -1;
+  }
+  if (alertsError) {
+    console.error("Error fetching alerts count:", alertsError.message);
+    Stats.NumAlerts = -1;
+  }
+
+  return Stats;
+}
+
+export async function fetchFields(): Promise<Field[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: fields, error } = await supabase
+    .from("field_data")
+    .select(`field_id, field_name, field_description, field_geometry`)
+    .eq("id", user?.id || "");
+
+  if (error) {
+    console.error("Error fetching fields:", error.message);
+    return [];
+  }
+  if (!fields || fields.length === 0) {
+    console.log("No fields found for the user");
+    return [];
+  }
+
+  const Fields: Field[] = fields.map((field) => ({
+    id: field.field_id,
+    fieldName: field.field_name,
+    description: field.field_description,
+    coordinates: field.field_geometry,
+  }));
+  return Fields;
+}
+
+export async function fetchFieldsNames(): Promise<
+  { fieldName: string; fieldId: string }[]
+> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: fields, error } = await supabase
+    .from("field_data")
+    .select(`field_name, field_id`)
+    .eq("id", user?.id || "");
+
+  if (error) {
+    console.error("Error fetching fields:", error.message);
+    return [];
+  }
+  if (!fields || fields.length === 0) {
+    console.log("No fields found for the user");
+    return [];
+  }
+  const Fields: { fieldName: string; fieldId: string }[] = fields.map(
+    (field) => ({
+      fieldName: field.field_name,
+      fieldId: field.field_id,
+    })
+  );
+
+  return Fields;
+}
+
+export async function fetchActivities(): Promise<Activity[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: activities, error } = await supabase
+    .from("activities")
+    .select(
+      `activity_id, activity_type, field_id, field_data(field_name), activity_date, products(product_name), product_quantity, note`
+    )
+    .eq("id", user?.id || "");
+
+  if (error) {
+    console.error("Error fetching activities:", error.message);
+    return [];
+  }
+  if (!activities || activities.length === 0) {
+    console.log("No activity found for the user");
+    return [];
+  }
+
+
+  const Activities: Activity[] = activities.map((activity) => ({
+    activity_id: activity.activity_id,
+    activity_type: activity.activity_type,
+    field_id: activity.field_id,
+    field_name: activity.field_data?.[0]?.field_name || "Unknown Field",
+    activity_date: activity.activity_date,
+    product_name: activity.products[0]?.product_name || "Unknown Product",
+    product_quantity: activity.product_quantity,
+    note: activity.note,
+  }));
+
+  return Activities;
+}
+
+export async function fetchActivitiesDash(): Promise<ActivityDash[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+  const { data: activities, error } = await supabase
+    .from("activities")
+    .select(`activity_date, activity_type, field_data(field_id, field_name)`)
+    .eq("id", user?.id || "")
+    .order("activity_date", { ascending: false })
+    .limit(3);
+
+  if (activities) {
+    for (const activity of activities) {
+      if (
+        Array.isArray(activity.field_data) &&
+        activity.field_data.length > 0
+      ) {
+        activity.field_data = activity.field_data.filter(
+          (field) => field.field_id === field.field_id
+        );
+      }
+    }
+  }
+
+  if (error) {
+    console.error("Error fetching activities:", error.message);
+    return [];
+  }
+
+  const Activities: ActivityDash[] = activities.map((activity) => ({
+    activityDate: activity.activity_date,
+    activityType: activity.activity_type,
+    fieldName: activity.field_data[0]?.field_name || "Unknown Field",
+  }));
+  console.log(Activities);
+
+  return Activities;
+}
+
+export async function fetchProducts(): Promise<Product[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: products, error } = await supabase
+    .from("products")
+    .select(
+      `product_id, product_name, active_ingredient, product_type, preharvest_interval, advised_dose`
+    )
+    .eq("id", user?.id || "");
+
+  if (error) {
+    console.error("Error fetching products:", error.message);
+    return [];
+  }
+  if (!products || products.length === 0) {
+    console.log("No products found for the user in fetchProducts");
+    return [];
+  }
+  const Products: Product[] = products.map((product) => ({
+    product_id: product.product_id,
+    product_name: product.product_name,
+    active_ingredient: product.active_ingredient,
+    product_type: product.product_type,
+    preharvest_interval: product.preharvest_interval,
+    advised_dose: product.advised_dose,
+  }));
+
+  return Products;
+}
+
+export async function fetchProductNamesandTypes(): Promise<
+  {
+    productName: string;
+    productType: string;
+    productId: string;
+  }[]
+> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: products, error } = await supabase
+    .from("products")
+    .select(`product_name, product_type, product_id`)
+    .eq("id", user.id);
+
+  if (error) {
+    console.error("Error fetching products:", error.message);
+    return [];
+  }
+  if (!products || products.length === 0) {
+    console.log("No products found for the user in fetchProductNamesandTypes");
+    return [];
+  }
+  const Products: {
+    productName: string;
+    productType: string;
+    productId: string;
+  }[] = products.map((product) => ({
+    productId: product.product_id,
+    productName: product.product_name,
+    productType: product.product_type,
+  }));
+
+  return Products;
 }

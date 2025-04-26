@@ -42,15 +42,17 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#166534" />
         <link rel="icon" href="/favicon.ico" />
-        <link href='https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css' rel='stylesheet' />
+        <link
+          href="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css"
+          rel="stylesheet"
+        />
       </head>
 
-      <body className={inter.className}>
+      <body className={` ${inter.className} `}>
         <div className="">
-
-        {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+          {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
         </div>
-        <div className="w-full min-h-screen">{children}</div>
+        <div className="w-full min-h-screen bg-gray-50">{children}</div>
         <Footer />
       </body>
 
