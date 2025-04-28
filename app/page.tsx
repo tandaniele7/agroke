@@ -337,7 +337,7 @@ export default function Home() {
                       le operazioni colturali in un&apos;unica interfaccia
                       intuitiva.
                     </p>
-                    <div className="flex items-center">
+                    <div className="hidden flex items-center">
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg
@@ -555,7 +555,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-green-50" ref={testimonialsRef}>
+      <section className="hidden py-20 bg-green-50" ref={testimonialsRef}>
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -635,7 +635,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-green-800 text-white">
+      <section className="hidden py-20 bg-green-800 text-white">
         <div className="container mx-auto px-4">
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
