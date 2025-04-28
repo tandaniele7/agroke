@@ -5,9 +5,8 @@ import "./globals.css";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import HeaderAuth from "@/components/header-auth";
 import { EnvVarWarning } from "@/components/env-var-warning";
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -45,7 +44,10 @@ export default function RootLayout({
     <html lang="it">
       <head>
         <meta charSet="utf-8" />
-        <meta name="google-site-verification" content="hjV1v6xybCt4pTG9MDQzaZK0wnso5eulTAj3yA43gAs" />
+        <meta
+          name="google-site-verification"
+          content="hjV1v6xybCt4pTG9MDQzaZK0wnso5eulTAj3yA43gAs"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#166534" />
         <link rel="icon" href="/favicon.ico" />
@@ -61,11 +63,10 @@ export default function RootLayout({
         </div>
         <div className="w-full min-h-screen bg-gray-50">{children}</div>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
-
       <GoogleAnalytics gaId="G-529Z4P1BGD" />
-      <Analytics />
-      <SpeedInsights />
     </html>
   );
 }
