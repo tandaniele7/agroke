@@ -15,9 +15,9 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "agroke - Soluzioni innovative per l'agricoltura",
+  title: "Agroke - Soluzioni innovative per l'agricoltura",
   description:
-    "Soluzioni innovative per ottimizzare l'applicazione di prodotti fitosanitari nei frutteti e oliveti. Risparmia fino al 90% sui costi di trattamento.",
+    "Soluzioni per la gestione della tua azienda agricola. Offriamo soluzioni per ottimizzare al meglio l'uso delle tue risorse e per offrirti uno spazio digitale dedicato alla tua alla tua azienda!",
   keywords: [
     "agricoltura di precisione",
     "irrorazione di precisione",
@@ -26,6 +26,9 @@ export const metadata = {
     "agritech",
     "tecnologia agricola",
     "sostenibilità",
+    "quaderno di campagna",
+    "campagna",
+    "prodotti fitofarmaci",
   ],
 };
 
@@ -42,6 +45,7 @@ export default function RootLayout({
     <html lang="it">
       <head>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="hjV1v6xybCt4pTG9MDQzaZK0wnso5eulTAj3yA43gAs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#166534" />
         <link rel="icon" href="/favicon.ico" />

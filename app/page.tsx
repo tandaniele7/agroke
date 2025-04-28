@@ -313,7 +313,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
+                <div className="absolute inset-0 bg-gradient-to-bl from-agroke-green/80 to-green-600 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
                 <motion.div
                   className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100"
                   whileHover={{
@@ -372,13 +372,13 @@ export default function Home() {
         >
           <path
             d="M0.00,49.98 C150.00,150.00 350.00,0.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-            className="fill-green-50"
+            className="fill-agroke-green/20"
           ></path>
         </svg>
       </div>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-green-100/50 relative" ref={featuresRef}>
+      <section className="py-20 bg-agroke-green/20 relative" ref={featuresRef}>
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
