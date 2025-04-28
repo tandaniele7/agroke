@@ -130,7 +130,7 @@ export default function FieldCard(fieldIstance: FieclCardComponent) {
                 <ChevronDown size={20} />
               )}
             </button>
-            <form action={formAction}>
+            {!state.isLoading && (<form action={formAction}>
               <input
                 type="hidden"
                 className="hidden"
@@ -149,7 +149,7 @@ export default function FieldCard(fieldIstance: FieclCardComponent) {
                 className="hidden"
                 type="submit"
               ></button>
-            </form>
+            </form>)}
           </div>
         </div>
 
