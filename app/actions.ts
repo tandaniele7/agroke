@@ -4,7 +4,13 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Field, ActivityDash, Activity, Product, Notification } from "@/lib/definitions";
+import {
+  Field,
+  ActivityDash,
+  Activity,
+  Product,
+  Notification,
+} from "@/lib/definitions";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -381,7 +387,9 @@ export async function fetchFields(): Promise<Field[]> {
 
   const { data: fields, error } = await supabase
     .from("field_data")
-    .select(`field_id, crop_type, field_name, field_description, field_geometry`)
+    .select(
+      `field_id, crop_type, field_name, field_description, field_geometry`
+    )
     .eq("id", user?.id || "");
 
   if (error) {
@@ -467,7 +475,6 @@ export async function fetchActivities(): Promise<Activity[]> {
     console.log("No activity found for the user");
     return [];
   }
-
 
   const Activities: Activity[] = activities.map((activity) => ({
     activity_id: activity.activity_id,
@@ -611,12 +618,12 @@ export async function fetchProductNamesandTypes(): Promise<
   return Products;
 }
 
-export async function fetchNotifications(): Promise<Notification[]>{
+export async function fetchNotifications(): Promise<Notification[]> {
   // to be done
-return []
+  return [];
 }
 
-export async function fetchFieldData(fieldId:string): Promise<Field | null> {
+export async function fetchFieldData(fieldId: string): Promise<Field | null> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -630,7 +637,9 @@ export async function fetchFieldData(fieldId:string): Promise<Field | null> {
 
   const { data: fieldData, error } = await supabase
     .from("field_data")
-    .select(`field_id, field_name, crop_type, field_description, field_geometry`)
+    .select(
+      `field_id, field_name, crop_type, field_description, field_geometry`
+    )
     .eq("id", user?.id || "")
     .eq("field_id", fieldId)
     .single();
@@ -654,4 +663,43 @@ export async function fetchFieldData(fieldId:string): Promise<Field | null> {
   };
 
   return Field;
+}
+
+export async function deleteField(prevState: State, formData: FormData) {
+  const fieldId = formData.get("fieldId")?.toString();
+  console.log(fieldId);
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "Could not retrieve user information"
+    );;
+  }
+
+  const { error } = await supabase
+    .from("field_data")
+    .delete()
+    .eq("field_id", fieldId);
+
+  if (error) {
+    console.error(error.message);
+    return encodedRedirect(
+      "error",
+      "/protected/fields",
+      "Could not delete field data",
+    );
+  }
+
+  return encodedRedirect(
+    "success",
+    "/protected/fields",
+    "Field data deleted successfully"
+  );
 }

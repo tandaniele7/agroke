@@ -1,10 +1,14 @@
 export type Field = {
   id: string;
-  cropType: string;
+  cropType: string
   fieldName: string;
   description: string;
   coordinates: number[][];
 };
+
+export interface FieclCardComponent {
+  fieldInfo: Field;
+}
 export interface MapComponentProps {
   initialFields: Field[];
 }

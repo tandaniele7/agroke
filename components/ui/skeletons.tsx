@@ -124,3 +124,56 @@ export function NotificationSkeleton() {
     </div>
   );
 }
+
+export function FieldCardSkeleton() {
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+      <div className="p-5">
+        {/* Header */}
+        <div className="flex justify-between items-start mb-4">
+          <div className="bg-gray-200 h-7 w-48 rounded"></div>
+          <div className="flex gap-2">
+            <div className="bg-gray-200 h-8 w-8 rounded"></div>
+            <div className="bg-gray-200 h-8 w-8 rounded"></div>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-center mb-4">
+          <div className="bg-gray-200 h-4 w-4 rounded mr-1"></div>
+          <div className="bg-gray-200 h-4 w-32 rounded"></div>
+        </div>
+
+        {/* Area and Crop Type */}
+        <div className="flex items-center mb-2">
+          <div className="bg-gray-200 h-4 w-24 rounded"></div>
+          <div className="mx-2 bg-gray-200 h-4 w-2 rounded"></div>
+          <div className="bg-gray-200 h-4 w-32 rounded"></div>
+        </div>
+
+        <div className="border-t border-gray-100 my-4"></div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div className="flex items-center mb-1">
+                <div className="bg-gray-200 h-4 w-4 rounded mr-1"></div>
+                <div className="bg-gray-200 h-4 w-16 rounded"></div>
+              </div>
+              <div className="bg-gray-200 h-6 w-20 rounded-full"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Expand Button */}
+      <div className="border-t border-gray-100">
+        <div className="w-full bg-gray-50 py-3 flex items-center justify-center gap-2">
+          <div className="bg-gray-200 h-4 w-32 rounded"></div>
+          <div className="bg-gray-200 h-4 w-4 rounded"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
