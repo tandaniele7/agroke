@@ -31,8 +31,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navigation = [
-  { icon: Home, name: "Dashboard", href: "/protected", current: false },
-  { icon: Map, name: "Fields", href: "/protected/fields", current: false },
+  { icon: Home, name: "Home", href: "/protected", current: false },
+  { icon: Map, name: "I Miei Campi", href: "/protected/fields", current: false },
   // {
   //   icon: Droplets,
   //   name: "Water Management",
@@ -42,7 +42,7 @@ const navigation = [
   // { icon: Leaf, name: "Crops", href: "/protected/crops", current: false },
   {
     icon: Notebook,
-    name: "Field Diary",
+    name: "Quaderno di Campagna",
     href: "/protected/field-diary",
     current: false,
   },

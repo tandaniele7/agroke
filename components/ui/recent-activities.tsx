@@ -12,7 +12,7 @@ export default async function RecentActivities() {
         <h3 className="font-semibold text-gray-800">Attività Recenti</h3>
         <Link
           className="text-green-600 hover:text-green-800 text-sm flex items-center"
-          href={"/protected/activity"}
+          href={"/protected/activities"}
         >
           Visualizza tutto <ChevronRight size={16} />
         </Link>

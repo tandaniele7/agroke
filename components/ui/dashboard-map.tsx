@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ChevronRight } from "react-feather";
-import { motion } from "framer-motion";
 import dynamic from 'next/dynamic';
 import { fetchFields } from "@/app/actions";
 import { Field } from "@/lib/definitions";

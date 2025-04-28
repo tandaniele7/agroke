@@ -10,7 +10,9 @@ export default async function Layout({
       <div className="sticky top-0 z-50">
         <Navbar />
       </div>
-      <div className="min-h-screen bg-gray-50 max-w-7xl mx-auto">{children}</div>
+      <div className="min-h-screen bg-gray-50 max-w-7xl mx-auto">
+        {children}
+      </div>
     </>
   );
 }

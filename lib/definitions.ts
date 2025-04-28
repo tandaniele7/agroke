@@ -1,5 +1,6 @@
 export type Field = {
   id: string;
+  cropType: string;
   fieldName: string;
   description: string;
   coordinates: number[][];
@@ -42,3 +43,39 @@ export const activityType = [
   { id: "pruning", name: "Potatura", icon: "✂️" },
   { id: "other", name: "Altra operazione", icon: "🔧" },
 ];
+
+export interface WeatherDataDashboard {
+  temperature: number;
+  humidity: number;
+  rainfall: number;
+  wind: number;
+  provice: string;
+}
+
+export interface Notification {
+  content: string;
+  type: "warning" | "severe";
+  date: string;
+}
+
+export type Treatment = {
+  id?: string;
+  crop_id: string;
+  date: string;
+  product_name: string;
+  active_ingredient: string;
+  quantity: string;
+  target_pest: string;
+  weather_conditions: string;
+  notes: string;
+  created_at?: string;
+};
+
+export type Crop = {
+  id: string;
+  name: string;
+  area: number;
+  sowing_date: string;
+  flowering_date: string | null;
+  harvest_date: string | null;
+};

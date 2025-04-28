@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Search, Filter } from "react-feather";
+import { Plus, Search } from "react-feather";
 import {
   fetchFieldsNames,
   fetchProductNamesandTypes,
@@ -10,7 +10,7 @@ import {
 } from "@/app/actions";
 import { activityType } from "@/lib/definitions";
 import { useEffect, useState, useActionState } from "react";
-import { Activity, Product } from "@/lib/definitions";
+import { Activity } from "@/lib/definitions";
 
 export default function ActivityPage() {
   const [showNewActivityModal, setShowNewActivityModal] = useState(false);
@@ -201,133 +201,135 @@ export default function ActivityPage() {
                 </div>
               </div>
 
-              <form action={formAction}>
-                <div className="p-6 space-y-6">
-                  {/* Form content */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Tipo di Attività
-                      </label>
-                      <select
-                        className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        name="activityType"
-                        required
-                      >
-                        <option value="" disabled selected>
-                          Seleziona tipo...
-                        </option>
-                        {activityType.map((type, idx) => (
-                          <option key={idx} value={type.id}>
-                            {type.icon} {type.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Terreno
-                      </label>
-                      <select
-                        className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        name="fieldId"
-                        required
-                      >
-                        <option value="" disabled selected>
-                          Seleziona terreno...
-                        </option>
-                        {fieldsNames.map((field, idx) => (
-                          <option key={idx} value={field.fieldId}>
-                            {field.fieldName}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Data
-                      </label>
-                      <input
-                        type="date"
-                        required
-                        name="activityDate"
-                        className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        defaultValue={new Date().toISOString().split("T")[0]}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Prodotto (se applicabile)
-                      </label>
-                      <select
-                        className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        name="productId"
-                        required
-                      >
-                        <option value="" selected>
-                          Nessun prodotto
-                        </option>
-                        {productsNamesTypes.map((product, idx) => (
-                          <option key={idx} value={product.productId}>
-                            {product.productName} ({product.productType})
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Quantità
-                      </label>
-                      <div className="flex">
-                        <input
-                          name="productQuantity"
-                          required
-                          type="text"
-                          className="block w-full border border-gray-300 rounded-l-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                          placeholder="Es: 2.5"
-                        />
+              {!state.isLoading && (
+                <form action={formAction}>
+                  <div className="p-6 space-y-6">
+                    {/* Form content */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Tipo di Attività
+                        </label>
                         <select
-                          name="unit"
+                          className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          name="activityType"
                           required
-                          className="border border-l-0 border-gray-300 rounded-r-lg p-2.5 bg-gray-50"
                         >
-                          <option value="kg/ha">kg/ha</option>
-                          <option value="l/ha">l/ha</option>
-                          <option value="q/ha">q/ha</option>
+                          <option value="" disabled selected>
+                            Seleziona tipo...
+                          </option>
+                          {activityType.map((type, idx) => (
+                            <option key={idx} value={type.id}>
+                              {type.icon} {type.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
-                    </div>
 
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Note
-                      </label>
-                      <textarea
-                        name="note"
-                        className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        rows={4}
-                        placeholder="Inserisci eventuali note sull'attività..."
-                      ></textarea>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Terreno
+                        </label>
+                        <select
+                          className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          name="fieldId"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Seleziona terreno...
+                          </option>
+                          {fieldsNames.map((field, idx) => (
+                            <option key={idx} value={field.fieldId}>
+                              {field.fieldName}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Data
+                        </label>
+                        <input
+                          type="date"
+                          required
+                          name="activityDate"
+                          className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          defaultValue={new Date().toISOString().split("T")[0]}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Prodotto (se applicabile)
+                        </label>
+                        <select
+                          className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          name="productId"
+                          required
+                        >
+                          <option value="" selected>
+                            Nessun prodotto
+                          </option>
+                          {productsNamesTypes.map((product, idx) => (
+                            <option key={idx} value={product.productId}>
+                              {product.productName} ({product.productType})
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Quantità
+                        </label>
+                        <div className="flex">
+                          <input
+                            name="productQuantity"
+                            required
+                            type="text"
+                            className="block w-full border border-gray-300 rounded-l-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            placeholder="Es: 2.5"
+                          />
+                          <select
+                            name="unit"
+                            required
+                            className="border border-l-0 border-gray-300 rounded-r-lg p-2.5 bg-gray-50"
+                          >
+                            <option value="kg/ha">kg/ha</option>
+                            <option value="l/ha">l/ha</option>
+                            <option value="q/ha">q/ha</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Note
+                        </label>
+                        <textarea
+                          name="note"
+                          className="block w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          rows={4}
+                          placeholder="Inserisci eventuali note sull'attività..."
+                        ></textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="p-6 border-t border-gray-200 flex justify-end space-x-4">
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-                    onClick={() => setShowNewActivityModal(false)}
-                  >
-                    Annulla
-                  </button>
-                  <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
-                    Salva Attività
-                  </button>
-                </div>
-              </form>
+                  <div className="p-6 border-t border-gray-200 flex justify-end space-x-4">
+                    <button
+                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                      onClick={() => setShowNewActivityModal(false)}
+                    >
+                      Annulla
+                    </button>
+                    <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                      Salva Attività
+                    </button>
+                  </div>
+                </form>
+              )}
             </motion.div>
           </motion.div>
         )}

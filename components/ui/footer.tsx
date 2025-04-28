@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="md:hidden text-center mb-8">
           <h3 className="text-xl font-semibold text-agroke-black-dark mb-3">Agroke</h3>
           <p className="text-sm text-agroke-black-light/80 px-4">
-            Empowering farmers with intelligent solutions for sustainable agriculture.
+          Soluzioni innovative per l'agricoltura.
           </p>
         </div>
 
@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="hidden md:block space-y-4">
             <h3 className="text-lg font-semibold text-agroke-black-dark">Agroke</h3>
             <p className="text-sm text-agroke-black-light/80">
-              Empowering farmers with intelligent solutions for sustainable agriculture through advanced technology and data-driven insights.
+            Potenziamo gli agricoltori con soluzioni intelligenti per un'agricoltura sostenibile, attraverso tecnologie avanzate e analisi basate sui dati.
             </p>
             <div className="flex space-x-4 pt-2">
               <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
@@ -39,26 +39,26 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
-              Quick Links
+              Risorse
             </h3>
             <ul className="space-y-3 text-center md:text-left">
               <li>
-                <Link href="/about" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  About Us
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                  Chi Siamo
                 </Link>
               </li>
               <li>
-                <Link href="/features" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Features
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                  Funzionalità
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Pricing
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                  Prezzo
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
                   Blog
                 </Link>
               </li>
@@ -68,7 +68,7 @@ export default function Footer() {
           {/* Support */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
-              Support
+              Supporto
             </h3>
             <ul className="space-y-3 text-center md:text-left">
               <li>
@@ -77,17 +77,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/documentation" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Documentation
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                  Documentazione
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Contact Us
+                <Link href="/#contatti" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                  Contattaci
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
+                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
                   Privacy Policy
                 </Link>
               </li>
@@ -97,19 +97,15 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
-              Contact
+              Contatti
             </h3>
             <ul className="space-y-3">
               {/* Contact items centered on mobile */}
               <li className="flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
                 <Mail size={16} />
-                <span>daniele.tanda314@gmail.com</span>
+                <span>info.agroke@gmail.com</span>
               </li>
-              <li className="flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
-                <Mail size={16} />
-                <span>lu.vaiarelli@gmail.com</span>
-              </li>
-              <li className="flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
+              <li className="hidden flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
                 <Phone size={16} />
                 <span>+39 389 342 3504</span>
               </li>

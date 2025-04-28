@@ -24,7 +24,6 @@ export default function Home() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState<number[][]>([]);
   const [fieldName, setFieldName] = useState("");
-  const [cropType, setCropType] = useState("");
   const [fieldDescription, setFieldDescription] = useState("");
   const initialState = {
     isLoading: false,
@@ -121,10 +120,10 @@ export default function Home() {
         {/* Map Section */}
         <div className="md:w-2/3 mb-6 md:mb-0">
           <div className="bg-white rounded-lg shadow-lg p-4 h-full">
-            <h2 className="text-2xl font-semibold mb-4">Mappa del Campo</h2>
+            <h2 className="text-2xl font-semibold mb-4">Field Map</h2>
             <p className="mb-4">
-              Disegna il perimetro del tuo terreno sulla mappa e inserisci le
-              informazioni.
+              Draw the perimeter of your land on the map and enter the
+              information.
             </p>
             <div
               ref={mapRef}
@@ -142,7 +141,7 @@ export default function Home() {
                     : "bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold"
                 }`}
               >
-                {isDrawing ? "Disegno in corso..." : "Disegna Perimetro"}
+                {isDrawing ? "Drawing in progress..." : "Draw area"}
               </button>
             </div>
           </div>
@@ -151,9 +150,7 @@ export default function Home() {
         {/* Form Section */}
         <div className="md:w-1/3">
           <div className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-2xl font-semibold mb-4">
-              Informazioni del Campo
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">Field Information</h2>
             {!state.isLoading && (
               <form action={formAction}>
                 <div className="mb-4">
@@ -161,7 +158,7 @@ export default function Home() {
                     className="block text-sm font-medium mb-2"
                     htmlFor="fieldName"
                   >
-                    Nome del Campo
+                    Field Name
                   </label>
                   <input
                     id="fieldName"
@@ -171,25 +168,7 @@ export default function Home() {
                     value={fieldName}
                     onChange={(e) => setFieldName(e.target.value)}
                     className="w-full border border-gray-300 rounded px-3 py-2"
-                    placeholder="Inserisci il nome del campo"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-sm font-medium mb-2"
-                    htmlFor="cropType"
-                  >
-                    Tipo di Coltura
-                  </label>
-                  <input
-                    id="cropType"
-                    required
-                    type="text"
-                    name="cropType"
-                    value={cropType}
-                    onChange={(e) => setCropType(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                    placeholder="Inserisci la coltura presente nel campo"
+                    placeholder="Enter the field name"
                   />
                 </div>
                 {polygonCoordinates.length > 0 &&
@@ -234,7 +213,7 @@ export default function Home() {
                     className="block text-sm font-medium mb-2"
                     htmlFor="fieldDescription"
                   >
-                    Descrizione
+                    Description
                   </label>
                   <textarea
                     id="fieldDescription"
@@ -243,7 +222,7 @@ export default function Home() {
                     value={fieldDescription}
                     onChange={(e) => setFieldDescription(e.target.value)}
                     className="w-full border border-gray-300 rounded px-3 py-2"
-                    placeholder="Inserisci una descrizione del campo"
+                    placeholder="Enter a description of the field"
                   ></textarea>
                 </div>
 
@@ -251,7 +230,7 @@ export default function Home() {
                   type="submit"
                   className="w-full px-4 py-2 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded"
                 >
-                  Salva Campo
+                  Save field
                 </button>
               </form>
             )}

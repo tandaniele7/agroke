@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Clipboard, BarChart2, AlertTriangle } from "react-feather";
 import Link from "next/link";
 import { fetchStats } from "@/app/actions";
@@ -8,7 +7,7 @@ export default async function Stats() {
     await fetchStats();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       {[
         {
           title: "Terreni Gestiti",
@@ -22,7 +21,7 @@ export default async function Stats() {
           value: NumActivities,
           icon: Clipboard,
           color: "bg-green-500",
-          sectionName: "/protected/activity",
+          sectionName: "/protected/activities",
         },
         {
           title: "Prodotti in Magazzino",

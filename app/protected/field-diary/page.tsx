@@ -1,32 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { Treatment, Crop } from "@/lib/definitions";
 
-// Treatment entry type
-type Treatment = {
-  id?: string;
-  crop_id: string;
-  date: string;
-  product_name: string;
-  active_ingredient: string;
-  quantity: string;
-  target_pest: string;
-  weather_conditions: string;
-  notes: string;
-  created_at?: string;
-};
-
-// Crop type
-type Crop = {
-  id: string;
-  name: string;
-  area: number;
-  sowing_date: string;
-  flowering_date: string | null;
-  harvest_date: string | null;
-};
-
-// Add fake data
 const fakeCrops: Crop[] = [
   {
     id: "1",

@@ -4,9 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Field, ActivityDash, Activity, Product } from "@/lib/definitions";
-import { set } from "date-fns";
-import { act } from "react";
+import { Field, ActivityDash, Activity, Product, Notification } from "@/lib/definitions";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -144,6 +142,7 @@ export interface State {
 export async function addFieldData(prevState: State, formData: FormData) {
   const fieldName = formData.get("fieldName")?.toString();
   const fieldDescription = formData.get("fieldDescription")?.toString();
+  const cropType = formData.get("cropType")?.toString();
   const lat = formData.getAll("lat").map((val) => parseFloat(val.toString()));
   const lng = formData.getAll("lng").map((val) => parseFloat(val.toString()));
   if (lat.length < 3 || lng.length < 3) {
@@ -163,11 +162,11 @@ export async function addFieldData(prevState: State, formData: FormData) {
   }
 
   const fieldGeometry = lat.map((latitude, index) => [lng[index], latitude]);
-  const fieldGeometryJson = { fieldGeometry };
 
   if (
     !fieldName ||
     !fieldDescription ||
+    !cropType ||
     !fieldGeometry ||
     !Array.isArray(fieldGeometry)
   ) {
@@ -196,6 +195,7 @@ export async function addFieldData(prevState: State, formData: FormData) {
   const { error } = await supabase.from("field_data").insert([
     {
       id: user.id,
+      crop_type: cropType,
       field_name: fieldName,
       field_description: fieldDescription,
       field_geometry: fieldGeometry,
@@ -381,7 +381,7 @@ export async function fetchFields(): Promise<Field[]> {
 
   const { data: fields, error } = await supabase
     .from("field_data")
-    .select(`field_id, field_name, field_description, field_geometry`)
+    .select(`field_id, crop_type, field_name, field_description, field_geometry`)
     .eq("id", user?.id || "");
 
   if (error) {
@@ -395,6 +395,7 @@ export async function fetchFields(): Promise<Field[]> {
 
   const Fields: Field[] = fields.map((field) => ({
     id: field.field_id,
+    cropType: field.crop_type,
     fieldName: field.field_name,
     description: field.field_description,
     coordinates: field.field_geometry,
@@ -523,7 +524,6 @@ export async function fetchActivitiesDash(): Promise<ActivityDash[]> {
     activityType: activity.activity_type,
     fieldName: activity.field_data[0]?.field_name || "Unknown Field",
   }));
-  console.log(Activities);
 
   return Activities;
 }
@@ -609,4 +609,49 @@ export async function fetchProductNamesandTypes(): Promise<
   }));
 
   return Products;
+}
+
+export async function fetchNotifications(): Promise<Notification[]>{
+  // to be done
+return []
+}
+
+export async function fetchFieldData(fieldId:string): Promise<Field | null> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return null;
+  }
+
+  const { data: fieldData, error } = await supabase
+    .from("field_data")
+    .select(`field_id, field_name, crop_type, field_description, field_geometry`)
+    .eq("id", user?.id || "")
+    .eq("field_id", fieldId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching field data:", error.message);
+    return null;
+  }
+
+  if (!fieldData) {
+    console.log("No field data found for the user");
+    return null;
+  }
+
+  const Field: Field = {
+    id: fieldData.field_id,
+    cropType: fieldData.crop_type,
+    fieldName: fieldData.field_name,
+    description: fieldData.field_description,
+    coordinates: fieldData.field_geometry,
+  };
+
+  return Field;
 }
