@@ -1,9 +1,14 @@
 import { fetchFieldData } from "@/app/actions";
-import ClientFieldView from "@/components/fields/client-field-view";
+// import ClientFieldView from "@/components/fields/client-field-view";
 
-export default async function FieldPage({ params }: { params: { id: string } }) {
-  const fieldData = await fetchFieldData(params.id);
-  
+export default async function FieldPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const fieldId = (await params).id;
+  const fieldData = await fetchFieldData(fieldId);
+
   if (!fieldData) {
     return (
       <div className="min-h-screen bg-gray-50 flex justify-center items-center">
@@ -15,5 +20,5 @@ export default async function FieldPage({ params }: { params: { id: string } }) 
     );
   }
 
-  return (<ClientFieldView fieldData={fieldData} />);
+  return fieldId;
 }

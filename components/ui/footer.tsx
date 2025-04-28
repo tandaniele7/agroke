@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="md:hidden text-center mb-8">
           <h3 className="text-xl font-semibold text-agroke-black-dark mb-3">Agroke</h3>
           <p className="text-sm text-agroke-black-light/80 px-4">
-          Soluzioni innovative per l'agricoltura.
+          Soluzioni innovative per l&apos;agricoltura.
           </p>
         </div>
 
@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="hidden md:block space-y-4">
             <h3 className="text-lg font-semibold text-agroke-black-dark">Agroke</h3>
             <p className="text-sm text-agroke-black-light/80">
-            Potenziamo gli agricoltori con soluzioni intelligenti per un'agricoltura sostenibile, attraverso tecnologie avanzate e analisi basate sui dati.
+            Potenziamo gli agricoltori con soluzioni intelligenti per un&apos;agricoltura sostenibile, attraverso tecnologie avanzate e analisi basate sui dati.
             </p>
             <div className="flex space-x-4 pt-2">
               <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
