@@ -166,7 +166,7 @@ export default function FieldCard(fieldIstance: FieclCardComponent) {
           <span className="text-sm">Coltura: {fieldInfo.cropType}</span>
         </div>
 
-        <div className="border-t border-gray-100 my-4"></div>
+        {/* <div className="border-t border-gray-100 my-4"></div> */}
         {/* Stats */}
         {/* <div className="grid grid-cols-3 gap-2 mb-4">
           <div className="flex flex-col items-center">

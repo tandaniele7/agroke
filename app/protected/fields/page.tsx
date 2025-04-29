@@ -23,7 +23,6 @@ export default async function FieldsPage() {
 
         <div className="grid grid-cols-1 gap-6">
           {fields.map((field, idx) => {
-            console.log(field);
             return (
               <Suspense key={idx} fallback={<FieldCardSkeleton />}>
                 <FieldCard key={idx} fieldInfo={field} />
