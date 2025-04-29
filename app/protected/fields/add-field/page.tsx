@@ -120,7 +120,7 @@ export default function Home() {
       <section className="flex-grow container mx-auto p-4 md:flex gap-6">
         {/* Map Section */}
         <div className="md:w-2/3 mb-6 md:mb-0">
-          <div className="bg-white rounded-lg shadow-lg p-4 h-full">
+          <div className="bg-white rounded-lg shadow-lg p-4 h-auto">
             <h2 className="text-2xl font-semibold mb-4">Mappa del Campo</h2>
             <p className="mb-4">
               Disegna il perimetro del tuo terreno sulla mappa e inserisci le
@@ -128,8 +128,8 @@ export default function Home() {
             </p>
             <div
               ref={mapRef}
-              className="w-full border border-gray-300 rounded mb-4"
-              style={{ height: "500px" }}
+              className="w-full border border-gray-300 rounded mb-4 h-80 md:h-[450px]"
+              // style={{ height: "500px" }}
             ></div>
 
             <div className="flex space-x-4">
