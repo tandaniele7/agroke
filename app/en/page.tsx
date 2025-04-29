@@ -218,7 +218,7 @@ export default function Home() {
             </a>
             <a
               href="#testimonials"
-              className="text-green-800 hover:text-green-600 font-medium transition-colors"
+              className="hidden text-green-800 hover:text-green-600 font-medium transition-colors"
               onClick={(e) => {
                 e.preventDefault();
                 testimonialsRef.current?.scrollIntoView({ behavior: "smooth" });
