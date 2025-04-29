@@ -22,10 +22,14 @@ export default async function RecentActivities() {
           <div key={idx} className="border-l-4 border-green-500 pl-3 py-2">
             <div className="flex items-center">
               <span className="text-lg mr-2">
-                {activityType.find((t) => t.id === item.activityType)?.icon || "🔧"}
+                {activityType.find((t) => t.id === item.activityType)?.icon ||
+                  "🔧"}
               </span>
               <div>
-                <p className="font-medium text-gray-800">{item.activityType}</p>
+                <p className="font-medium text-gray-800">
+                  {activityType.find((t) => t.id === item.activityType)?.name ||
+                    ""}
+                </p>
                 <p className="text-sm text-gray-600">
                   {item.fieldName} -{" "}
                   {new Date(item.activityDate).toLocaleDateString("it-IT")}
