@@ -177,3 +177,61 @@ export function FieldCardSkeleton() {
     </div>
   );
 }
+
+export function ActivityTableSkeleton() {
+  return (
+    <div className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
+      <table className="min-w-full divide-y divide-gray-200">
+        {/* Table Header */}
+        <thead className="bg-gray-50">
+          <tr>
+            {[...Array(6)].map((_, index) => (
+              <th
+                key={index}
+                scope="col"
+                className="px-6 py-3 text-left"
+              >
+                <div className="bg-gray-200 h-4 w-20 rounded"></div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+
+        {/* Table Body */}
+        <tbody className="bg-white divide-y divide-gray-200">
+          {[...Array(5)].map((_, rowIndex) => (
+            <tr key={rowIndex}>
+              {/* Date */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="bg-gray-200 h-4 w-24 rounded"></div>
+              </td>
+              {/* Type */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="bg-gray-200 h-4 w-20 rounded"></div>
+              </td>
+              {/* Field */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="bg-gray-200 h-4 w-32 rounded"></div>
+              </td>
+              {/* Product */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="bg-gray-200 h-4 w-28 rounded"></div>
+              </td>
+              {/* Quantity */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="bg-gray-200 h-4 w-16 rounded"></div>
+              </td>
+              {/* Actions */}
+              <td className="px-6 py-4 whitespace-nowrap text-center">
+                <div className="flex justify-center space-x-2">
+                  <div className="bg-gray-200 h-8 w-8 rounded"></div>
+                  <div className="bg-gray-200 h-8 w-8 rounded"></div>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}

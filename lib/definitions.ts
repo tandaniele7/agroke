@@ -1,6 +1,6 @@
 export type Field = {
   id: string;
-  cropType: string
+  cropType: string;
   fieldName: string;
   description: string;
   coordinates: number[][];
@@ -77,9 +77,23 @@ export type Treatment = {
 
 export type Crop = {
   id: string;
-  name: string;
+  name: string; 
   area: number;
   sowing_date: string;
   flowering_date: string | null;
   harvest_date: string | null;
 };
+
+export interface NewActivityInterface {
+  fields: { fieldName: string; fieldId: string }[];
+  products: {
+    productName: string;
+    productType: string;
+    productId: string;
+  }[];
+}
+
+export interface TableRowInterface {
+  index: number;
+  activity: Activity;
+}

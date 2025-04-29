@@ -19,7 +19,7 @@ export default async function Page() {
               Registro Attività
             </h2>
             <div className="flex space-x-4">
-              <div className="hidden relative">
+              <div className="relative">
                 <input
                   type="text"
                   placeholder="Cerca attività..."
