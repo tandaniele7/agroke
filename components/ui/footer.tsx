@@ -1,141 +1,136 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-agroke-green/20 border-t border-agroke-green/20">
-      <div className="container mx-auto px-4 py-8 md:py-12">
-        {/* Mobile Logo and Description */}
-        <div className="md:hidden text-center mb-8">
-          <h3 className="text-xl font-semibold text-agroke-black-dark mb-3">Agroke</h3>
-          <p className="text-sm text-agroke-black-light/80 px-4">
-          Soluzioni innovative per l&apos;agricoltura.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          {/* Company Info - Hidden on Mobile */}
-          <div className="hidden md:block space-y-4">
-            <h3 className="text-lg font-semibold text-agroke-black-dark">Agroke</h3>
-            <p className="text-sm text-agroke-black-light/80">
-            Potenziamo gli agricoltori con soluzioni intelligenti per un&apos;agricoltura sostenibile, attraverso tecnologie avanzate e analisi basate sui dati.
-            </p>
-            <div className="flex space-x-4 pt-2">
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-                className="text-agroke-black-light hover:text-agroke-green transition-colors">
+    <footer className="bg-white border-t border-agroke-green/20">
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+          {/* Company Info */}
+          <div className="space-y-6">
+            <div className="flex flex-col items-center md:items-start">
+              <h3 className="text-2xl font-bold text-agroke-black-dark mb-4">Agroke</h3>
+              <p className="text-gray-600 text-center md:text-left">
+                Potenziamo gli agricoltori con soluzioni intelligenti per un&apos;agricoltura sostenibile, attraverso tecnologie avanzate e analisi basate sui dati.
+              </p>
+            </div>
+            <div className="flex items-center justify-center md:justify-start space-x-4">
+              <Link 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-agroke-green/10 text-agroke-green hover:bg-agroke-green hover:text-white transition-all duration-300"
+              >
                 <Linkedin size={20} />
               </Link>
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer"
-                className="text-agroke-black-light hover:text-agroke-green transition-colors">
+              <Link 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-agroke-green/10 text-agroke-green hover:bg-agroke-green hover:text-white transition-all duration-300"
+              >
                 <Github size={20} />
               </Link>
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                className="text-agroke-black-light hover:text-agroke-green transition-colors">
+              <Link 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-agroke-green/10 text-agroke-green hover:bg-agroke-green hover:text-white transition-all duration-300"
+              >
                 <Instagram size={20} />
               </Link>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-agroke-black-dark text-center md:text-left">
               Risorse
             </h3>
-            <ul className="space-y-3 text-center md:text-left">
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Chi Siamo
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Funzionalità
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Prezzo
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Blog
-                </Link>
-              </li>
+            <ul className="space-y-4 text-center md:text-left">
+              {['Chi Siamo', 'Funzionalità', 'Prezzo', 'Blog'].map((item) => (
+                <li key={item}>
+                  <Link 
+                    href="/" 
+                    className="text-gray-600 hover:text-agroke-green transition-colors duration-300"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Support */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-agroke-black-dark text-center md:text-left">
               Supporto
             </h3>
-            <ul className="space-y-3 text-center md:text-left">
-              <li>
-                <Link href="/help" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Documentazione
-                </Link>
-              </li>
-              <li>
-                <Link href="/#contatti" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Contattaci
-                </Link>
-              </li>
-              <li>
-                <Link href="/" className="text-sm text-agroke-black-light/80 hover:text-agroke-green transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
+            <ul className="space-y-4 text-center md:text-left">
+              {[
+                { text: 'Help Center', href: '/help' },
+                { text: 'Documentazione', href: '/' },
+                { text: 'Contattaci', href: '/#contatti' },
+                { text: 'Privacy Policy', href: '/' },
+              ].map((item) => (
+                <li key={item.text}>
+                  <Link 
+                    href={item.href} 
+                    className="text-gray-600 hover:text-agroke-green transition-colors duration-300"
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-agroke-black-dark text-center md:text-left">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-agroke-black-dark text-center md:text-left">
               Contatti
             </h3>
-            <ul className="space-y-3">
-              {/* Contact items centered on mobile */}
-              <li className="flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
-                <Mail size={16} />
-                <span>info.agroke@gmail.com</span>
-              </li>
-              <li className="hidden flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
-                <Phone size={16} />
-                <span>+39 389 342 3504</span>
-              </li>
-              <li className="flex items-center space-x-3 text-sm text-agroke-black-light/80 justify-center md:justify-start">
-                <MapPin size={16} />
-                <span>Turin, Italy</span>
-              </li>
+            <ul className="space-y-4">
+              {[
+                { icon: Mail, text: 'info.agroke@gmail.com' },
+                { icon: MapPin, text: 'Turin, Italy' },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <li 
+                    key={index}
+                    className="flex items-center justify-center md:justify-start space-x-3 text-gray-600"
+                  >
+                    <div className="p-2 rounded-full bg-agroke-green/10">
+                      <Icon size={18} className="text-agroke-green" />
+                    </div>
+                    <span>{item.text}</span>
+                  </li>
+                );
+              })}
             </ul>
-          </div>
-
-          {/* Social Links - Mobile Only */}
-          <div className="md:hidden flex justify-center space-x-6 py-4">
-            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-              className="text-agroke-black-light hover:text-agroke-green transition-colors">
-              <Linkedin size={24} />
-            </Link>
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer"
-              className="text-agroke-black-light hover:text-agroke-green transition-colors">
-              <Github size={24} />
-            </Link>
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-              className="text-agroke-black-light hover:text-agroke-green transition-colors">
-              <Instagram size={24} />
-            </Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-agroke-green/20 mt-6 md:mt-8 pt-6 md:pt-8 text-center text-sm text-agroke-black-light/70">
-          <p>© {new Date().getFullYear()} Agroke. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t border-agroke-green/20">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <p className="text-gray-600 text-center md:text-left mb-4 md:mb-0">
+              © {new Date().getFullYear()} Agroke. Tutti i diritti riservati.
+            </p>
+            <div className="flex items-center space-x-6">
+              {['Termini', 'Privacy', 'Cookie'].map((item) => (
+                <Link
+                  key={item}
+                  href="/"
+                  className="text-gray-600 hover:text-agroke-green transition-colors duration-300 text-sm"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>
