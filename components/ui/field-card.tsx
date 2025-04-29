@@ -5,7 +5,7 @@ import { Trash2, MapPin, ChevronDown, ChevronUp, Layers } from "lucide-react";
 import dynamic from "next/dynamic";
 import { FieclCardComponent } from "@/lib/definitions";
 import { deleteField } from "@/app/actions";
-import Link from "next/link";
+
 
 // Client-side map component
 const MapComponent = dynamic(() => import("@/components/ui/map-component"), {

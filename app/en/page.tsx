@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Phone } from "react-feather";
+
 
 // Initialize Supabase (replace with your credentials)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";

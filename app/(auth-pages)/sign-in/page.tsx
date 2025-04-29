@@ -17,6 +17,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
       <div className="w-full max-w-md px-4 sm:px-0">
         {/* Logo */}
         <div className="text-center mb-8">
+          <Link href="/">
           <Image
             src="/agroke_logo_with_text.png"
             alt="AgroKe Logo"
@@ -24,6 +25,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             height={48}
             className="mx-auto"
           />
+          </Link>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl p-8 relative overflow-hidden">
