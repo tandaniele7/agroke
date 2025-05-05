@@ -776,3 +776,42 @@ export async function deleteField(prevState: State, formData: FormData) {
     "Field data deleted successfully"
   );
 }
+
+export async function deleteProduct(prevState: State, formData: FormData) {
+  const ProductId = formData.get("productId")?.toString();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return encodedRedirect(
+      "error",
+      "/protected/products",
+      "Could not retrieve user information"
+    );;
+  }
+
+  const { error } = await supabase
+    .from("products")
+    .delete()
+    .eq("product_id", ProductId);
+
+  if (error) {
+    console.error(error.message);
+    return encodedRedirect(
+      "error",
+      "/protected/products",
+      "Could not delete product data",
+    );
+  }
+
+  return encodedRedirect(
+    "success",
+    "/protected/products",
+    "Product data deleted successfully"
+  );
+}
