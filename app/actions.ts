@@ -579,7 +579,7 @@ export async function fetchActivitiesDash(): Promise<ActivityDash[]> {
     .select(`activity_date, activity_type, field_data(field_id, field_name)`)
     .eq("id", user?.id || "")
     .order("activity_date", { ascending: false })
-    .limit(3);
+    .limit(4);
 
   if (activities) {
     for (const activity of activities) {
