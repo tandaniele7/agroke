@@ -1,3 +1,5 @@
+import { icons } from "lucide-react";
+
 export type Field = {
   id: string;
   cropType: string;
@@ -38,6 +40,14 @@ export interface Product {
   advised_dose: string;
 }
 
+export const productType = [
+  { id: "pesticide", name: "Pesticida", icon: "🦠" },
+  { id: "herbicide", name: "Erbicida", icon: "🌿" },
+  { id: "fungicide", name: "Fungicida", icon: "🍄" },
+  { id: "organic_fertilizer", name: "Concime Organico", icon: "🌱" },
+  {id: "insecticide", name: "Insetticida", icon: "🪳"}
+];
+
 export const activityType = [
   { id: "treatment", name: "Trattamento fitosanitario", icon: "🌿" },
   { id: "fertilization", name: "Concimazione", icon: "🧪" },
@@ -77,7 +87,7 @@ export type Treatment = {
 
 export type Crop = {
   id: string;
-  name: string; 
+  name: string;
   area: number;
   sowing_date: string;
   flowering_date: string | null;
@@ -96,4 +106,9 @@ export interface NewActivityInterface {
 export interface TableRowInterface {
   index: number;
   activity: Activity;
+}
+
+export interface ProductCardInterface {
+  index: number;
+  product: Product;
 }

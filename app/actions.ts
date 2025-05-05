@@ -298,6 +298,79 @@ export async function addActivity(prevState: State, formData: FormData) {
     "Field data added successfully"
   );
 }
+export async function addProduct(prevState: State, formData: FormData) {
+
+  const productType = formData.get("productType")?.toString();
+  const productName = formData.get("productName")?.toString();
+  const activeIngredient = formData.get("activeIngredient")?.toString();
+  const preharvestInterval = formData.get("preharvestInterval")?.toString();
+  const advisedQuantity = formData.get("advisedQuantity")?.toString();
+  const Unit = formData.get("unit")?.toString();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return encodedRedirect(
+      "error",
+      "/protected/products",
+      "Could not retrieve user information"
+    );
+  }
+
+  if (
+    !productType ||
+    !productName ||
+    !activeIngredient ||
+    !preharvestInterval ||
+    !advisedQuantity
+  ) {
+    return encodedRedirect(
+      "error",
+      "/protected/products",
+      "All fields are required"
+    );
+  }
+
+  let transformedQuantity = parseFloat(advisedQuantity);
+  if (Unit === "l/ha") {
+    transformedQuantity = transformedQuantity * 1; // assuming 1L = 1kg for simplicity
+  } else if (Unit === "q/ha") {
+    transformedQuantity = transformedQuantity * 100; // 1q = 100kg
+  }
+  const advisedQuantityTransformed = transformedQuantity.toString();
+
+  const { error } = await supabase.from("products").insert([
+    {
+      id: user.id,
+      product_name: productName,
+      product_type: productType,
+      active_ingredient: activeIngredient,
+      preharvest_interval: preharvestInterval,
+      advised_dose: advisedQuantityTransformed,
+    },
+  ]);
+
+  if (error) {
+    console.error(error.message);
+    return encodedRedirect(
+      "error",
+      "/protected/products",
+      // "Could not add field data"
+      error.message
+    );
+  }
+
+  return encodedRedirect(
+    "success",
+    "/protected/products",
+    "Product added successfully"
+  );
+}
 
 export async function fetchStats(): Promise<{
   NumFields: number;
