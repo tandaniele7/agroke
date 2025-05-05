@@ -5,9 +5,20 @@ import FieldCard from "@/components/ui/field-card";
 import { Suspense } from "react";
 import { FieldCardSkeleton } from "@/components/ui/skeletons";
 
-export default async function FieldsPage() {
+// Separate component for the field list to handle loading state
+async function FieldList() {
   const fields = await fetchFields();
+  
+  return (
+    <div className="grid grid-cols-1 gap-6">
+      {fields.map((field, idx) => (
+        <FieldCard key={field.id || idx} fieldInfo={field} />
+      ))}
+    </div>
+  );
+}
 
+export default function FieldsPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
@@ -21,15 +32,17 @@ export default async function FieldsPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
-          {fields.map((field, idx) => {
-            return (
-              <Suspense key={idx} fallback={<FieldCardSkeleton />}>
-                <FieldCard key={idx} fieldInfo={field} />
-              </Suspense>
-            );
-          })}
-        </div>
+        <Suspense 
+          fallback={
+            <div className="grid grid-cols-1 gap-6">
+              {[...Array(3)].map((_, idx) => (
+                <FieldCardSkeleton key={idx} />
+              ))}
+            </div>
+          }
+        >
+          <FieldList />
+        </Suspense>
       </div>
     </div>
   );
