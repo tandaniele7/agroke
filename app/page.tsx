@@ -2,9 +2,12 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone } from "react-feather";
+import Link from "next/link";
+import LanguageMenu from "@/components/ui/lang-menu";
 
 // Initialize Supabase (replace with your credentials)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -210,7 +213,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="hidden md:flex space-x-8"
           >
-            <a
+            <Link
               href="#funzionalita"
               className="text-green-800 hover:text-green-600 font-medium transition-colors"
               onClick={(e) => {
@@ -219,8 +222,8 @@ export default function Home() {
               }}
             >
               Funzionalità
-            </a>
-            <a
+            </Link>
+            <Link
               href="#testimonianze"
               className="hidden text-green-800 hover:text-green-600 font-medium transition-colors"
               onClick={(e) => {
@@ -229,8 +232,8 @@ export default function Home() {
               }}
             >
               Testimonianze
-            </a>
-            <a
+            </Link>
+            <Link
               href="#contatti"
               className="text-green-800 hover:text-green-600 font-medium transition-colors"
               onClick={(e) => {
@@ -239,20 +242,22 @@ export default function Home() {
               }}
             >
               Contattaci
-            </a>
+            </Link>
           </motion.nav>
-
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-medium transition duration-300"
-            onClick={() =>
-              scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Prova Ora
-          </motion.button>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
+            <LanguageMenu language="ita" />
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-medium transition duration-300"
+              onClick={() =>
+                scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Prova Ora
+            </motion.button>
+          </div>
         </div>
       </motion.header>
 

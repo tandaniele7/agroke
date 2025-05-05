@@ -40,6 +40,7 @@
     "react-feather": "^2.0.10",
     "react-ga4": "^2.1.0",
     "react-google-charts": "^5.2.1",
+    "react-world-flags": "^1.6.0",
     "recharts": "^2.15.2",
     "stripe": "^18.0.0"
   },
@@ -47,6 +48,7 @@
     "@types/node": "22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "19.0.2",
+    "@types/react-world-flags": "^1.6.0",
     "eslint": "9.23.0",
     "eslint-config-next": "15.2.4",
     "postcss": "8.4.49",

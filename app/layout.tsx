@@ -28,6 +28,7 @@ export const metadata = {
     "quaderno di campagna",
     "campagna",
     "prodotti fitofarmaci",
+    "qdc quaderno di campagna",
   ],
 };
 

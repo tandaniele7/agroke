@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
+import LanguageMenu from "@/components/ui/lang-menu";
 
 // Initialize Supabase (replace with your credentials)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -112,12 +112,14 @@ export default function Home() {
   const diaryFeatures = [
     {
       title: "Simple Recording",
-      description: "Easily document every field activity with just a few clicks",
+      description:
+        "Easily document every field activity with just a few clicks",
       icon: "📝",
     },
     {
       title: "Legal Compliance",
-      description: "Automatically comply with all regulations without bureaucratic stress",
+      description:
+        "Automatically comply with all regulations without bureaucratic stress",
       icon: "✅",
     },
     {
@@ -137,7 +139,8 @@ export default function Home() {
     },
     {
       title: "Complete Integration",
-      description: "Connect sensors, weather forecasts and other smart farming tools",
+      description:
+        "Connect sensors, weather forecasts and other smart farming tools",
       icon: "🔄",
     },
   ];
@@ -237,18 +240,20 @@ export default function Home() {
               Contact Us
             </a>
           </motion.nav>
-
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-medium transition duration-300"
-            onClick={() =>
-              scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Try Now
-          </motion.button>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
+            <LanguageMenu language="gb" />
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-medium transition duration-300"
+              onClick={() =>
+                scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Try Now
+            </motion.button>
+          </div>
         </div>
       </motion.header>
 
