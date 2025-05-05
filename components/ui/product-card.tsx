@@ -14,8 +14,14 @@ export default function ProductCard(data: ProductCardInterface) {
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (confirm(`Sei sicuro di voler eliminare ${product.product_name}? Questa azione non può essere annullata.`)) {
-      const submitButton = document.getElementById(product.product_id) as HTMLButtonElement;
+    if (
+      confirm(
+        `Sei sicuro di voler eliminare ${product.product_name}? Questa azione non può essere annullata e andrà a eliminare le attività che hanno utilizzato questo prodotto.`
+      )
+    ) {
+      const submitButton = document.getElementById(
+        product.product_id
+      ) as HTMLButtonElement;
       submitButton?.click();
     }
   };
@@ -86,8 +92,15 @@ export default function ProductCard(data: ProductCardInterface) {
           </button>
           {!state.isLoading && (
             <form action={formAction}>
-              <input type="hidden" name="productId" value={product.product_id} />
-              <button className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100" onClick={handleDelete}>
+              <input
+                type="hidden"
+                name="productId"
+                value={product.product_id}
+              />
+              <button
+                className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100"
+                onClick={handleDelete}
+              >
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -102,7 +115,11 @@ export default function ProductCard(data: ProductCardInterface) {
                   />
                 </svg>
               </button>
-              <button id={product.product_id} className="hidden" type="submit" />
+              <button
+                id={product.product_id}
+                className="hidden"
+                type="submit"
+              />
             </form>
           )}
         </div>

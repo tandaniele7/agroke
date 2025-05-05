@@ -1,8 +1,9 @@
 "use client";
 
+import { deleteActivity } from "@/app/actions";
 import { Activity, activityType, TableRowInterface } from "@/lib/definitions";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 
 // Add view prop to interface
 interface TableRowProps extends TableRowInterface {
@@ -12,7 +13,22 @@ interface TableRowProps extends TableRowInterface {
 export default function TableRow({ index, activity, view }: TableRowProps) {
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
     null
-  );
+  );  const initialState = { isLoading: false, error: null };
+  const [state, formAction] = useActionState(deleteActivity, initialState);
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (
+      confirm(
+        `Sei sicuro di voler eliminare ${activity.activity_type}? Questa azione non può essere annullata.`
+      )
+    ) {
+      const submitButton = document.getElementById(
+        activity.activity_id
+      ) as HTMLButtonElement;
+      submitButton?.click();
+    }
+  };
 
   const renderActivityDetailsModal = () => {
     return (
@@ -146,8 +162,10 @@ export default function TableRow({ index, activity, view }: TableRowProps) {
                   ?.icon || "🔧"}
               </span>
               <div className="text-sm font-medium text-gray-900">
-                {activityType.find((t) => t.id === activity.activity_type)
-                  ?.name}
+                {
+                  activityType.find((t) => t.id === activity.activity_type)
+                    ?.name
+                }
               </div>
             </div>
           </td>
@@ -202,21 +220,38 @@ export default function TableRow({ index, activity, view }: TableRowProps) {
                   />
                 </svg>
               </button>
-              <button className="p-1 rounded-md bg-red-50 text-red-600 hover:bg-red-100">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              {!state.isLoading && (
+                <form action={formAction}>
+                  <input
+                    type="hidden"
+                    name="activityId"
+                    value={activity.activity_id}
                   />
-                </svg>
-              </button>
+                  <button
+                    className="p-1 rounded-md bg-red-50 text-red-600 hover:bg-red-100"
+                    onClick={handleDelete}
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    id={activity.activity_id}
+                    className="hidden"
+                    type="submit"
+                  />
+                </form>
+              )}
             </div>
           </td>
         </tr>
