@@ -1,5 +1,3 @@
-import { icons } from "lucide-react";
-
 export type Field = {
   id: string;
   cropType: string;
