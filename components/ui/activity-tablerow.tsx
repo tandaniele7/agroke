@@ -13,7 +13,8 @@ interface TableRowProps extends TableRowInterface {
 export default function TableRow({ index, activity, view }: TableRowProps) {
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
     null
-  );  const initialState = { isLoading: false, error: null };
+  );  
+  const initialState = { isLoading: false, error: null };
   const [state, formAction] = useActionState(deleteActivity, initialState);
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
