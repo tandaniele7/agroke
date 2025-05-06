@@ -64,6 +64,11 @@ export interface WeatherDataDashboard {
   provice: string;
 }
 
+export interface WeatherInfoInterface {
+  data: WeatherDataDashboard
+}
+
+
 export interface Notification {
   content: string;
   type: "warning" | "severe";

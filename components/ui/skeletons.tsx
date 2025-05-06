@@ -282,3 +282,42 @@ export function ProductCardsSkeleton() {
     </div>
   );
 }
+
+export function WeatherCardSkeleton() {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
+      {/* Header */}
+      <div className="h-7 w-40 bg-gray-200 rounded-lg mb-6"></div>
+
+      {/* Weather Metrics */}
+      <div className="space-y-5">
+        {/* Temperature Row */}
+        <div className="flex items-center justify-between p-3 rounded-xl bg-gray-100">
+          <div className="flex items-center">
+            <div className="w-5 h-5 bg-gray-200 rounded-full mr-3"></div>
+            <div className="w-24 h-5 bg-gray-200 rounded"></div>
+          </div>
+          <div className="w-12 h-5 bg-gray-200 rounded"></div>
+        </div>
+
+        {/* Humidity Row */}
+        <div className="flex items-center justify-between p-3 rounded-xl bg-gray-100">
+          <div className="flex items-center">
+            <div className="w-5 h-5 bg-gray-200 rounded-full mr-3"></div>
+            <div className="w-24 h-5 bg-gray-200 rounded"></div>
+          </div>
+          <div className="w-12 h-5 bg-gray-200 rounded"></div>
+        </div>
+
+        {/* Wind Row */}
+        <div className="flex items-center justify-between p-3 rounded-xl bg-gray-100">
+          <div className="flex items-center">
+            <div className="w-5 h-5 bg-gray-200 rounded-full mr-3"></div>
+            <div className="w-24 h-5 bg-gray-200 rounded"></div>
+          </div>
+          <div className="w-12 h-5 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
