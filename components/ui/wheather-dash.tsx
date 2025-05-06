@@ -5,8 +5,8 @@ import { averagePosition } from "@/lib/functions";
 export default async function WheatherWidget() {
   const res = await averagePosition();
   let wheatherData = await fetchWeatherDataDashboard(
-    42.583039658687916,
-    12.615177525118934
+    42.58303965868716,
+    12.61517752511834
   );
   if (res) {
     const { lat, lng } = res;
