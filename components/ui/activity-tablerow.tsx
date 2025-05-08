@@ -180,7 +180,7 @@ export default function TableRow({ index, activity, view }: TableRowProps) {
           </td>
           <td className="px-6 py-4 whitespace-nowrap">
             <div className="text-sm text-gray-900">
-              {activity.product_quantity}
+              {activity.product_quantity} kg/ha
             </div>
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-center">

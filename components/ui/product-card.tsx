@@ -66,7 +66,7 @@ export default function ProductCard(data: ProductCardInterface) {
         </div>
         <div className="flex justify-between">
           <span>Dose consigliata:</span>
-          <span className="font-medium">{product.advised_dose}</span>
+          <span className="font-medium">{product.advised_dose} kg/ha</span>
         </div>
       </div>
 
