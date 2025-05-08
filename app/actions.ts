@@ -10,6 +10,8 @@ import {
   Activity,
   Product,
   Notification,
+  ActivityDBType,
+  ActivityDashDBType,
 } from "@/lib/definitions";
 
 export const signUpAction = async (formData: FormData) => {
@@ -299,7 +301,6 @@ export async function addActivity(prevState: State, formData: FormData) {
   );
 }
 export async function addProduct(prevState: State, formData: FormData) {
-
   const productType = formData.get("productType")?.toString();
   const productName = formData.get("productName")?.toString();
   const activeIngredient = formData.get("activeIngredient")?.toString();
@@ -548,14 +549,15 @@ export async function fetchActivities(): Promise<Activity[]> {
     console.log("No activity found for the user");
     return [];
   }
+  const activities_ = activities as unknown as ActivityDBType;
 
-  const Activities: Activity[] = activities.map((activity) => ({
+  const Activities: Activity[] = activities_?.map((activity) => ({
     activity_id: activity.activity_id,
     activity_type: activity.activity_type,
     field_id: activity.field_id,
-    field_name: activity.field_data?.[0]?.field_name || "Unknown Field",
+    field_name: activity.field_data.field_name,
     activity_date: activity.activity_date,
-    product_name: activity.products[0]?.product_name || "Unknown Product",
+    product_name: activity.products.product_name,
     product_quantity: activity.product_quantity,
     note: activity.note,
   }));
@@ -598,11 +600,11 @@ export async function fetchActivitiesDash(): Promise<ActivityDash[]> {
     console.error("Error fetching activities:", error.message);
     return [];
   }
-
-  const Activities: ActivityDash[] = activities.map((activity) => ({
+  const activities_ = activities as unknown as ActivityDashDBType
+  const Activities: ActivityDash[] = activities_.map((activity) => ({
     activityDate: activity.activity_date,
     activityType: activity.activity_type,
-    fieldName: activity.field_data[0]?.field_name || "Unknown Field",
+    fieldName: activity.field_data.field_name || "Unknown Field",
   }));
 
   return Activities;
@@ -753,7 +755,7 @@ export async function deleteField(prevState: State, formData: FormData) {
       "error",
       "/protected/fields",
       "Could not retrieve user information"
-    );;
+    );
   }
 
   const { error } = await supabase
@@ -766,7 +768,7 @@ export async function deleteField(prevState: State, formData: FormData) {
     return encodedRedirect(
       "error",
       "/protected/fields",
-      "Could not delete field data",
+      "Could not delete field data"
     );
   }
 
@@ -792,7 +794,7 @@ export async function deleteProduct(prevState: State, formData: FormData) {
       "error",
       "/protected/products",
       "Could not retrieve user information"
-    );;
+    );
   }
 
   const { error } = await supabase
@@ -805,7 +807,7 @@ export async function deleteProduct(prevState: State, formData: FormData) {
     return encodedRedirect(
       "error",
       "/protected/products",
-      "Could not delete product data",
+      "Could not delete product data"
     );
   }
 
@@ -831,7 +833,7 @@ export async function deleteActivity(prevState: State, formData: FormData) {
       "error",
       "/protected/activities",
       "Could not retrieve user information"
-    );;
+    );
   }
 
   const { error } = await supabase
@@ -844,7 +846,7 @@ export async function deleteActivity(prevState: State, formData: FormData) {
     return encodedRedirect(
       "error",
       "/protected/activities",
-      "Could not delete activity data",
+      "Could not delete activity data"
     );
   }
 

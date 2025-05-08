@@ -21,7 +21,7 @@ export type ActivityDash = {
 export interface Activity {
   activity_id: string;
   activity_type: string;
-  field_id: number;
+  field_id: string;
   field_name: string;
   activity_date: string;
   product_name: string;
@@ -115,3 +115,27 @@ export interface ProductCardInterface {
   index: number;
   product: Product;
 }
+
+export type ActivityDBType = {
+  activity_id: string;
+  activity_type: string;
+  field_id: string;
+  field_data: {
+    field_name: string;
+  };
+  activity_date: string;
+  products: {
+    product_name: string;
+  };
+  product_quantity: number;
+  note: string;
+}[];
+
+export type ActivityDashDBType = {
+  activity_date: string;
+  activity_type: string;
+  field_data: {
+      field_id: string;
+      field_name: string;
+  };
+}[]
