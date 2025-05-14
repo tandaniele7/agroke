@@ -20,11 +20,7 @@ export const metadata = {
   keywords: [
     "agricoltura di precisione",
     "irrorazione di precisione",
-    "frutteti",
     "risparmio fitofarmaci",
-    "agritech",
-    "tecnologia agricola",
-    "sostenibilità",
     "quaderno di campagna",
     "campagna",
     "prodotti fitofarmaci",

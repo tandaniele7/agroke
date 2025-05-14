@@ -243,6 +243,12 @@ export default function Home() {
             >
               Contattaci
             </Link>
+            <Link
+              href="/blog"
+              className="text-green-800 hover:text-green-600 font-medium transition-colors"
+            >
+              Blog
+            </Link>
           </motion.nav>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
             <LanguageMenu language="ita" />

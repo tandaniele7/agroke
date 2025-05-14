@@ -40,6 +40,7 @@
     "react-feather": "^2.0.10",
     "react-ga4": "^2.1.0",
     "react-google-charts": "^5.2.1",
+    "react-markdown": "^10.1.0",
     "react-world-flags": "^1.6.0",
     "recharts": "^2.15.2",
     "stripe": "^18.0.0"
