@@ -60,6 +60,12 @@ export default function Home() {
               maxZoom: 19,
             }),
           }),
+          new TileLayer({
+            source: new XYZ({
+              url: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+              maxZoom: 19,
+            }),
+          }),
           vectorLayer,
         ],
         view: new View({
