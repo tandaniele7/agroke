@@ -12,7 +12,10 @@ import {
   Notification,
   ActivityDBType,
   ActivityDashDBType,
+  ActivityFieldDiary,
+  ActivityFieldDiaryDBType,
 } from "@/lib/definitions";
+import { checkCompliance } from "@/lib/functions";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -559,6 +562,51 @@ export async function fetchActivities(): Promise<Activity[]> {
     activity_date: activity.activity_date,
     product_name: activity.products.product_name,
     product_quantity: activity.product_quantity,
+    note: activity.note,
+  }));
+
+  return Activities;
+}
+
+export async function fetchActivitiesFieldDiary(): Promise<ActivityFieldDiary[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error(userError?.message || "User not found");
+    return [];
+  }
+
+  const { data: activities, error } = await supabase
+    .from("activities")
+    .select(
+      `activity_id, activity_type, field_id, field_data(field_name), activity_date, products(product_name, active_ingredient) ,product_quantity, note`
+    )
+    .eq("id", user?.id || "");
+
+  if (error) {
+    console.error("Error fetching activities from Field Diary:", error.message);
+    return [];
+  }
+  if (!activities || activities.length === 0) {
+    console.log("No activity found for the user");
+    return [];
+  }
+  const activities_ = activities as unknown as ActivityFieldDiaryDBType;
+
+  const Activities: ActivityFieldDiary[] = activities_?.map((activity) => ({
+    activity_id: activity.activity_id,
+    activity_type: activity.activity_type,
+    field_id: activity.field_id,
+    field_name: activity.field_data.field_name,
+    activity_date: activity.activity_date,
+    product_name: activity.products.product_name,
+    product_quantity: activity.product_quantity,
+    active_ingredient: activity.products.active_ingredient,
+    compliance_status: checkCompliance(activity.activity_date),
     note: activity.note,
   }));
 

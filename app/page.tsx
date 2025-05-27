@@ -282,8 +282,7 @@ export default function Home() {
                 variants={fadeInUp}
               >
                 Il Quaderno di Campagna{" "}
-                <span className="text-green-600">Digitale</span> che Rivoluziona
-                la tua Azienda
+                <span className="text-green-600">Digitale</span> che ti Aiuta a Gestire la tua Azienda
               </motion.h1>
 
               <motion.p

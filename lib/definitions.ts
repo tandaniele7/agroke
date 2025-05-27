@@ -29,6 +29,19 @@ export interface Activity {
   note: string;
 }
 
+export interface ActivityFieldDiary {
+  activity_id: string;
+  activity_type: string;
+  field_id: string;
+  field_name: string;
+  activity_date: string;
+  product_name: string;
+  product_quantity: number;
+  active_ingredient: string,
+  compliance_status: "compliant" | "warning" | "non_compliant",
+  note: string;
+}
+
 export interface Product {
   product_id: string;
   product_name: string;
@@ -131,6 +144,23 @@ export type ActivityDBType = {
   note: string;
 }[];
 
+
+export type ActivityFieldDiaryDBType = {
+  activity_id: string;
+  activity_type: string;
+  field_id: string;
+  field_data: {
+    field_name: string;
+  };
+  activity_date: string;
+  products: {
+    product_name: string;
+    active_ingredient: string;
+  };
+  product_quantity: number;
+  note: string;
+}[];
+
 export type ActivityDashDBType = {
   activity_date: string;
   activity_type: string;
@@ -139,3 +169,7 @@ export type ActivityDashDBType = {
       field_name: string;
   };
 }[]
+
+export interface ActivityFieldDiaryProp {
+  treatments : ActivityFieldDiary[]
+}
