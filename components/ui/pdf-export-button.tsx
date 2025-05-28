@@ -3,42 +3,48 @@
 import { ActivityFieldDiaryProp } from "@/lib/definitions";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { format } from "date-fns";
 import { ArrowDownCircle } from "lucide-react";
 
 export default function ExportPDFButton(treatProp: ActivityFieldDiaryProp) {
   const treatments = treatProp.treatments;
- const  exportToPDF = () => {
-  const doc = new jsPDF();
 
-  // Add title and metadata
-  doc.setFontSize(20);
-  doc.text("Registro dei Trattamenti", 14, 15);
-  doc.setFontSize(10);
-  doc.text(`Generato il ${new Date().getUTCDate()}`, 14, 25);
+  const exportToPDF = () => {
+    const doc = new jsPDF();
 
-  // Convert treatments to table format
-  const tableData = treatments.map((t) => [
-    t.activity_date,
-    t.field_name,
-    t.product_name,
-    t.active_ingredient,
-    t.product_quantity,
-    t.compliance_status === "compliant" ? "conforme" : 
-    t.compliance_status === "warning" ? "attenzione" : "non conforme",
-  ]);
+    // Add title and metadata
+    doc.setFontSize(20);
+    doc.text("Registro dei Trattamenti", 14, 15);
+    doc.setFontSize(10);
+    doc.text(`Generato il ${format(new Date(), "dd/MM/yyyy")}`, 14, 25);
 
-  autoTable(doc, {
-    head: [
-      ["Data", "Campo", "Prodotto", "Principio Attivo", "Quantità", "Stato"],
-    ],
-    body: tableData,
-    startY: 35,
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [22, 101, 52] },
-  });
+    // Convert treatments to table format
+    const tableData = treatments.map((t) => [
+      format(new Date(t.activity_date), "dd/MM/yyyy"),
+      t.field_name,
+      t.product_name,
+      t.active_ingredient,
+      t.product_quantity,
+      t.compliance_status === "compliant"
+        ? "conforme"
+        : t.compliance_status === "warning"
+          ? "attenzione"
+          : "non conforme",
+    ]);
 
-  doc.save("registro-trattamenti.pdf");
-}
+    autoTable(doc, {
+      head: [
+        ["Data", "Campo", "Prodotto", "Principio Attivo", "Quantità", "Stato"],
+      ],
+      body: tableData,
+      startY: 35,
+      styles: { fontSize: 8 },
+      headStyles: { fillColor: [22, 101, 52] },
+    });
+
+    doc.save("registro-trattamenti.pdf");
+  };
+
   return (
     <>
       {treatments ? (

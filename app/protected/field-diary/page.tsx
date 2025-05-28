@@ -1,8 +1,6 @@
 "use server";
 
 import { format } from "date-fns";
-import { Plus } from "lucide-react";
-
 import { fetchActivitiesFieldDiary } from "@/app/actions";
 import ExportPDFButton from "@/components/ui/pdf-export-button";
 
