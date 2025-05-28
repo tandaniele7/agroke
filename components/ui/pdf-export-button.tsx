@@ -14,7 +14,7 @@ export default function ExportPDFButton(treatProp: ActivityFieldDiaryProp) {
   doc.setFontSize(20);
   doc.text("Registro dei Trattamenti", 14, 15);
   doc.setFontSize(10);
-  doc.text(`Generato il ${new Date().getDate()}`, 14, 25);
+  doc.text(`Generato il ${new Date().getUTCDate()}`, 14, 25);
 
   // Convert treatments to table format
   const tableData = treatments.map((t) => [
