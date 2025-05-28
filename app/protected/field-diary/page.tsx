@@ -27,10 +27,6 @@ export default async function FieldDiary() {
               <div className="w-full sm:w-auto">
                 <ExportPDFButton treatments={treatments} />
               </div>
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-agroke-green/65 text-agroke-black-light hover:bg-agroke-green-dark/90 hover:text-white font-bold rounded-lg transition">
-                <Plus size={18} />
-                Nuovo Trattamento
-              </button>
             </div>
           </div>
 
